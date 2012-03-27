@@ -118,7 +118,7 @@ func dump(n *html.Node, pad int) (err error) {
    case html.CommentNode:
       fmt.Printf("%*s<!-- %s -->\n", pad, "", n.Data)
    case html.TextNode:
-      if IsOnlySpace(n.Data) {
+      if isOnlySpace(n.Data) {
          break
       }
       fmt.Printf("%*s%s", pad, "", n.Data)
@@ -136,7 +136,7 @@ func dump(n *html.Node, pad int) (err error) {
    return nil
 }
 
-func IsOnlySpace(s string) bool {
+func isOnlySpace(s string) bool {
    for _, r := range s {
       if !unicode.IsSpace(r) {
          return false

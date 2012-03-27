@@ -9,6 +9,16 @@ import "strings"
 var PhpSessid  string
 var FusionUser string
 
+func HasSession() bool {
+   if len(PhpSessid) < 1 {
+      return false
+   }
+   if len(FusionUser) < 1 {
+      return false
+   }
+   return true
+}
+
 func Get(rawUrl string) (text string, err error) {
    return Request("GET", rawUrl, "")
 }
@@ -18,11 +28,8 @@ func Post(rawUrl string, data string) (text string, err error) {
 }
 
 func Request(method string, rawUrl string, data string) (text string, err error) {
-   if len(PhpSessid) < 1 {
-      return "", errors.New("PHPSESSID not set.")
-   }
-   if len(FusionUser) < 1 {
-      return "", errors.New("fusion_user not set.")
+   if !HasSession() {
+      return "", errors.New("no session variables set.")
    }
    var req *http.Request
    if len(data) < 1 {

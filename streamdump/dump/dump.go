@@ -1,3 +1,4 @@
+// Package dump implements functions for retrieving stream URLs.
 package dump
 
 import "errors"
@@ -9,6 +10,8 @@ import "os/exec"
 import "path"
 import "strings"
 
+// Url locates a stream URL in a given page and calls Stream with the stream URL
+// as argument.
 func Url(rawUrl string) (err error) {
    r, err := http.Get(rawUrl)
    if err != nil {
@@ -39,6 +42,7 @@ func Url(rawUrl string) (err error) {
    return nil
 }
 
+// Stream executes rtmpdump on a given stream ([e]rtmp) URL.
 func Stream(streamUrl string) (err error) {
    fmt.Println("dumping:", streamUrl)
    cmd := exec.Command("rtmpdump", "-r", streamUrl, "-o", path.Base(streamUrl))

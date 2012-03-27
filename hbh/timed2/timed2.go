@@ -1,8 +1,8 @@
 package main
 
-import "hbh"
-import "parse"
-import "str"
+import "github.com/mewmew/playground/hbh"
+import "github.com/mewmew/playground/hbh/parse"
+import "github.com/mewmew/playground/str"
 
 import "errors"
 import "flag"
@@ -19,6 +19,10 @@ func init() {
 
 func main() {
    flag.Parse()
+   if !hbh.HasSession() {
+      flag.Usage()
+      return
+   }
    err := timed1()
    if err != nil {
       log.Fatalln(err)
