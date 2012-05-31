@@ -11,15 +11,14 @@ func getMono(orig image.Image) (mono pic.SubImager) {
    rect := orig.Bounds()
    dst := image.NewRGBA(rect)
    for y := rect.Min.Y; y < rect.Max.Y; y++ {
-      // c is the background gradient color of the current horizontal line.
-      c := orig.At(0, y)
       for x := rect.Min.X; x < rect.Max.X; x++ {
-         if orig.At(x, y) == c {
-            // part of the gradient.
-            dst.Set(x, y, color.Transparent)
-         } else {
-            // not part of the gradient.
+         textColor := color.RGBA{R: 41, G: 36, B: 33, A: 255}
+         if orig.At(x, y) == textColor {
+            // text
             dst.Set(x, y, color.Black)
+         } else {
+            // background
+            dst.Set(x, y, color.Transparent)
          }
       }
    }

@@ -24,7 +24,7 @@ func main() {
       os.Exit(1)
    }
    for i := 0; i < 1000; i++ {
-      err := captcha1()
+      err := captcha2()
       if err != nil {
          ///log.Fatalln(err)
          dbg.Println(err)
@@ -33,7 +33,7 @@ func main() {
    }
 }
 
-// captcha1 translates the captcha into text and submits the answer.
+// captcha2 translates the captcha into text and submits the answer.
 //
 // 1) Download:
 //    - Download the image.
@@ -50,7 +50,7 @@ func main() {
 //      stored version.
 // 6) Submit answer.
 //    - Submit the answer.
-func captcha1() (err error) {
+func captcha2() (err error) {
    img, err := getImage()
    if err != nil {
       return err
