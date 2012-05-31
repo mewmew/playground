@@ -1,9 +1,5 @@
 package main
 
-import "github.com/mewmew/playground/hbh"
-import "github.com/mewmew/playground/hbh/parse"
-import "github.com/mewmew/playground/str"
-
 import "encoding/base64"
 import "errors"
 import "flag"
@@ -11,6 +7,10 @@ import "fmt"
 import "log"
 import "net/url"
 import "strings"
+
+import "github.com/mewkiz/pkg/stringsutil"
+import "github.com/mewmew/playground/hbh"
+import "github.com/mewmew/playground/hbh/parse"
 
 func init() {
    flag.StringVar(&hbh.PhpSessid, "p", "", "Set PHPSESSID cookie value.")
@@ -53,7 +53,7 @@ func getEncStr() (enc string, err error){
    if err != nil {
       return "", err
    }
-   pos := str.IndexAfter(text, "Decrypt the following random string: ")
+   pos := stringsutil.IndexAfter(text, "Decrypt the following random string: ")
    if pos == -1 {
       return "", errors.New("base64 encoded string start not found.")
    }

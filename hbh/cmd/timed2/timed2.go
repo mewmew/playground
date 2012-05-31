@@ -1,9 +1,5 @@
 package main
 
-import "github.com/mewmew/playground/hbh"
-import "github.com/mewmew/playground/hbh/parse"
-import "github.com/mewmew/playground/str"
-
 import "errors"
 import "flag"
 import "fmt"
@@ -11,6 +7,10 @@ import "log"
 import "strconv"
 import "strings"
 import "unicode"
+
+import "github.com/mewkiz/pkg/stringsutil"
+import "github.com/mewmew/playground/hbh"
+import "github.com/mewmew/playground/hbh/parse"
 
 func init() {
    flag.StringVar(&hbh.PhpSessid, "p", "", "Set PHPSESSID cookie value.")
@@ -55,7 +55,7 @@ func getMd5Hash() (md5 string, err error){
    if err != nil {
       return "", err
    }
-   pos := str.IndexAfter(text, "You have <strong>two</strong> seconds to answer this challenge and your string is: ")
+   pos := stringsutil.IndexAfter(text, "You have <strong>two</strong> seconds to answer this challenge and your string is: ")
    if pos == -1 {
       return "", errors.New("md5 hash start not found.")
    }

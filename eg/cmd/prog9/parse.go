@@ -6,7 +6,7 @@ import "errors"
 import "fmt"
 import "strings"
 
-import "github.com/mewmew/playground/str"
+import "github.com/mewkiz/pkg/stringsutil"
 
 // Slot represents a slot in the game_grid.
 type Slot struct {
@@ -87,7 +87,7 @@ func NewEquation() (e Equation) {
 //    △ = 340
 //    # = 0
 func ParseGrid(page string) (es *list.List, err error) {
-   gridStart := str.IndexAfter(page, `<table id="game_grid">`)
+   gridStart := stringsutil.IndexAfter(page, `<table id="game_grid">`)
    if gridStart == -1 {
       return nil, errors.New("unable to locate start table tag of game_grid.")
    }
@@ -156,7 +156,7 @@ func ParseGrid(page string) (es *list.List, err error) {
 
 // GetSlot parses grid and returns a slot and the new grid position.
 func GetSlot(grid string) (slot Slot, newGrid string, err error) {
-   tdStart := str.IndexAfter(grid, "<td>")
+   tdStart := stringsutil.IndexAfter(grid, "<td>")
    if tdStart == -1 {
       return Slot{}, "", errors.New("unable to locate start td tag in game_grid.")
    }
