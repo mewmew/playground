@@ -7,20 +7,20 @@ import "os"
 import "github.com/mewmew/playground/eg"
 
 func init() {
-   flag.StringVar(&eg.FieldV4, "f", "", "Set enigmafiedV4 cookie value.")
-   flag.StringVar(&eg.PhpSessid, "p", "", "Set PHPSESSID cookie value.")
-   flag.Parse()
+	flag.StringVar(&eg.FieldV4, "f", "", "Set enigmafiedV4 cookie value.")
+	flag.StringVar(&eg.PhpSessid, "p", "", "Set PHPSESSID cookie value.")
+	flag.Parse()
 }
 
 func main() {
-   if !eg.HasSession() {
-      flag.Usage()
-      os.Exit(1)
-   }
-   err := prog9()
-   if err != nil {
-      log.Fatalln(err)
-   }
+	if !eg.HasSession() {
+		flag.Usage()
+		os.Exit(1)
+	}
+	err := prog9()
+	if err != nil {
+		log.Fatalln(err)
+	}
 }
 
 // prog9 parses the game_grid, solves the equation and submits the answer.
@@ -36,21 +36,21 @@ func main() {
 // 4) Submit answer.
 //    - Submit the answer.
 func prog9() (err error) {
-   buf, err := eg.Get("http://www.enigmagroup.org/missions/programming/9/")
-   if err != nil {
-      return err
-   }
-   es, err := ParseGrid(string(buf))
-   if err != nil {
-      return err
-   }
-   Print(es)
-   for es.Len() > 0 {
-      Calc(es)
-   }
-   err = submitAnswer()
-   if err != nil {
-      return err
-   }
-   return nil
+	buf, err := eg.Get("http://www.enigmagroup.org/missions/programming/9/")
+	if err != nil {
+		return err
+	}
+	es, err := ParseGrid(string(buf))
+	if err != nil {
+		return err
+	}
+	Print(es)
+	for es.Len() > 0 {
+		Calc(es)
+	}
+	err = submitAnswer()
+	if err != nil {
+		return err
+	}
+	return nil
 }

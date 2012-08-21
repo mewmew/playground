@@ -38,9 +38,9 @@ const format = `<!DOCTYPE html>
 
 // dumpGrid dumps the grid to an HTML file.
 func dumpGrid(grid string) (err error) {
-   err = ioutil.WriteFile("grid.html", []byte(fmt.Sprintf(format, grid)), 0644)
-   if err != nil {
-      return err
-   }
-   return nil
+	err = ioutil.WriteFile("grid.html", []byte(fmt.Sprintf(format, grid)), 0644)
+	if err != nil {
+		return err
+	}
+	return nil
 }

@@ -8,14 +8,14 @@ import "github.com/mewmew/playground/eg"
 
 // getImage downloads and returns an image for the challenge.
 func getImage() (img image.Image, err error) {
-   buf, err := eg.Get("http://www.enigmagroup.org/missions/captcha/2/image.php")
-   if err != nil {
-      return nil, err
-   }
-   r := bytes.NewBuffer(buf)
-   img, err = png.Decode(r)
-   if err != nil {
-      return nil, err
-   }
-   return img, nil
+	buf, err := eg.Get("http://www.enigmagroup.org/missions/captcha/2/image.php")
+	if err != nil {
+		return nil, err
+	}
+	r := bytes.NewBuffer(buf)
+	img, err = png.Decode(r)
+	if err != nil {
+		return nil, err
+	}
+	return img, nil
 }

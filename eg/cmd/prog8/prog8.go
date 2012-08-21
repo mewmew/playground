@@ -11,20 +11,20 @@ import "github.com/mewmew/playground/eg"
 import "github.com/mewmew/playground/pic"
 
 func init() {
-   flag.StringVar(&eg.FieldV4, "f", "", "Set enigmafiedV4 cookie value.")
-   flag.StringVar(&eg.PhpSessid, "p", "", "Set PHPSESSID cookie value.")
-   flag.Parse()
+	flag.StringVar(&eg.FieldV4, "f", "", "Set enigmafiedV4 cookie value.")
+	flag.StringVar(&eg.PhpSessid, "p", "", "Set PHPSESSID cookie value.")
+	flag.Parse()
 }
 
 func main() {
-   if !eg.HasSession() {
-      flag.Usage()
-      os.Exit(1)
-   }
-   err := prog8()
-   if err != nil {
-      log.Fatalln(err)
-   }
+	if !eg.HasSession() {
+		flag.Usage()
+		os.Exit(1)
+	}
+	err := prog8()
+	if err != nil {
+		log.Fatalln(err)
+	}
 }
 
 // prog8 translates the captcha into text and submits the answer.
@@ -47,47 +47,47 @@ func main() {
 // 7) Submit answer.
 //    - Submit the answer.
 func prog8() (err error) {
-   img, err := getImage()
-   if err != nil {
-      return err
-   }
-   orig, ok := img.(pic.SubImager)
-   if !ok {
-      return errors.New("image contains no SubImage method.")
-   }
-   err = pngutil.WriteFile("01_orig.png", orig)
-   if err != nil {
-      return err
-   }
-   sorted := getSorted(orig)
-   err = pngutil.WriteFile("02_sort.png", sorted)
-   if err != nil {
-      return err
-   }
-   mono := getMono(sorted)
-   err = pngutil.WriteFile("03_mono.png", mono)
-   if err != nil {
-      return err
-   }
-   crop := pic.Crop(mono)
-   err = pngutil.WriteFile("04_crop.png", crop)
-   if err != nil {
-      return err
-   }
-   subs := pic.HSubs(crop)
-   for subNum, sub := range subs {
-      err = pngutil.WriteFile(fmt.Sprintf("05_sub_%d.png", subNum), sub)
-      if err != nil {
-         return err
-      }
-   }
-   text, err := translate(subs)
-   if err != nil {
-      return err
-   }
-   err = submitAnswer(text)
-   if err != nil {
-      return err
-   }
-   return nil
+	img, err := getImage()
+	if err != nil {
+		return err
+	}
+	orig, ok := img.(pic.SubImager)
+	if !ok {
+		return errors.New("image contains no SubImage method.")
+	}
+	err = pngutil.WriteFile("01_orig.png", orig)
+	if err != nil {
+		return err
+	}
+	sorted := getSorted(orig)
+	err = pngutil.WriteFile("02_sort.png", sorted)
+	if err != nil {
+		return err
+	}
+	mono := getMono(sorted)
+	err = pngutil.WriteFile("03_mono.png", mono)
+	if err != nil {
+		return err
+	}
+	crop := pic.Crop(mono)
+	err = pngutil.WriteFile("04_crop.png", crop)
+	if err != nil {
+		return err
+	}
+	subs := pic.HSubs(crop)
+	for subNum, sub := range subs {
+		err = pngutil.WriteFile(fmt.Sprintf("05_sub_%d.png", subNum), sub)
+		if err != nil {
+			return err
+		}
+	}
+	text, err := translate(subs)
+	if err != nil {
+		return err
+	}
+	err = submitAnswer(text)
+	if err != nil {
+		return err
+	}
+	return nil
 }
