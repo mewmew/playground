@@ -3,7 +3,7 @@ package main
 import "fmt"
 import "os"
 
-import "github.com/mewkiz/pkg/pngutil"
+import "github.com/mewkiz/pkg/imgutil"
 import "github.com/mewmew/playground/pic"
 
 // charCount keeps track of the number of times an image content hash has been
@@ -25,7 +25,7 @@ func dump(subs []pic.SubImager) (err error) {
 			fr.Close()
 			continue
 		}
-		err = pngutil.WriteFile(imgName, sub)
+		err = imgutil.WriteFile(imgName, sub)
 		if err != nil {
 			return err
 		}

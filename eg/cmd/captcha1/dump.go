@@ -2,7 +2,7 @@ package main
 
 import "os"
 
-import "github.com/mewkiz/pkg/pngutil"
+import "github.com/mewkiz/pkg/imgutil"
 import "github.com/mewmew/playground/pic"
 
 // dump converts each sub image into a PNG file, whose name is based on the hash
@@ -19,7 +19,7 @@ func dump(subs []pic.SubImager) (err error) {
 			fr.Close()
 			continue
 		}
-		err = pngutil.WriteFile(imgName, sub)
+		err = imgutil.WriteFile(imgName, sub)
 		if err != nil {
 			return err
 		}

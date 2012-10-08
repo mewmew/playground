@@ -9,7 +9,7 @@ import "fmt"
 import "os"
 import "time"
 
-import "github.com/mewkiz/pkg/pngutil"
+import "github.com/mewkiz/pkg/imgutil"
 import "github.com/mewmew/playground/eg"
 import "github.com/mewmew/playground/pic"
 
@@ -60,23 +60,23 @@ func captcha1() (err error) {
 	if !ok {
 		return errors.New("image contains no SubImage method.")
 	}
-	err = pngutil.WriteFile("01_orig.png", orig)
+	err = imgutil.WriteFile("01_orig.png", orig)
 	if err != nil {
 		return err
 	}
 	mono := getMono(orig)
-	err = pngutil.WriteFile("02_mono.png", mono)
+	err = imgutil.WriteFile("02_mono.png", mono)
 	if err != nil {
 		return err
 	}
 	crop := pic.Crop(mono)
-	err = pngutil.WriteFile("03_crop.png", crop)
+	err = imgutil.WriteFile("03_crop.png", crop)
 	if err != nil {
 		return err
 	}
 	subs := pic.HSubs(crop)
 	for subNum, sub := range subs {
-		err = pngutil.WriteFile(fmt.Sprintf("04_sub_%d.png", subNum), sub)
+		err = imgutil.WriteFile(fmt.Sprintf("04_sub_%d.png", subNum), sub)
 		if err != nil {
 			return err
 		}
