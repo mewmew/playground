@@ -16,10 +16,10 @@ import "github.com/mewmew/playground/pic"
 func init() {
 	flag.StringVar(&eg.FieldV4, "f", "", "Set enigmafiedV4 cookie value.")
 	flag.StringVar(&eg.PhpSessid, "p", "", "Set PHPSESSID cookie value.")
-	flag.Parse()
 }
 
 func main() {
+	flag.Parse()
 	if !eg.HasSession() {
 		flag.Usage()
 		os.Exit(1)

@@ -15,10 +15,10 @@ import "github.com/mewmew/playground/hbh/parse"
 func init() {
 	flag.StringVar(&hbh.PhpSessid, "p", "", "Set PHPSESSID cookie value.")
 	flag.StringVar(&hbh.FusionUser, "f", "", "Set fusion_user cookie value.")
-	flag.Parse()
 }
 
 func main() {
+	flag.Parse()
 	if !hbh.HasSession() {
 		flag.Usage()
 		return
