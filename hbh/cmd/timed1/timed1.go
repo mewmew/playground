@@ -49,7 +49,7 @@ func timed1() (err error) {
 
 func getEncStr() (enc string, err error) {
 	rawUrl := "http://www.hellboundhackers.org/challenges/timed/timed1/index.php"
-	text, err := hbh.Get(rawUrl)
+	text, err := hbh.GetString(rawUrl)
 	if err != nil {
 		return "", err
 	}
@@ -66,7 +66,7 @@ func getEncStr() (enc string, err error) {
 
 func submitSolution(dec string) (err error) {
 	rawUrl := "http://www.hellboundhackers.org/challenges/timed/timed1/index.php?b64="
-	text, err := hbh.Get(rawUrl + url.QueryEscape(dec))
+	text, err := hbh.GetString(rawUrl + url.QueryEscape(dec))
 	if err != nil {
 		return err
 	}

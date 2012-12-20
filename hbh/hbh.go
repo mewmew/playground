@@ -19,28 +19,36 @@ func HasSession() bool {
 	return true
 }
 
-func Get(rawUrl string) (text string, err error) {
+func Get(rawUrl string) (buf []byte, err error) {
 	return Request("GET", rawUrl, "")
 }
 
-func Post(rawUrl string, data string) (text string, err error) {
+func GetString(rawUrl string) (text string, err error) {
+	return RequestString("GET", rawUrl, "")
+}
+
+func Post(rawUrl string, data string) (buf []byte, err error) {
 	return Request("POST", rawUrl, data)
 }
 
-func Request(method string, rawUrl string, data string) (text string, err error) {
+func PostString(rawUrl string, data string) (text string, err error) {
+	return RequestString("POST", rawUrl, data)
+}
+
+func Request(method string, rawUrl string, data string) (buf []byte, err error) {
 	if !HasSession() {
-		return "", errors.New("no session variables set.")
+		return nil, errors.New("no session variables set.")
 	}
 	var req *http.Request
 	if len(data) < 1 {
 		req, err = http.NewRequest(method, rawUrl, nil)
 		if err != nil {
-			return "", err
+			return nil, err
 		}
 	} else {
 		req, err = http.NewRequest(method, rawUrl, strings.NewReader(data))
 		if err != nil {
-			return "", err
+			return nil, err
 		}
 		req.Header.Set("Content-Type", "application/x-www-form-urlencoded")
 	}
@@ -48,10 +56,18 @@ func Request(method string, rawUrl string, data string) (text string, err error)
 	req.AddCookie(&http.Cookie{Name: "fusion_user", Value: FusionUser})
 	r, err := client.Do(req)
 	if err != nil {
-		return "", err
+		return nil, err
 	}
 	defer r.Body.Close()
-	buf, err := ioutil.ReadAll(r.Body)
+	buf, err = ioutil.ReadAll(r.Body)
+	if err != nil {
+		return nil, err
+	}
+	return buf, nil
+}
+
+func RequestString(method string, rawUrl string, data string) (text string, err error) {
+	buf, err := Request(method, rawUrl, data)
 	if err != nil {
 		return "", err
 	}

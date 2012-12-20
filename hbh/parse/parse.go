@@ -46,7 +46,7 @@ func (search *Search) node(n *html.Node, pad int) (err error) {
 		}
 	}
 	pad += 3
-	for _, c := range n.Child {
+	for c := n.FirstChild; c != nil; c = n.NextSibling {
 		err = search.node(c, pad)
 		if err != nil {
 			return err
@@ -127,7 +127,7 @@ func dump(n *html.Node, pad int) (err error) {
 		}
 	}
 	pad += 3
-	for _, c := range n.Child {
+	for c := n.FirstChild; c != nil; c = n.NextSibling {
 		err = dump(c, pad)
 		if err != nil {
 			return err

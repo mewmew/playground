@@ -51,7 +51,7 @@ func timed1() (err error) {
 
 func getMd5Hash() (md5 string, err error) {
 	rawUrl := "http://www.hellboundhackers.org/challenges/timed/timed2/index.php"
-	text, err := hbh.Get(rawUrl)
+	text, err := hbh.GetString(rawUrl)
 	if err != nil {
 		return "", err
 	}
@@ -68,7 +68,7 @@ func getMd5Hash() (md5 string, err error) {
 
 func submitSolution(sum int) (err error) {
 	rawUrl := "http://www.hellboundhackers.org/challenges/timed/timed2/index.php?check"
-	text, err := hbh.Post(rawUrl, fmt.Sprintf("ans=%d&submit=Check", sum))
+	text, err := hbh.PostString(rawUrl, fmt.Sprintf("ans=%d&submit=Check", sum))
 	if err != nil {
 		return err
 	}
