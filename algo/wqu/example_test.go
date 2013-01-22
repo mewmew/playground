@@ -2,7 +2,7 @@ package wqu_test
 
 import "fmt"
 
-import "github.com/mewmew/algo/wqu"
+import wqu "."
 
 func ExampleWQU() {
 	set := wqu.New(10)

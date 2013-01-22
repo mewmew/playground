@@ -2,7 +2,7 @@ package wqupc_test
 
 import "fmt"
 
-import "github.com/mewmew/algo/wqupc"
+import wqupc "."
 
 func ExampleWQUPC() {
 	set := wqupc.New(10)

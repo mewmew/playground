@@ -14,11 +14,11 @@ Documentation provided by GoDoc:
    - [wqu][]: weighted quick-union algorithm.
    - [wqupc][]: weighted quick-union path compression algorithm.
 
-[qf]: http://godoc.org/github.com/mewmew/algo/qf
-[qu]: http://godoc.org/github.com/mewmew/algo/qu
-[uf]: http://godoc.org/github.com/mewmew/algo/uf
-[wqu]: http://godoc.org/github.com/mewmew/algo/wqu
-[wqupc]: http://godoc.org/github.com/mewmew/algo/wqupc
+[qf]: http://godoc.org/github.com/mewmew/playground/algo/qf
+[qu]: http://godoc.org/github.com/mewmew/playground/algo/qu
+[uf]: http://godoc.org/github.com/mewmew/playground/algo/uf
+[wqu]: http://godoc.org/github.com/mewmew/playground/algo/wqu
+[wqupc]: http://godoc.org/github.com/mewmew/playground/algo/wqupc
 
 public domain
 -------------

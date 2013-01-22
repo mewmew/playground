@@ -2,7 +2,7 @@ package qu_test
 
 import "fmt"
 
-import "github.com/mewmew/algo/qu"
+import qu "."
 
 func ExampleQU() {
 	set := qu.New(10)

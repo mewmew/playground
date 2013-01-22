@@ -2,7 +2,7 @@ package qf_test
 
 import "fmt"
 
-import "github.com/mewmew/algo/qf"
+import qf "."
 
 func ExampleQF() {
 	set := qf.New(10)

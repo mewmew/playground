@@ -2,7 +2,7 @@ package uf_test
 
 import "testing"
 
-import "github.com/mewmew/algo/uf"
+import uf "."
 
 func BenchmarkNew1e1(b *testing.B) {
 	for i := 0; i < b.N; i++ {

@@ -2,7 +2,7 @@ package wqupc_test
 
 import "testing"
 
-import "github.com/mewmew/algo/wqupc"
+import wqupc "."
 
 func BenchmarkNew1e1(b *testing.B) {
 	for i := 0; i < b.N; i++ {

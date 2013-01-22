@@ -2,7 +2,7 @@ package qu_test
 
 import "testing"
 
-import "github.com/mewmew/algo/qu"
+import qu "."
 
 func BenchmarkNew1e1(b *testing.B) {
 	for i := 0; i < b.N; i++ {

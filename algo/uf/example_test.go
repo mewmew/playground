@@ -2,7 +2,7 @@ package uf_test
 
 import "fmt"
 
-import "github.com/mewmew/algo/uf"
+import uf "."
 
 func ExampleUF() {
 	set := uf.New(10)
