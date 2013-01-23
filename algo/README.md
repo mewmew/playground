@@ -6,7 +6,7 @@ This projects provides various algorithm implementations.
 documentation
 -------------
 
-Documentation provided by GoDoc:
+Documentation provided by GoDoc.
 
    - [qf][]: quick-find algorithm.
    - [qu][]: quick-union algorithm.
