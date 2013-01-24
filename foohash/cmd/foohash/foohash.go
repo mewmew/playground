@@ -37,6 +37,8 @@ func init() {
 func usage() {
 	fmt.Fprintln(os.Stderr, "Usage: foohash [OPTION]... [HASH]...")
 	fmt.Fprintln(os.Stderr, "Recover passwords from hashes.")
+	fmt.Fprintln(os.Stderr)
+	fmt.Fprintln(os.Stderr, "Flags:")
 	flag.PrintDefaults()
 }
 
