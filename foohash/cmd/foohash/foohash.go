@@ -6,10 +6,9 @@ import "log"
 import "os"
 import "strings"
 
-import "github.com/mewmew/foohash"
-import "github.com/mewmew/foohash/google"
-import "github.com/mewmew/foohash/mutation"
-import "github.com/mewmew/foohash/wordlist"
+import "github.com/mewmew/playground/foohash"
+import "github.com/mewmew/playground/foohash/mutation"
+import "github.com/mewmew/playground/foohash/wordlist"
 
 var flagWordlistPath string
 var flagRegular bool
@@ -19,7 +18,6 @@ var flagLeet bool
 var flagNum bool
 var flagSaltPrefix string
 var flagSaltSuffix string
-var flagGoogle bool
 
 func init() {
 	flag.StringVar(&flagWordlistPath, "w", "", "Wordlist path.")
@@ -30,7 +28,6 @@ func init() {
 	flag.BoolVar(&flagNum, "wn", true, "Wordlist attack, using words with number suffixes.")
 	flag.StringVar(&flagSaltPrefix, "sp", "", "Salt prefix.")
 	flag.StringVar(&flagSaltSuffix, "ss", "", "Salt suffix.")
-	flag.BoolVar(&flagGoogle, "g", false, "Google.")
 	flag.Usage = usage
 }
 
@@ -49,10 +46,6 @@ func main() {
 		return
 	}
 	for _, rawHash := range flag.Args() {
-		if flagGoogle {
-			google.Search(rawHash)
-			continue
-		}
 		if len(flagWordlistPath) > 0 {
 			pass, found, err := CheckWordlist(rawHash, flagWordlistPath)
 			if err != nil {

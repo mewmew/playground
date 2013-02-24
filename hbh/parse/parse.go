@@ -1,10 +1,11 @@
 package parse
 
 import "errors"
-import "exp/html"
 import "fmt"
 import "strings"
 import "unicode"
+
+import "code.google.com/p/go.net/html"
 
 type Search struct {
 	Tag   string

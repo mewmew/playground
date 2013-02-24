@@ -1,7 +1,7 @@
 package wordlist
 
 import "github.com/mewkiz/pkg/bufioutil"
-import "github.com/mewmew/foohash"
+import "github.com/mewmew/playground/foohash"
 
 type Wordlist []string
 
