@@ -2,7 +2,7 @@ turtle
 ======
 
 Expressing information, concepts and ideas in order to teach someone else gives
-you a deeper understanding of what you know and also of your limitations.
+you a deeper understanding of your own knowledge and limitations.
 
 The purpose of project turtle is to facilitate my own understanding of the
 Japanese language. It is largely based on the awesome [WaniKani][] site and any
@@ -19,7 +19,7 @@ Documentation
 
 Documentation provided by GoDoc.
 
-	- [turtle][]
+- [turtle][]
 
 [turtle]: http://godoc.org/github.com/mewmew/playground/turtle
 
