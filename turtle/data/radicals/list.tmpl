@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset='utf-8'>
+		<title>List of radicals</title>
+		<link rel='stylesheet' href='/css/style.css'>
+	</head>
+	<body>
+		<div class="container standard">
+			<div class="row">
+				<div class="span12">
+					<h2>List of radicals</h2>
+					<p>Sort order:</p>
+					<ul>
+						<li><a href='/radicals/?order=num'>Radical number (default)</a>.</li>
+						<li><a href='/radicals/?order=freq'>Frequency of use</a>.</li>
+						<li><a href='/radicals/?order=rnd'>Random order</a>.</li>
+					</ul>
+{{ $order := .order }}
+{{ range .radicals }}
+					<p><a href='/radicals/{{ .Rune }}' title='{{ if eq $order "freq" }}{{ printf "Frequency: %d" .Freq }}{{ else }}{{ printf "Radical number: %d" .Num }}{{ end }}'>{{ .Rune }} - {{ .Meaning }}</a></p>
+{{ end }}
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
