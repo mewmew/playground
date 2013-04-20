@@ -26,7 +26,7 @@ Documentation provided by GoDoc.
 Installation
 ------------
 
-	go get github.com/mewmew/playground/cmd/turtle
+	go get github.com/mewmew/playground/turtle/cmd/turtle
 
 public domain
 -------------
