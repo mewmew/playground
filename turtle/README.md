@@ -40,4 +40,4 @@ released into the *public domain* since the script itself pre-dates modern
 concepts of copyright [[1][]].
 
 [public domain]: https://creativecommons.org/publicdomain/zero/1.0/
-[1]: https://commons.wikimedia.org/wiki/Template:PD-ancient-script/en
+[1]: https://commons.wikimedia.org/wiki/Template:PD-ancient-script
