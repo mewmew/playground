@@ -27,14 +27,14 @@ Mandelbrot set.
 
 	go get github.com/mewmew/playground/mset/examples/simple
 
-![Simple visual representation of the Mandelbrot set](https://github.com/mewmew/playground/mset/blob/master/examples/simple/simple.png?raw=true)
+![Simple visual representation of the Mandelbrot set](https://github.com/mewmew/playground/blob/master/mset/examples/simple/simple.png?raw=true)
 
 pretty creates a more aesthetically looking visual representation of the
 Mandelbrot set, with a gradient transition from black to blue to white.
 
 	go get github.com/mewmew/playground/mset/examples/pretty
 
-![Pretty visual representation of the Mandelbrot set](https://github.com/mewmew/playground/mset/blob/master/examples/pretty/pretty.png?raw=true)
+![Pretty visual representation of the Mandelbrot set](https://github.com/mewmew/playground/blob/master/mset/examples/pretty/pretty.png?raw=true)
 
 public domain
 -------------
