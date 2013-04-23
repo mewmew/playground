@@ -10,7 +10,7 @@ Documentation
 
 Documentation provided by GoDoc.
 
-	- [mset][]
+- [mset][]
 
 [mset]: http://godoc.org/github.com/mewmew/playground/mset
 
