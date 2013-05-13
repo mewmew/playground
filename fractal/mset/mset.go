@@ -61,8 +61,8 @@ func (img *Image) At(x, y int) color.Color {
 
 	next := gen(c)
 	for i := 0; i < Iterations; i++ {
-		x := next()
-		if hasEscaped(x) {
+		a := next()
+		if hasEscaped(a) {
 			// Give the pixel a color based on how many iterations it took to
 			// escape the circle.
 			return Colors[i%len(Colors)]
