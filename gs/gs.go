@@ -2,6 +2,7 @@
 package gs
 
 import (
+	"fmt"
 	"net/http"
 )
 
@@ -34,7 +35,14 @@ func NewSession() (sess *Session, err error) {
 
 // UserId returns the user id associated with the provided username.
 func (sess *Session) UserId(username string) (userId int, err error) {
-	return sess.userId(username)
+	userId, err = sess.userId(username)
+	if err != nil {
+		return 0, err
+	}
+	if userId == 0 {
+		return 0, fmt.Errorf("Session.UserId: unable to locate user id for %q.", username)
+	}
+	return userId, nil
 }
 
 // UserSongs returns a list of all songs in the provided user's collection.
@@ -122,6 +130,10 @@ type Song struct {
 	id int
 	// Artist id.
 	artistId int
+}
+
+func (song *Song) String() string {
+	return fmt.Sprintf("%s - %s", song.Artist, song.Title)
 }
 
 // A Playlist is an ordered list of songs with an associated name.
