@@ -3,14 +3,17 @@ package gs
 import (
 	"bytes"
 	"crypto/md5"
+	"crypto/sha1"
 	"encoding/json"
 	"errors"
 	"fmt"
 	"io"
 	"io/ioutil"
 	"log"
+	"math/rand"
 	"net/http"
 	"net/http/httputil"
+	"strconv"
 	"strings"
 
 	gouuid "code.google.com/p/go-uuid/uuid"
@@ -101,6 +104,83 @@ func (sess *Session) initCommToken() (err error) {
 	return nil
 }
 
+type gsReqCollection struct {
+	Page   string `json:"page"`
+	UserId int    `json:"userID"`
+}
+
+type gsRespCollection struct {
+	Result gsRespCollectionResult `json:"result"`
+	Err    *gsRespError           `json:"fault"`
+}
+
+// Example response:
+//
+//    "result":
+//    {
+//       "Songs": [
+//          {
+//             "SongID": "28653841",
+//             "Name": "Tiefblau",
+//             "AlbumName": "Breathless",
+//             "AlbumID": "5564043",
+//             "Flags": "0",
+//             "ArtistName": "Schiller",
+//             "ArtistID": "1700932",
+//             "Year": "2010",
+//             "CoverArtFilename": "5564043.jpg",
+//             "EstimateDuration": null,
+//             "IsVerified": "1",
+//             "IsLowBitrateAvailable": "0",
+//             "Popularity": "1313500001",
+//             "TrackNum": "2",
+//             "TSAdded": "2013-05-16 11:01:27"
+//          }
+//       ],
+//       "TSModified": 1368719620,
+//       "hasMore": false
+//    }
+type gsRespCollectionResult struct {
+	Songs   []*gsCollectionSong
+	HasMore bool `json:"hasMore"`
+}
+
+type gsCollectionSong struct {
+	Name       string
+	ArtistName string
+	AlbumName  string
+	TrackNum   string
+	SongID     string
+	ArtistID   string
+}
+
+// collection returns a list of the songs in the provided user collection's
+// page. hasMore is true if there are more pages available.
+func (sess *Session) collection(userId int, page int) (songs []*gsCollectionSong, hasMore bool, err error) {
+	// Perform request.
+	method := "userGetSongsInLibrary"
+	params := gsReqCollection{
+		Page:   strconv.Itoa(page),
+		UserId: userId,
+	}
+	buf, err := sess.request(method, params)
+	if err != nil {
+		return nil, false, err
+	}
+
+	// Unmarshal JSON response.
+	var resp gsRespCollection
+	err = json.Unmarshal(buf, &resp)
+	if err != nil {
+		return nil, false, err
+	}
+	if resp.Err != nil {
+		return nil, false, resp.Err
+	}
+
+	return resp.Result.Songs, resp.Result.HasMore, nil
+}
+
 // methodClient maps request methods to their associated client.
 var methodClient = map[string]*client{
 	"addSongsToQueue":          jsqueue,
@@ -150,6 +230,7 @@ type gsReqHeader struct {
 	Privacy   int                `json:"privacy"`
 	Country   gsReqHeaderCountry `json:"country"`
 	Session   string             `json:"session"`
+	Token     string             `json:"token,omitempty"`
 	UUID      string             `json:"uuid"`
 }
 
@@ -229,7 +310,8 @@ func (sess *Session) request(method string, params interface{}) (buf []byte, err
 		Params: params,
 	}
 	if sess.commToken != "" {
-		// TODO(u): Create token for all requests except getCommunicationToken.
+		// Generate request token.
+		data.Header.Token = sess.genToken(method)
 	}
 	rawData, err := json.Marshal(data)
 	if err != nil {
@@ -273,4 +355,29 @@ func (sess *Session) request(method string, params interface{}) (buf []byte, err
 	}
 
 	return buf, nil
+}
+
+// genToken generates and returns a request token based on the communication
+// token.
+func (sess *Session) genToken(method string) (token string) {
+	// Get a value between 0x100 and 0x1000000
+	n := rand.Intn(0x1000000 - 0x100)
+	n += 0x100
+	rnd := fmt.Sprintf("%06x", n)
+
+	// Create the request token.
+	h := sha1.New()
+	client, ok := methodClient[method]
+	if !ok {
+		client = defaultClient
+	}
+	plain := fmt.Sprintf("%s:%s:%s:%s", method, sess.commToken, client.Salt, rnd)
+	io.WriteString(h, plain)
+	token = fmt.Sprintf("%s%x", rnd, h.Sum(nil))
+	if Verbose {
+		log.Println("request token (plain):", plain)
+		log.Println("request token:", token)
+	}
+
+	return token
 }
