@@ -357,11 +357,11 @@ type gsReqPlaylists struct {
 //       ]
 //    }
 type gsRespPlaylists struct {
-	Result gsReqPlaylistsResult `json:"result"`
+	Result gsRespPlaylistsResult `json:"result"`
 	Err    *gsRespError         `json:"fault"`
 }
 
-type gsReqPlaylistsResult struct {
+type gsRespPlaylistsResult struct {
 	Playlists []*gsPlaylist
 }
 
@@ -427,11 +427,11 @@ type gsReqPlaylistSongs struct {
 //       ]
 //    }
 type gsRespPlaylistSongs struct {
-	Result gsReqPlaylistSongsResult `json:"result"`
+	Result gsRespPlaylistSongsResult `json:"result"`
 	Err    *gsRespError             `json:"fault"`
 }
 
-type gsReqPlaylistSongsResult struct {
+type gsRespPlaylistSongsResult struct {
 	Songs []*gsSong
 }
 
