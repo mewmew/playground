@@ -119,7 +119,20 @@ func (sess *Session) UserFavorites(userId int) (songs []*Song, err error) {
 
 // UserPlaylists returns a list of the provided user's playlists.
 func (sess *Session) UserPlaylists(userId int) (playlists []*Playlist, err error) {
-	return nil, errors.New("gs.UserPlaylists: not yet implemented.")
+	gsPlaylists, err := sess.playlists(userId)
+	if err != nil {
+		return nil, err
+	}
+	for _, gsPlaylist := range gsPlaylists {
+		playlist := &Playlist{
+			Name: gsPlaylist.Name,
+			id:   gsPlaylist.PlaylistID,
+		}
+		// TODO(u): fetch playlist songs.
+		playlists = append(playlists, playlist)
+	}
+
+	return playlists, nil
 }
 
 // A Song is a music track with associated information.
@@ -144,4 +157,6 @@ type Playlist struct {
 	Name string
 	// An ordered slice of songs.
 	Songs []*Song
+	// Playlist id.
+	id int
 }

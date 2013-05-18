@@ -237,6 +237,66 @@ func (sess *Session) favorites(userId int) (songs []*gsSong, err error) {
 	return resp.Result, nil
 }
 
+type gsReqPlaylists struct {
+	UserId int `json:"userID"`
+}
+
+// Example response:
+//
+//    "result":
+//    {
+//       "Playlists": [
+//          {
+//             "UUID": "5194f4e3e56c67243a000001",
+//             "TSAdded": "2013-05-16 11:01:55",
+//             "Picture": "1699951-2579234-4296074-5564043.jpg",
+//             "TSModified": 1368716515,
+//             "Name": "blip",
+//             "PlaylistID": 86557331,
+//             "SongCount": 4,
+//             "UserID": 21229114
+//          }
+//       ]
+//    }
+type gsRespPlaylists struct {
+	Result gsReqPlaylistsResult `json:"result"`
+	Err    *gsRespError         `json:"fault"`
+}
+
+type gsReqPlaylistsResult struct {
+	Playlists []*gsPlaylist
+}
+
+type gsPlaylist struct {
+	Name       string
+	PlaylistID int
+}
+
+// playlists  returns a list of the provided user's playlists.
+func (sess *Session) playlists(userId int) (playlists []*gsPlaylist, err error) {
+	// Perform request.
+	method := "userGetPlaylists"
+	params := gsReqPlaylists{
+		UserId: userId,
+	}
+	buf, err := sess.request(method, params)
+	if err != nil {
+		return nil, err
+	}
+
+	// Unmarshal JSON response.
+	var resp gsRespPlaylists
+	err = json.Unmarshal(buf, &resp)
+	if err != nil {
+		return nil, err
+	}
+	if resp.Err != nil {
+		return nil, resp.Err
+	}
+
+	return resp.Result.Playlists, nil
+}
+
 // methodClient maps request methods to their associated client.
 var methodClient = map[string]*client{
 	"addSongsToQueue":          jsqueue,
