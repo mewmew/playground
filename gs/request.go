@@ -104,6 +104,77 @@ func (sess *Session) initCommToken() (err error) {
 	return nil
 }
 
+type gsReqUserId struct {
+	Name string `json:"name"`
+}
+
+// Example response:
+//
+//    "result":
+//    {
+//       "type": "user",
+//       "data":
+//       {
+//          "FavoriteSongCount": 2,
+//          "LibrarySongCount": 3,
+//          "PlaylistCount": 2
+//       },
+//       "user":
+//       {
+//          "UserID": 21229114,
+//          "FName": "Alice",
+//          "LName": "",
+//          "Picture": null,
+//          "TSAdded": "2013-05-16 10:59:15",
+//          "City": null,
+//          "State": null,
+//          "Country": null,
+//          "IsPremium": "0",
+//          "Sex": "F",
+//          "Flags": "0",
+//          "About": null,
+//          "Username": "Alice"
+//       }
+//    }
+type gsRespUserId struct {
+	Result gsRespUserIdResult `json:"result"`
+	Err    *gsRespError       `json:"fault"`
+}
+
+type gsRespUserIdResult struct {
+	User gsRespUserIdUser `json:"user"`
+}
+
+type gsRespUserIdUser struct {
+	UserID int
+}
+
+//  userId returns the user id associated with the provided username.
+func (sess *Session) userId(username string) (userId int, err error) {
+	// Perform request.
+	// TODO(u): use getUserIDFromUsername method instead.
+	method := "getItemByPageName"
+	params := gsReqUserId{
+		Name: username,
+	}
+	buf, err := sess.request(method, params)
+	if err != nil {
+		return 0, err
+	}
+
+	// Unmarshal JSON response.
+	var resp gsRespUserId
+	err = json.Unmarshal(buf, &resp)
+	if err != nil {
+		return 0, err
+	}
+	if resp.Err != nil {
+		return 0, resp.Err
+	}
+
+	return resp.Result.User.UserID, nil
+}
+
 type gsReqCollection struct {
 	Page   string `json:"page"`
 	UserId int    `json:"userID"`

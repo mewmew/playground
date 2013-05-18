@@ -2,7 +2,6 @@
 package gs
 
 import (
-	"errors"
 	"net/http"
 )
 
@@ -35,7 +34,7 @@ func NewSession() (sess *Session, err error) {
 
 // UserId returns the user id associated with the provided username.
 func (sess *Session) UserId(username string) (userId int, err error) {
-	return 0, errors.New("gs.UserId: not yet implemented.")
+	return sess.userId(username)
 }
 
 // UserSongs returns a list of all songs in the provided user's collection.
