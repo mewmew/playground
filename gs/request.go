@@ -154,6 +154,33 @@ type gsSong struct {
 	ArtistID   string
 }
 
+func (gsSong *gsSong) Song() (song *Song, err error) {
+	song = &Song{
+		Title:  gsSong.Name,
+		Artist: gsSong.ArtistName,
+		Album:  gsSong.AlbumName,
+	}
+	if gsSong.TrackNum != "" {
+		song.TrackNum, err = strconv.Atoi(gsSong.TrackNum)
+		if err != nil {
+			return nil, err
+		}
+	}
+	if gsSong.SongID != "" {
+		song.id, err = strconv.Atoi(gsSong.SongID)
+		if err != nil {
+			return nil, err
+		}
+	}
+	if gsSong.ArtistID != "" {
+		song.artistId, err = strconv.Atoi(gsSong.ArtistID)
+		if err != nil {
+			return nil, err
+		}
+	}
+	return song, nil
+}
+
 // collection returns a list of the songs in the provided user collection's
 // page. hasMore is true if there are more pages available.
 func (sess *Session) collection(userId int, page int) (songs []*gsSong, hasMore bool, err error) {
@@ -295,6 +322,71 @@ func (sess *Session) playlists(userId int) (playlists []*gsPlaylist, err error) 
 	}
 
 	return resp.Result.Playlists, nil
+}
+
+type gsReqPlaylistSongs struct {
+	PlaylistId int `json:"playlistID"`
+}
+
+// Example response:
+//
+//    "result":
+//    {
+//       "Songs": [
+//          {
+//             "SongID": "28653841",
+//             "Name": "Tiefblau",
+//             "SongNameID": "12624501",
+//             "AlbumID": "5564043",
+//             "AlbumName": "Breathless",
+//             "ArtistID": "1700932",
+//             "ArtistName": "Schiller",
+//             "AvgRating": null,
+//             "IsVerified": "1",
+//             "CoverArtFilename": "5564043.jpg",
+//             "Year": "2010",
+//             "UserRating": "0",
+//             "EstimateDuration": null,
+//             "Popularity": "1313500001",
+//             "TrackNum": "2",
+//             "IsLowBitrateAvailable": "0",
+//             "Flags": "0",
+//             "Sort": 0
+//          }
+//       ]
+//    }
+type gsRespPlaylistSongs struct {
+	Result gsReqPlaylistSongsResult `json:"result"`
+	Err    *gsRespError             `json:"fault"`
+}
+
+type gsReqPlaylistSongsResult struct {
+	Songs []*gsSong
+}
+
+// playlistSongs  returns a list of all songs in the provided playlist.
+func (sess *Session) playlistSongs(playlistId int) (songs []*gsSong, err error) {
+	// Perform request.
+	method := "playlistGetSongs"
+	params := gsReqPlaylistSongs{
+		PlaylistId: playlistId,
+	}
+	buf, err := sess.request(method, params)
+	if err != nil {
+		return nil, err
+	}
+
+	// Unmarshal JSON response.
+	var resp gsRespPlaylistSongs
+	err = json.Unmarshal(buf, &resp)
+	if err != nil {
+		return nil, err
+	}
+	if resp.Err != nil {
+		return nil, resp.Err
+	}
+
+	return resp.Result.Songs, nil
 }
 
 // methodClient maps request methods to their associated client.

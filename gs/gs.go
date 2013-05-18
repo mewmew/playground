@@ -4,7 +4,6 @@ package gs
 import (
 	"errors"
 	"net/http"
-	"strconv"
 )
 
 // Session contains the cookies and token of a grooveshark session.
@@ -48,28 +47,9 @@ func (sess *Session) UserSongs(userId int) (songs []*Song, err error) {
 			return nil, err
 		}
 		for _, gsSong := range gsSongs {
-			song := &Song{
-				Title:  gsSong.Name,
-				Artist: gsSong.ArtistName,
-				Album:  gsSong.AlbumName,
-			}
-			if gsSong.TrackNum != "" {
-				song.TrackNum, err = strconv.Atoi(gsSong.TrackNum)
-				if err != nil {
-					return nil, err
-				}
-			}
-			if gsSong.SongID != "" {
-				song.id, err = strconv.Atoi(gsSong.SongID)
-				if err != nil {
-					return nil, err
-				}
-			}
-			if gsSong.ArtistID != "" {
-				song.artistId, err = strconv.Atoi(gsSong.ArtistID)
-				if err != nil {
-					return nil, err
-				}
+			song, err := gsSong.Song()
+			if err != nil {
+				return nil, err
 			}
 			songs = append(songs, song)
 		}
@@ -88,28 +68,9 @@ func (sess *Session) UserFavorites(userId int) (songs []*Song, err error) {
 		return nil, err
 	}
 	for _, gsSong := range gsSongs {
-		song := &Song{
-			Title:  gsSong.Name,
-			Artist: gsSong.ArtistName,
-			Album:  gsSong.AlbumName,
-		}
-		if gsSong.TrackNum != "" {
-			song.TrackNum, err = strconv.Atoi(gsSong.TrackNum)
-			if err != nil {
-				return nil, err
-			}
-		}
-		if gsSong.SongID != "" {
-			song.id, err = strconv.Atoi(gsSong.SongID)
-			if err != nil {
-				return nil, err
-			}
-		}
-		if gsSong.ArtistID != "" {
-			song.artistId, err = strconv.Atoi(gsSong.ArtistID)
-			if err != nil {
-				return nil, err
-			}
+		song, err := gsSong.Song()
+		if err != nil {
+			return nil, err
 		}
 		songs = append(songs, song)
 	}
@@ -119,6 +80,7 @@ func (sess *Session) UserFavorites(userId int) (songs []*Song, err error) {
 
 // UserPlaylists returns a list of the provided user's playlists.
 func (sess *Session) UserPlaylists(userId int) (playlists []*Playlist, err error) {
+	// Locate user playlists.
 	gsPlaylists, err := sess.playlists(userId)
 	if err != nil {
 		return nil, err
@@ -128,7 +90,19 @@ func (sess *Session) UserPlaylists(userId int) (playlists []*Playlist, err error
 			Name: gsPlaylist.Name,
 			id:   gsPlaylist.PlaylistID,
 		}
-		// TODO(u): fetch playlist songs.
+
+		// Populate the playlist with it's associated songs.
+		gsSongs, err := sess.playlistSongs(playlist.id)
+		if err != nil {
+			return nil, err
+		}
+		for _, gsSong := range gsSongs {
+			song, err := gsSong.Song()
+			if err != nil {
+				return nil, err
+			}
+			playlist.Songs = append(playlist.Songs, song)
+		}
 		playlists = append(playlists, playlist)
 	}
 
