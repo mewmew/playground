@@ -83,7 +83,38 @@ func (sess *Session) UserSongs(userId int) (songs []*Song, err error) {
 
 // UserFavorites returns a list of the provided user's favorite songs.
 func (sess *Session) UserFavorites(userId int) (songs []*Song, err error) {
-	return nil, errors.New("gs.UserFavorites: not yet implemented.")
+	gsSongs, err := sess.favorites(userId)
+	if err != nil {
+		return nil, err
+	}
+	for _, gsSong := range gsSongs {
+		song := &Song{
+			Title:  gsSong.Name,
+			Artist: gsSong.ArtistName,
+			Album:  gsSong.AlbumName,
+		}
+		if gsSong.TrackNum != "" {
+			song.TrackNum, err = strconv.Atoi(gsSong.TrackNum)
+			if err != nil {
+				return nil, err
+			}
+		}
+		if gsSong.SongID != "" {
+			song.id, err = strconv.Atoi(gsSong.SongID)
+			if err != nil {
+				return nil, err
+			}
+		}
+		if gsSong.ArtistID != "" {
+			song.artistId, err = strconv.Atoi(gsSong.ArtistID)
+			if err != nil {
+				return nil, err
+			}
+		}
+		songs = append(songs, song)
+	}
+
+	return songs, nil
 }
 
 // UserPlaylists returns a list of the provided user's playlists.

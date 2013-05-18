@@ -141,11 +141,11 @@ type gsRespCollection struct {
 //       "hasMore": false
 //    }
 type gsRespCollectionResult struct {
-	Songs   []*gsCollectionSong
+	Songs   []*gsSong
 	HasMore bool `json:"hasMore"`
 }
 
-type gsCollectionSong struct {
+type gsSong struct {
 	Name       string
 	ArtistName string
 	AlbumName  string
@@ -156,7 +156,7 @@ type gsCollectionSong struct {
 
 // collection returns a list of the songs in the provided user collection's
 // page. hasMore is true if there are more pages available.
-func (sess *Session) collection(userId int, page int) (songs []*gsCollectionSong, hasMore bool, err error) {
+func (sess *Session) collection(userId int, page int) (songs []*gsSong, hasMore bool, err error) {
 	// Perform request.
 	method := "userGetSongsInLibrary"
 	params := gsReqCollection{
@@ -179,6 +179,62 @@ func (sess *Session) collection(userId int, page int) (songs []*gsCollectionSong
 	}
 
 	return resp.Result.Songs, resp.Result.HasMore, nil
+}
+
+type gsReqFavorites struct {
+	OfWhat string `json:"ofWhat"`
+	UserId int    `json:"userID"`
+}
+
+// Example response:
+//
+//    "result": [
+//       {
+//          "Name": "Tiefblau",
+//          "SongID": "28653841",
+//          "Flags": "0",
+//          "ArtistID": "1700932",
+//          "ArtistName": "Schiller",
+//          "AlbumID": "5564043",
+//          "AlbumName": "Breathless",
+//          "CoverArtFilename": "5564043.jpg",
+//          "TSFavorited": "2013-05-16 11:01:33",
+//          "IsLowBitrateAvailable": "0",
+//          "EstimateDuration": null,
+//          "IsVerified": "1",
+//          "Popularity": "1313500001",
+//          "TrackNum": "2"
+//       }
+//    ]
+type gsRespFavorites struct {
+	Result []*gsSong    `json:"result"`
+	Err    *gsRespError `json:"fault"`
+}
+
+// favorites returns a list of the provided user's favorite songs.
+func (sess *Session) favorites(userId int) (songs []*gsSong, err error) {
+	// Perform request.
+	method := "getFavorites"
+	params := gsReqFavorites{
+		OfWhat: "Songs",
+		UserId: userId,
+	}
+	buf, err := sess.request(method, params)
+	if err != nil {
+		return nil, err
+	}
+
+	// Unmarshal JSON response.
+	var resp gsRespFavorites
+	err = json.Unmarshal(buf, &resp)
+	if err != nil {
+		return nil, err
+	}
+	if resp.Err != nil {
+		return nil, resp.Err
+	}
+
+	return resp.Result, nil
 }
 
 // methodClient maps request methods to their associated client.
