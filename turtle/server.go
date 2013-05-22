@@ -5,7 +5,6 @@ import (
 	"html/template"
 	"log"
 	"net/http"
-	"path"
 	"reflect"
 	"sort"
 )
@@ -29,7 +28,7 @@ func NewRadicalServer() (srv *RadicalServer, err error) {
 	funcs := template.FuncMap{
 		"eq": eq,
 	}
-	srv.tmpl, err = template.New(path.Base(tmplPath)).Funcs(funcs).ParseFiles(tmplPath)
+	srv.tmpl, err = template.New("list.tmpl").Funcs(funcs).ParseFiles(tmplPath)
 	if err != nil {
 		return nil, err
 	}
@@ -71,7 +70,7 @@ func eq(a, b interface{}) bool {
 //    * page of radical 人:
 //       "/radicals/人"
 //       "/radicals/9"
-//       "/radicals/human"
+//       "/radicals/person"
 func (srv *RadicalServer) ServeHTTP(w http.ResponseWriter, req *http.Request) {
 	s := req.URL.Path[len("/radicals/"):]
 	if len(s) == 0 {
@@ -111,7 +110,6 @@ func (srv *RadicalServer) ServeList(w http.ResponseWriter, req *http.Request) {
 		m["radicals"] = srv.freqOrder
 	case "rnd":
 		// Random order.
-		// map gives us random access.
 		sort.Sort(RndOrder(srv.rndOrder))
 		m["radicals"] = srv.rndOrder
 	default:
