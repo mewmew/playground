@@ -3,11 +3,11 @@ package turtle
 // radicals is a slice of all radicals with associated information. It is by
 // default sorted by radical number.
 //
-// The following data has been generated using the genrad tool [1] to parse the
-// table of radicals at Wikipedia [2]. Only minor manual alterations have been
-// performed.
+// The following data has been generated using the genradical tool [1] to parse
+// the table of radicals at Wikipedia [2]. Only minor manual alterations have
+// been performed.
 //
-// [1]: github.com/mewmew/playground/turtle/cmd/genrad
+// [1]: github.com/mewmew/playground/turtle/cmd/genradical
 // [2]: https://en.wikipedia.org/wiki/Kangxi_radical#Table_of_radicals
 var radicals = []*Radical{
 	&Radical{Num: 1, Rune: "一", AltRune: "", Strokes: 1, Pinyin: "yī", Hiragana: "いち", Romaji: "ichi", Meaning: "one", Freq: 42, Simplified: "", Examples: "七三丈不丘世"},
