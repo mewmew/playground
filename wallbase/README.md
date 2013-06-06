@@ -13,7 +13,7 @@ Documentation provided by GoDoc.
 
 - [wallbase][]
 
-[wallbase]: http://godoc.org/github.com/mewmew/wallbase
+[wallbase]: http://godoc.org/github.com/mewmew/playground/wallbase
 
 walls
 =====
@@ -28,7 +28,7 @@ For persistent storage a custom download directory can be specified.
 Installation
 ------------
 
-	go get github.com/mewmew/wallbase/cmd/walls
+	go get github.com/mewmew/playground/wallbase/cmd/walls
 
 Dependencies
 ------------
@@ -42,7 +42,7 @@ Documentation provided by GoDoc.
 
 - [walls][]
 
-[walls]: http://godoc.org/github.com/mewmew/wallbase/cmd/walls
+[walls]: http://godoc.org/github.com/mewmew/playground/wallbase/cmd/walls
 
 Usage
 -----

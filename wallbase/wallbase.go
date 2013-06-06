@@ -1,20 +1,22 @@
 // Package wallbase implements search and download functions for wallbase.cc.
 package wallbase
 
-import "bytes"
-import "encoding/base64"
-import "encoding/json"
-import "errors"
-import "fmt"
-import "image"
-import _ "image/jpeg"
-import _ "image/png"
-import "io/ioutil"
-import "net/http"
-import "strings"
+import (
+	"bytes"
+	"encoding/base64"
+	"encoding/json"
+	"errors"
+	"fmt"
+	"image"
+	_ "image/jpeg"
+	_ "image/png"
+	"io/ioutil"
+	"net/http"
+	"strings"
 
-import "github.com/mewkiz/pkg/httputil"
-import "github.com/mewkiz/pkg/stringsutil"
+	"github.com/mewkiz/pkg/httputil"
+	"github.com/mewkiz/pkg/stringsutil"
+)
 
 // Wall is a wallpaper.
 type Wall struct {
