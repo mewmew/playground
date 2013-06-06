@@ -1,10 +1,12 @@
 // Package pcap provides support for reading pcap files.
 package pcap
 
-import "encoding/binary"
-import "io"
-import "os"
-import "time"
+import (
+	"encoding/binary"
+	"io"
+	"os"
+	"time"
+)
 
 // A File represents a pcap file.
 type File struct {

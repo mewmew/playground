@@ -16,7 +16,7 @@ Documentation provided by GoDoc.
 
    - [pcap][]
 
-[pcap]: http://godoc.org/github.com/mewmew/pcap
+[pcap]: http://godoc.org/github.com/mewmew/playground/pcap
 
 public domain
 -------------
