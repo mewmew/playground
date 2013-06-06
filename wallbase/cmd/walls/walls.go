@@ -1,0 +1,102 @@
+package main
+
+import "flag"
+import "fmt"
+import "io/ioutil"
+import "log"
+import "os"
+import "os/exec"
+import "strings"
+import "time"
+
+import "github.com/mewmew/wallbase"
+
+// flagTimeout is the timeout interval between wallpaper updates.
+var flagTimeout string
+
+// wallPath is the output directory in which all wallpapers are stored. The
+// default is a none persistent directory.
+var wallPath string
+
+func init() {
+	flag.StringVar(&wallPath, "o", "/tmp/wallbase", "Output directory.")
+	flag.StringVar(&flagTimeout, "t", "30m", "Timeout interval between updates.")
+	flag.Usage = usage
+}
+
+func usage() {
+	fmt.Fprintln(os.Stderr, "walls [OPTION]... QUERY")
+	fmt.Fprintln(os.Stderr, "Update the desktop wallpaper at specified time intervals.")
+	fmt.Fprintln(os.Stderr)
+	fmt.Fprintln(os.Stderr, "Flags:")
+	flag.PrintDefaults()
+	fmt.Fprintln(os.Stderr)
+	fmt.Fprintln(os.Stderr, "Examples:")
+	fmt.Fprintln(os.Stderr, `  Search for "nature waterfall" and update active wallpaper each 10s.`)
+	fmt.Fprintln(os.Stderr, "    walls -t 10s nature waterfall")
+	fmt.Fprintln(os.Stderr, `  Search for "nature" and store each wallpaper in "download/".`)
+	fmt.Fprintln(os.Stderr, "    walls -t 0s -o download/ nature")
+}
+
+func main() {
+	flag.Parse()
+	err := walls()
+	if err != nil {
+		log.Fatalln(err)
+	}
+}
+
+// walls performs a search on wallbase.cc based on the provided search query,
+// with random search result order, and updates the active wallpaper after the
+// specified timeout interval.
+func walls() (err error) {
+	timeout, err := time.ParseDuration(flagTimeout)
+	if err != nil {
+		return err
+	}
+	err = os.MkdirAll(wallPath, 0755)
+	if err != nil {
+		return err
+	}
+	query := strings.Join(flag.Args(), " ")
+	for {
+		// Each call to search should return new wallpapers, since the search
+		// result order is random.
+		walls, err := wallbase.Search(query)
+		if err != nil {
+			return err
+		}
+		if len(walls) == 0 {
+			return fmt.Errorf("walls: No wallpapers match the search query '%s'.", query)
+		}
+		for _, wall := range walls {
+			start := time.Now()
+			err = update(wall)
+			if err != nil {
+				return err
+			}
+			elapsed := time.Since(start)
+			time.Sleep(timeout - elapsed)
+		}
+	}
+	return nil
+}
+
+// update downloads the provided wallpaper and updates the current wallpaper.
+func update(wall *wallbase.Wall) (err error) {
+	err = wall.Download()
+	if err != nil {
+		return err
+	}
+	imgPath := fmt.Sprintf("%s/%d.%s", wallPath, wall.Id, wall.Ext)
+	err = ioutil.WriteFile(imgPath, wall.Buf, 0644)
+	if err != nil {
+		return err
+	}
+	cmd := exec.Command("hsetroot", "-fill", imgPath)
+	err = cmd.Run()
+	if err != nil {
+		return err
+	}
+	return nil
+}
