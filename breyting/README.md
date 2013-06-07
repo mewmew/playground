@@ -4,6 +4,11 @@ WIP
 This project is a *work in progress*. The implementation is *incomplete* and
 subject to change. The documentation can be inaccurate.
 
+Another project called [nyfiken][] has gotten much further and is currently
+usable for monitoring page changes.
+
+[nyfiken]: https://github.com/karlek/nyfiken
+
 breyting
 ========
 
