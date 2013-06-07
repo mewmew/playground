@@ -27,7 +27,7 @@ import (
 func main() {
 	flag.Parse()
 	for _, filePath := range flag.Args() {
-		err := play(filePath)
+		err := genradical(filePath)
 		if err != nil {
 			log.Fatalln(err)
 		}
@@ -37,7 +37,7 @@ func main() {
 	}
 }
 
-func play(filePath string) (err error) {
+func genradical(filePath string) (err error) {
 	buf, err := ioutil.ReadFile(filePath)
 	if err != nil {
 		return err
