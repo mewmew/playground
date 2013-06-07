@@ -1,7 +1,9 @@
 package mutation
 
-import "fmt"
-import "strings"
+import (
+	"fmt"
+	"strings"
+)
 
 var leetCharset = map[string]string{
 	"o": "0",

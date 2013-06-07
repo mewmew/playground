@@ -1,4 +1,4 @@
-partial implementation
+Partial implementation
 ----------------------
 
 This implementation is only *partially complete*. While useable it is still
@@ -9,7 +9,7 @@ pcap
 
 This package provides support for reading pcap files.
 
-documentation
+Documentation
 -------------
 
 Documentation provided by GoDoc.

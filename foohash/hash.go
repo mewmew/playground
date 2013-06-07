@@ -1,8 +1,10 @@
 package foohash
 
-import "bytes"
-import "encoding/hex"
-import "fmt"
+import (
+	"bytes"
+	"encoding/hex"
+	"fmt"
+)
 
 type Hash struct {
 	buf   []byte

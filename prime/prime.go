@@ -6,7 +6,9 @@
 
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
 func main() {
 	primes := make(chan int)

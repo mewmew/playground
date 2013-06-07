@@ -1,6 +1,8 @@
 package foohash
 
-import "crypto/sha1"
+import (
+	"crypto/sha1"
+)
 
 func newSha1(pass string) (hash *Hash) {
 	h := sha1.New()

@@ -14,6 +14,10 @@ func init() {
 func usage() {
 	fmt.Fprintln(os.Stderr, "Usage: pacdump PKG...")
 	fmt.Fprintf(os.Stderr, "Create an archive (%q) containing the files of the specified Arch Linux packages.\n", output)
+	fmt.Fprintln(os.Stderr)
+	fmt.Fprintln(os.Stderr, "Examples:")
+	fmt.Fprintln(os.Stderr, `  Create an archive ("boll.tar.gz") containing the files of the mesa package.`)
+	fmt.Fprintln(os.Stderr, "    pacdump mesa")
 }
 
 func main() {

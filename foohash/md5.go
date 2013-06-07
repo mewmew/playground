@@ -1,6 +1,8 @@
 package foohash
 
-import "crypto/md5"
+import (
+	"crypto/md5"
+)
 
 func newMd5(pass string) (hash *Hash) {
 	h := md5.New()

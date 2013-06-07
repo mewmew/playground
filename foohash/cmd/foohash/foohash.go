@@ -1,14 +1,16 @@
 package main
 
-import "flag"
-import "fmt"
-import "log"
-import "os"
-import "strings"
+import (
+	"flag"
+	"fmt"
+	"log"
+	"os"
+	"strings"
 
-import "github.com/mewmew/playground/foohash"
-import "github.com/mewmew/playground/foohash/mutation"
-import "github.com/mewmew/playground/foohash/wordlist"
+	"github.com/mewmew/playground/foohash"
+	"github.com/mewmew/playground/foohash/mutation"
+	"github.com/mewmew/playground/foohash/wordlist"
+)
 
 var flagWordlistPath string
 var flagRegular bool

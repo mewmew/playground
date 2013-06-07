@@ -1,14 +1,16 @@
 // Package dump implements functions for retrieving stream URLs.
 package dump
 
-import "errors"
-import "fmt"
-import "io/ioutil"
-import "net/http"
-import "os"
-import "os/exec"
-import "path"
-import "strings"
+import (
+	"errors"
+	"fmt"
+	"io/ioutil"
+	"net/http"
+	"os"
+	"os/exec"
+	"path"
+	"strings"
+)
 
 // Url locates a stream URL in a given page and calls Stream with the stream URL
 // as argument.

@@ -1,10 +1,12 @@
 package main
 
-import "github.com/mewmew/playground/streamdump/dump"
+import (
+	"github.com/mewmew/playground/streamdump/dump"
 
-import "flag"
-import "fmt"
-import "log"
+	"flag"
+	"fmt"
+	"log"
+)
 
 func init() {
 	flag.Usage = usage
