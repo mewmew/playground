@@ -1,8 +1,8 @@
 package main
 
 import (
-	dbg "fmt"
 	"flag"
+	dbg "fmt"
 	"log"
 	"os"
 	"time"
