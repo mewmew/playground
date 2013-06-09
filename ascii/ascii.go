@@ -73,7 +73,10 @@ func checkFile(filePath string) (err error) {
 	lineNum := 1
 	s := bufio.NewScanner(f)
 	for s.Scan() {
-		checkLine(s.Text(), lineNum)
+		err := checkLine(s.Text(), filePath, lineNum)
+		if err != nil {
+			fmt.Fprintln(os.Stderr, err)
+		}
 		lineNum++
 	}
 	err = s.Err()
@@ -84,16 +87,17 @@ func checkFile(filePath string) (err error) {
 	return nil
 }
 
-func checkLine(line string, lineNum int) {
+func checkLine(line, filePath string, lineNum int) (err error) {
 	for col, r := range line {
 		if r < 128 {
 			if !unicode.IsSpace(rune(r)) && !unicode.IsPrint(rune(r)) {
-				fmt.Printf("%d:%d - non-printable character 0x%02X.\n", lineNum, col, r)
+				return fmt.Errorf("%s (%d:%d) - non-printable character 0x%02X.", filePath, lineNum, col, r)
 			}
 		} else {
-			fmt.Printf("%d:%d - non-ascii character '%c'.\n", lineNum, col, r)
+			return fmt.Errorf("%s (%d:%d) - non-ascii character '%c'.", filePath, lineNum, col, r)
 		}
 	}
+	return nil
 }
 
 func isDir(path string) bool {
