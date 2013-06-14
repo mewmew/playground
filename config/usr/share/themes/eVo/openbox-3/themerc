@@ -1,0 +1,110 @@
+!===============================================================================
+!
+!--- [ introduction ] ----------------------------------------------------------
+! A very dark openbox theme inspired by Onyx and BoxShadow.
+!
+!--- [ license ] ---------------------------------------------------------------
+! This theme is licensed under the BSD license.
+!       http://www.opensource.org/licenses/bsd-license.php
+!
+!--- [ release information ] ---------------------------------------------------
+! file          - eVo-openbox-theme, v0.0.1
+! author        - robin eklind  < x@opensec.se >
+! created       - 25-Jul-2008
+! modified      - 26-Jul-2008
+!
+!===============================================================================
+
+!--- [ Menu background ] -------------------------------------------------------
+menu.items.bg: sunken gradient horizontal
+menu.items.bg.color: #202020
+menu.items.bg.colorTo: #000000
+
+!--- [ Menu text ] -------------------------------------------------------------
+menu.items.text.color: #AAAAAA
+menu.items.justify: left
+menu.items.disabled.text.color: #555555
+
+!--- [ Menu headers ] ----------------------------------------------------------
+menu.title.bg: raised splitvertical gradient
+menu.title.bg.color: #555555
+menu.title.bg.colorTo: #111111
+
+menu.title.text.color: #FFFFFF
+menu.title.text.justify: center
+
+!--- [ Selected menu item ] ----------------------------------------------------
+menu.items.active.bg: raised splitvertical gradient
+menu.items.active.bg.color: #444444
+menu.items.active.bg.colorTo: #111111
+
+menu.items.active.text.color: #FFFFFF
+
+!--- [ Titlebar ] --------------------------------------------------------------
+window.active.title.bg: raised splitvertical gradient
+window.active.title.bg.color: #444444
+window.active.title.bg.colorTo: #000000
+
+window.inactive.title.bg: raised splitvertical gradient
+window.inactive.title.bg.color: #222222
+window.inactive.title.bg.colorTo: #000000
+
+!--- [ Titlebar text ] ---------------------------------------------------------
+window.label.text.justify: center
+
+window.active.label.bg: parentrelative
+window.active.label.text.color: #FFFFFF
+
+window.inactive.label.bg: parentrelative
+window.inactive.label.text.color: #777777
+
+!--- [ Window buttons ] --------------------------------------------------------
+window.*.button.*.bg: parentrelative
+
+window.active.button.unpressed.image.color: #AAAAAA
+window.active.button.pressed.image.color: #FFFFFF
+window.active.button.disabled.image.color: #555555
+window.active.button.hover.image.color: #FFFFFF
+
+window.inactive.button.unpressed.image.color: #333333
+window.inactive.button.pressed.image.color: #777777
+window.inactive.button.disabled.image.color: #222222
+window.inactive.button.hover.image.color: #777777
+
+!--- [ Window grip and handle ] ------------------------------------------------
+window.active.grip.bg: parentrelative
+window.inactive.grip.bg: parentrelative
+
+window.active.handle.bg: flat solid
+window.active.handle.bg.color: #EEEEEE
+
+window.inactive.handle.bg: flat solid
+window.inactive.handle.bg.color: #AAAAAA
+
+!--- [ Borders ] ---------------------------------------------------------------
+window.active.border.color: #000000
+window.inactive.border.color: #000000
+window.inactive.title.separator.color: #000000
+
+border.width: 1
+padding.width: 2
+window.handle.width: 2
+window.client.padding.width: 0
+window.client.padding.height: 0
+menu.overlap: 0
+
+!--- [ On-screen displays ] ----------------------------------------------------
+osd.bg: gradient vertical flat
+osd.bg.color: #444444
+osd.bg.colorTo: #000000
+
+osd.hilight.bg: gradient splitvertical
+osd.hilight.bg.color: #AAAAAA
+osd.hilight.bg.colorTo: #555555
+
+osd.unhilight.bg: gradient splitvertical
+osd.unhilight.bg.color: #222222
+osd.unhilight.bg.colorTo: #111111
+
+!--- [ Font shadows ] ----------------------------------------------------------
+menu.items.font: shadow=y:shadowtint=70:shadowoffset=1
