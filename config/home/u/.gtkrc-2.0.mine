@@ -1,0 +1,4 @@
+gtk-icon-sizes = "gtk-menu=16,16:\
+                  gtk-button=24,24:\
+                  gtk-large-toolbar=16,16"
+gtk-error-bell = 0

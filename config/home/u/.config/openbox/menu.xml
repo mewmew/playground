@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<openbox_menu xmlns="http://openbox.org/3.4/menu">
+
+<menu id="sys-menu" label="System">
+   <item label="Reconfigure">
+      <action name="Reconfigure"/>
+   </item>
+</menu>
+
+<menu id="root-menu" label="openbox">
+   <separator label="openbox"/>
+
+   <menu id="sys-menu"/>
+
+   <separator/>
+
+   <item label="Exit">
+      <action name="Exit">
+         <prompt>yes</prompt>
+      </action>
+   </item>
+</menu>
+
+</openbox_menu>

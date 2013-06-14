@@ -1,0 +1,3 @@
+xmodmap -e "keycode 76 = aring Aring"
+xmodmap -e "keycode 95 = adiaeresis Adiaeresis"
+xmodmap -e "keycode 96 = odiaeresis Odiaeresis"

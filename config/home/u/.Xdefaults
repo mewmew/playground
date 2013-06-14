@@ -1,0 +1,7 @@
+maxBufSize 65536
+minBufSize 32768
+
+!--- [ xterm settings ] --------------------------------------------------------
+xterm*background: black
+xterm*foreground: white
+xterm*cursorColor: #6AA2D8

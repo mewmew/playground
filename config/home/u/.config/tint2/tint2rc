@@ -1,0 +1,75 @@
+# === [ /home/u/.config/tint2/tint2rc ] ========================================
+
+# --- [ background and border ] ------------------------------------------------
+rounded = 0
+border_width = 0
+background_color = #000000 60
+border_color = #ffffff 18
+
+rounded = 0
+border_width = 0
+background_color = #ffffff 40
+border_color = #ffffff 50
+
+rounded = 0
+border_width = 0
+background_color = #ffffff 18
+border_color = #ffffff 70
+
+# --- [ panel ] ----------------------------------------------------------------
+panel_monitor = all
+panel_position = bottom center
+panel_size = 0 24
+panel_margin = 0 0
+panel_padding = 2 0 3
+font_shadow = 0
+panel_background_id = 1
+wm_menu = 0
+
+# --- [ taskbar ] --------------------------------------------------------------
+taskbar_mode = single_desktop
+taskbar_padding = 0 2 2
+taskbar_background_id = 0
+
+# --- [ tasks ] ----------------------------------------------------------------
+task_icon = 1
+task_text = 1
+task_width = 150
+task_centered = 0
+task_padding = 3 2
+task_font = sans 8
+task_font_color = #ffffff 70
+task_active_font_color = #ffffff 100
+task_background_id = 3
+task_active_background_id = 2
+
+# --- [ systraybar ] -----------------------------------------------------------
+systray_padding = 0 3 0
+systray_background_id = 0
+
+# --- [ clock ] ----------------------------------------------------------------
+time1_format = %H:%M
+time1_font = sans 8
+time2_format = %a %d %b
+time2_font = sans 6
+clock_font_color = #ffffff 76
+clock_padding = 1 0
+clock_background_id = 0
+#clock_lclick_command =
+#clock_rclick_command =
+
+# --- [ battery ] --------------------------------------------------------------
+battery = 1
+battery_low_status = 10
+battery_low_cmd = notify-send "battery low"
+bat1_font = sans 8
+bat2_font = sans 6
+battery_font_color = #ffffff 76
+battery_padding = 1 0
+battery_background_id = 0
+
+# --- [ mouse action on task ] -------------------------------------------------
+mouse_middle = none
+mouse_right = close
+mouse_scroll_up = toggle
+mouse_scroll_down = iconify
