@@ -23,10 +23,10 @@ Documentation
 Documentation provided by GoDoc.
 
 - [or1k-32][]: provides access to the 32-bit version of the Open RISC 1000 instruction sets.
-	- [orbis][]: provides access to the OpenRISC Basic Instruction Set (ORBIS32).
+   - [orbis][]: provides access to the OpenRISC Basic Instruction Set (ORBIS32).
 
-[or1k-32]: http://godoc.org/github.com/mewmew/openrisc/or1k-32
-[orbis]: http://godoc.org/github.com/mewmew/openrisc/or1k-32/orbis
+[or1k-32]: http://godoc.org/github.com/mewmew/playground/openrisc/or1k-32
+[orbis]: http://godoc.org/github.com/mewmew/playground/openrisc/or1k-32/orbis
 
 public domain
 -------------
