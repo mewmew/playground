@@ -81,9 +81,12 @@ func usage() {
 
 func main() {
 	flag.Parse()
-	err := walls()
-	if err != nil {
-		log.Fatalln(err)
+	for {
+		err := walls()
+		if err != nil {
+			log.Println(err)
+		}
+		time.Sleep(10 * time.Second)
 	}
 }
 
