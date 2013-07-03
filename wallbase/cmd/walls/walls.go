@@ -110,9 +110,6 @@ func walls() (err error) {
 		if err != nil {
 			return err
 		}
-		if len(walls) == 0 {
-			return fmt.Errorf("walls: No wallpapers match the search query '%s'.", query)
-		}
 		for _, wall := range walls {
 			start := time.Now()
 			err = update(wall)

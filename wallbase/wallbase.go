@@ -53,6 +53,9 @@ func Search(query string) (walls []*Wall, err error) {
 	if err != nil {
 		return nil, err
 	}
+	if len(walls) == 0 || walls[0] == nil {
+		return fmt.Errorf("wallbase.Search: No wallpapers match the search query %q.", query)
+	}
 	return walls, nil
 }
 
