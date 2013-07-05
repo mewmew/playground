@@ -55,6 +55,8 @@ Flags:
 		Output directory.
 	-t (default="30m")
 		Timeout interval between updates.
+	-v (default=false)
+		Verbose.
 
 Examples
 --------
