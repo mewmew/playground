@@ -52,16 +52,20 @@ import (
 	"github.com/mewmew/playground/wallbase"
 )
 
-// flagTimeout is the timeout interval between wallpaper updates.
-var flagTimeout string
-
 // wallPath is the output directory in which all wallpapers are stored. The
 // default is a none persistent directory.
 var wallPath string
 
+// flagTimeout is the timeout interval between wallpaper updates.
+var flagTimeout string
+
+// When flagVerbose is true, verbose output is enabled.
+var flagVerbose bool
+
 func init() {
 	flag.StringVar(&wallPath, "o", "/tmp/wallbase", "Output directory.")
 	flag.StringVar(&flagTimeout, "t", "30m", "Timeout interval between updates.")
+	flag.BoolVar(&flagVerbose, "v", false, "Verbose.")
 	flag.Usage = usage
 }
 
@@ -110,6 +114,13 @@ func walls() (err error) {
 		if err != nil {
 			return err
 		}
+		if flagVerbose {
+			found := "1 wallpaper"
+			if len(walls) != 1 {
+				found = fmt.Sprintf("%d wallpapers", len(walls))
+			}
+			log.Printf("Located %s while searching for %q.\n", found, query)
+		}
 		for _, wall := range walls {
 			start := time.Now()
 			err = update(wall)
@@ -125,6 +136,9 @@ func walls() (err error) {
 
 // update downloads the provided wallpaper and updates the current wallpaper.
 func update(wall *wallbase.Wall) (err error) {
+	if flagVerbose {
+		log.Println("Downloading:", wall.Id)
+	}
 	err = wall.Download()
 	if err != nil {
 		return err
