@@ -7,13 +7,34 @@
 package main
 
 import (
+	"flag"
 	"fmt"
+	"log"
+	"os"
+	"strconv"
 )
 
+func init() {
+	flag.Usage = usage
+}
+
+func usage() {
+	fmt.Fprintln(os.Stderr, "prime COUNT")
+}
+
 func main() {
+	flag.Parse()
+	if flag.NArg() != 1 {
+		flag.Usage()
+		os.Exit(1)
+	}
+	max, err := strconv.Atoi(flag.Arg(0))
+	if err != nil {
+		log.Fatalln(err)
+	}
 	primes := make(chan int)
 	go sieve(primes)
-	for i := 0; i < 1000; i++ {
+	for i := 0; i < max; i++ {
 		fmt.Println(<-primes)
 	}
 }
