@@ -151,6 +151,11 @@
 				<command>slock</command>
 			</action>
 		</keybind>
+		<keybind key="W-x">
+			<action name="Execute">
+				<command>xrandr --auto</command>
+			</action>
+		</keybind>
 		<keybind key="C-A-Delete">
 			<action name="Execute">
 				<command>lxtask</command>
