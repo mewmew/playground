@@ -32,10 +32,10 @@ type FileHeader struct {
 	Network uint32
 }
 
-// Magic numbers which specify if little or big endian encoding has been used.
+// Magic specifies if little or big endian encoding has been used.
 const (
-	Magic        = 0xA1B2C3D4
-	MagicSwapped = 0xD4C3B2A1
+	MagicLittleEndian = 0xA1B2C3D4
+	MagicBigEndian    = 0xD4C3B2A1
 )
 
 // Open opens the named pcap file for reading.
@@ -57,8 +57,8 @@ func Open(filePath string) (f *File, err error) {
 
 // A Package represents a network packet.
 type Package struct {
-	hdr PackageHeader
-	buf []byte
+	Hdr PackageHeader
+	Buf []byte
 }
 
 // A PackageHeader structure is present at the beginning of each packet stored
@@ -77,12 +77,12 @@ type PackageHeader struct {
 // ReadPackage reads and returns the next packet in the pcap file.
 func (f *File) ReadPackage() (pkg *Package, err error) {
 	pkg = new(Package)
-	err = binary.Read(f, binary.LittleEndian, &pkg.hdr)
+	err = binary.Read(f, binary.LittleEndian, &pkg.Hdr)
 	if err != nil {
 		return nil, err
 	}
-	pkg.buf = make([]byte, pkg.hdr.Len)
-	_, err = f.Read(pkg.buf)
+	pkg.Buf = make([]byte, pkg.Hdr.Len)
+	_, err = f.Read(pkg.Buf)
 	if err != nil {
 		return nil, err
 	}
@@ -91,10 +91,10 @@ func (f *File) ReadPackage() (pkg *Package, err error) {
 
 // Bytes returns the package's content as a byte slice.
 func (pkg *Package) Bytes() (buf []byte) {
-	return pkg.buf
+	return pkg.Buf
 }
 
 // Time returns the time when the package was sent.
 func (pkg *Package) Time() (t time.Time) {
-	return time.Unix(int64(pkg.hdr.Sec), int64(pkg.hdr.Usec*1000))
+	return time.Unix(int64(pkg.Hdr.Sec), int64(pkg.Hdr.Usec*1000))
 }
