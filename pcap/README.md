@@ -14,9 +14,34 @@ Documentation
 
 Documentation provided by GoDoc.
 
-   - [pcap][]
+	- [pcap][]
 
 [pcap]: http://godoc.org/github.com/mewmew/playground/pcap
+
+Installation
+------------
+
+	go get github.com/mewmew/playground/pcap
+
+pcapsulate
+==========
+
+pcapsulate encapsulates the provided files as packets in a pcap file.
+
+Installation
+------------
+
+	go get github.com/mewmew/playground/pcap/cmd/pcapsulate
+
+Usage
+-----
+
+	pcapsulate [FILE]...
+
+Flags:
+
+	-o (default="pcapsulate.pcap")
+		Output path.
 
 public domain
 -------------
