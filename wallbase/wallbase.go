@@ -12,6 +12,7 @@ import (
 	_ "image/png"
 	"io/ioutil"
 	"net/http"
+	"net/url"
 	"strings"
 
 	"github.com/mewkiz/pkg/httputil"
@@ -30,11 +31,18 @@ type Wall struct {
 }
 
 // Search performs a search based on the provided query. The search result order
-// is random.
-func Search(query string) (walls []*Wall, err error) {
+// is random. If res is provided the search query will be limited to that screen
+// resolution.
+func Search(query string, res ...string) (walls []*Wall, err error) {
 	rawUrl := "http://wallbase.cc/search"
-	data := strings.NewReader(fmt.Sprintf("query=%s&orderby=random", query))
-	req, err := http.NewRequest("POST", rawUrl, data)
+	u := url.Values{
+		"query":   []string{query},
+		"orderby": []string{"random"},
+	}
+	if len(res) > 0 {
+		u.Set("res", res[0])
+	}
+	req, err := http.NewRequest("POST", rawUrl, strings.NewReader(u.Encode()))
 	if err != nil {
 		return nil, err
 	}

@@ -23,6 +23,8 @@ Flags:
 
 	-o (default="/tmp/wallbase")
 		Output directory.
+	-res (default="")
+		Screen resolution (ex. "1920x1080").
 	-t (default="30m")
 		Timeout interval between updates.
 	-v (default=false)
@@ -37,6 +39,10 @@ Examples:
 2. Search for "nature" and store each wallpaper in "download/".
 
 	wallbase -t 0s -o download/ nature
+
+3. Search for "nature" wallpapers with the screen resolution 1920x1080.
+
+	wallbase -res 1920x1080 nature
 
 */
 package main
@@ -64,8 +70,12 @@ var flagTimeout string
 // When flagVerbose is true, verbose output is enabled.
 var flagVerbose bool
 
+// flagResolution represent the screen resolution of the wallpaper.
+var flagResolution string
+
 func init() {
 	flag.StringVar(&wallPath, "o", "/tmp/wallbase", "Output directory.")
+	flag.StringVar(&flagResolution, "res", "", `Screen resolution (ex. "1920x1080").`)
 	flag.StringVar(&flagTimeout, "t", "30m", "Timeout interval between updates.")
 	flag.BoolVar(&flagVerbose, "v", false, "Verbose.")
 	flag.Usage = usage
@@ -83,6 +93,8 @@ func usage() {
 	fmt.Fprintln(os.Stderr, "    walls -t 10s nature waterfall")
 	fmt.Fprintln(os.Stderr, `  Search for "nature" and store each wallpaper in "download/".`)
 	fmt.Fprintln(os.Stderr, "    walls -t 0s -o download/ nature")
+	fmt.Fprintln(os.Stderr, `  Search for "nature" wallpapers with the screen resolution 1920x1080.`)
+	fmt.Fprintln(os.Stderr, "    wallbase -res 1920x1080 nature")
 }
 
 func main() {
@@ -112,9 +124,17 @@ func walls() (err error) {
 	for {
 		// Each call to search should return new wallpapers, since the search
 		// result order is random.
-		walls, err := wallbase.Search(query)
-		if err != nil {
-			return err
+		var walls []*wallbase.Wall
+		if len(flagResolution) > 0 {
+			walls, err = wallbase.Search(query, flagResolution)
+			if err != nil {
+				return err
+			}
+		} else {
+			walls, err = wallbase.Search(query)
+			if err != nil {
+				return err
+			}
 		}
 		if flagVerbose {
 			found := "1 wallpaper"

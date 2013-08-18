@@ -53,6 +53,8 @@ Flags:
 
 	-o (default="/tmp/wallbase")
 		Output directory.
+	-res (default="")
+		Screen resolution (ex. "1920x1080").
 	-t (default="30m")
 		Timeout interval between updates.
 	-v (default=false)
@@ -68,6 +70,10 @@ Examples
 2. Search for "nature" and store each wallpaper in "download/".
 
 		wallbase -t 0s -o download/ nature
+
+3. Search for "nature" wallpapers with the screen resolution 1920x1080.
+
+		wallbase -res 1920x1080 nature
 
 public domain
 -------------
