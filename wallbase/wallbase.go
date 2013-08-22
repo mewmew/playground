@@ -27,7 +27,7 @@ type Wall struct {
 	// Ext is the file extension of the wallpaper.
 	Ext string
 	// Id is the unique identifier (at wallbase.cc) of the wallpaper.
-	Id int `json: "id"`
+	Id int `json:"id"`
 }
 
 // Search performs a search based on the provided query. The search result order

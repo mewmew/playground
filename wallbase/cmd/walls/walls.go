@@ -153,7 +153,6 @@ func walls() (err error) {
 			time.Sleep(timeout - elapsed)
 		}
 	}
-	return nil
 }
 
 // update downloads the provided wallpaper and updates the current wallpaper.
