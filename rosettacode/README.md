@@ -9,10 +9,15 @@ This repository contains code samples for [rosettacode][] [tasks][].
 Tasks
 -----
 
+* [I before E except after C][]
+
+		go get github.com/mewmew/playground/rosettacode/ie
+
 * [OpenGL][]
 
 		go get github.com/mewmew/playground/rosettacode/triangle
 
+[I before E except after C]: http://rosettacode.org/wiki/I_before_E_except_after_C
 [OpenGL]: http://rosettacode.org/wiki/OpenGL
 
 public domain
