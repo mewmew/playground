@@ -37,15 +37,15 @@ func main() {
 	}
 
 	check(ie, cie, "I before E when not preceded by C")
-	check(cei, ei, "I before E when not preceded by C")
+	check(cei, ei, "E before I when preceded by C")
 }
 
 // check checks if a statement is plausible. Something is plausible if a is more
 // than two times b.
 func check(a, b int, s string) {
 	if a > b*2 {
-		fmt.Printf("%q is plausible.\n", s)
+		fmt.Printf("%q is plausible (%d vs %d).\n", s, a, b)
 	} else {
-		fmt.Printf("%q is implausible.\n", s)
+		fmt.Printf("%q is implausible (%d vs %d).\n", s, b, a)
 	}
 }
