@@ -3,50 +3,38 @@ package wallbase
 
 import (
 	"bytes"
-	"encoding/base64"
-	"encoding/json"
 	"errors"
 	"fmt"
 	"image"
-	_ "image/jpeg"
-	_ "image/png"
+	_ "image/jpeg" // enable jpeg decoding.
+	_ "image/png"  // enable png decoding.
 	"io/ioutil"
 	"net/http"
-	"net/url"
-	"strings"
+	"strconv"
 
+	"github.com/mewkiz/pkg/bytesutil"
 	"github.com/mewkiz/pkg/httputil"
-	"github.com/mewkiz/pkg/stringsutil"
 )
 
-// Wall is a wallpaper.
-type Wall struct {
-	// Buf is the image file content of the wallpaper. Use the Download method to
-	// retrieve the data.
-	Buf []byte
-	// Ext is the file extension of the wallpaper.
-	Ext string
-	// Id is the unique identifier (at wallbase.cc) of the wallpaper.
-	Id int `json:"id"`
-}
+// Res represent the screen resolution used in search queries. If blank no
+// screen resolution will be enforced.
+//
+// Example:
+//    "1920x1080".
+var Res string
 
-// Search performs a search based on the provided query. The search result order
-// is random. If res is provided the search query will be limited to that screen
-// resolution.
-func Search(query string, res ...string) (walls []*Wall, err error) {
-	rawUrl := "http://wallbase.cc/search"
-	u := url.Values{
-		"query":   []string{query},
-		"orderby": []string{"random"},
+// Search searches for wallpapers matching the provided query and returns their
+// ids. The search result order is random.
+func Search(query string) (ids []int, err error) {
+	// Perform search query.
+	url := fmt.Sprintf("http://wallbase.cc/search?q=%s&order=random", query)
+	if len(Res) > 0 {
+		url = fmt.Sprintf("%s&res=%s", url, Res)
 	}
-	if len(res) > 0 {
-		u.Set("res", res[0])
-	}
-	req, err := http.NewRequest("POST", rawUrl, strings.NewReader(u.Encode()))
+	req, err := http.NewRequest("GET", url, nil)
 	if err != nil {
 		return nil, err
 	}
-	req.Header.Add("Content-Type", "application/x-www-form-urlencoded")
 	req.Header.Add("X-Requested-With", "XMLHttpRequest")
 	resp, err := http.DefaultClient.Do(req)
 	if err != nil {
@@ -57,60 +45,61 @@ func Search(query string, res ...string) (walls []*Wall, err error) {
 	if err != nil {
 		return nil, err
 	}
-	err = json.Unmarshal(buf, &walls)
-	if err != nil {
-		return nil, err
+
+	// Locate wallpapers IDs in the response.
+	for {
+		pos := bytesutil.IndexAfter(buf, []byte(`"http://wallbase.cc/wallpaper/`))
+		if pos == -1 {
+			break
+		}
+		end := bytes.IndexByte(buf[pos:], '"')
+		if end == -1 {
+			return nil, errors.New("wallbase.Search: unmatched quote in wallpaper URL.")
+		}
+		rawID := buf[pos : pos+end]
+		buf = buf[pos+end:]
+		id, err := strconv.Atoi(string(rawID))
+		if err != nil {
+			return nil, err
+		}
+		ids = append(ids, id)
 	}
-	if len(walls) == 0 || walls[0] == nil {
-		return nil, fmt.Errorf("wallbase.Search: No wallpapers match the search query %q.", query)
-	}
-	return walls, nil
+
+	return ids, nil
 }
 
-// Download downloads the wallpaper and stores it's content in wall.Buf.
-func (wall *Wall) Download() (err error) {
-	if wall.Buf != nil {
-		// already downloaded.
-		return nil
-	}
-	imgUrl, err := wall.getImageUrl()
+// Download downloads the wallpaper specified by id and returns it's content and
+// file extension.
+func Download(id int) (buf []byte, ext string, err error) {
+	// Download the wallpaper page.
+	url := fmt.Sprintf("http://wallbase.cc/wallpaper/%d", id)
+	page, err := httputil.Get(url)
 	if err != nil {
-		return err
+		return nil, "", err
 	}
-	wall.Buf, err = httputil.Get(imgUrl)
-	if err != nil {
-		return err
-	}
-	_, wall.Ext, err = image.DecodeConfig(bytes.NewReader(wall.Buf))
-	if err != nil {
-		return err
-	}
-	return nil
-}
 
-// getImageUrl locates the image URL of a given wallpaper. The image URL is part
-// of a javascript and it is base64 encoded.
-func (wall *Wall) getImageUrl() (imgUrl string, err error) {
-	rawUrl := fmt.Sprintf("http://wallbase.cc/wallpaper/%d", wall.Id)
-	body, err := httputil.GetString(rawUrl)
-	if err != nil {
-		return "", err
+	// Locate the wallpaper image URL.
+	pos := bytes.Index(page, []byte("http://wallpapers.wallbase.cc/"))
+	if pos == -1 {
+		return nil, "", fmt.Errorf("wallbase.Download: unable to locate wallpaper image URL for %d.", id)
 	}
-	// example:
-	//    document.write('<img ... src="'+B('aHR0cDovL25zMjIzNTA2Lm92aC5uZXQvcm96bmUvYmZjMzIwNzM5ZGY4NzMwOWE2N2E1MTdjMTQ5MDIwODAvd2FsbHBhcGVyLTIzOTMyMTMuanBn')+'" />');
-	start := stringsutil.IndexAfter(body, ` src="'+B('`)
-	if start == -1 {
-		return "", errors.New("wallbase.Download: image URL start position not found.")
-	}
-	imgUrlEnc := body[start:]
-	end := strings.Index(imgUrlEnc, "'")
+	end := bytes.IndexByte(page[pos:], '"')
 	if end == -1 {
-		return "", errors.New("wallbase.Download: image URL end position not found.")
+		return nil, "", errors.New("wallbase.Download: unmatched quote in wallpaper URL.")
 	}
-	imgUrlEnc = imgUrlEnc[:end]
-	buf, err := base64.StdEncoding.DecodeString(imgUrlEnc)
+	wallURL := page[pos : pos+end]
+
+	// Download the wallpaper image.
+	buf, err = httputil.Get(string(wallURL))
 	if err != nil {
-		return "", err
+		return nil, "", err
 	}
-	return string(buf), nil
+
+	// Locate the file extension.
+	_, ext, err = image.DecodeConfig(bytes.NewReader(buf))
+	if err != nil {
+		return nil, "", err
+	}
+
+	return buf, ext, nil
 }

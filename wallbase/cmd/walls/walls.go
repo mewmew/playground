@@ -70,12 +70,9 @@ var flagTimeout string
 // When flagVerbose is true, verbose output is enabled.
 var flagVerbose bool
 
-// flagResolution represent the screen resolution of the wallpaper.
-var flagResolution string
-
 func init() {
 	flag.StringVar(&wallPath, "o", "/tmp/wallbase", "Output directory.")
-	flag.StringVar(&flagResolution, "res", "", `Screen resolution (ex. "1920x1080").`)
+	flag.StringVar(&wallbase.Res, "res", "", `Screen resolution (ex. "1920x1080").`)
 	flag.StringVar(&flagTimeout, "t", "30m", "Timeout interval between updates.")
 	flag.BoolVar(&flagVerbose, "v", false, "Verbose.")
 	flag.Usage = usage
@@ -124,28 +121,20 @@ func walls() (err error) {
 	for {
 		// Each call to search should return new wallpapers, since the search
 		// result order is random.
-		var walls []*wallbase.Wall
-		if len(flagResolution) > 0 {
-			walls, err = wallbase.Search(query, flagResolution)
-			if err != nil {
-				return err
-			}
-		} else {
-			walls, err = wallbase.Search(query)
-			if err != nil {
-				return err
-			}
+		ids, err := wallbase.Search(query)
+		if err != nil {
+			return err
 		}
 		if flagVerbose {
 			found := "1 wallpaper"
-			if len(walls) != 1 {
-				found = fmt.Sprintf("%d wallpapers", len(walls))
+			if len(ids) != 1 {
+				found = fmt.Sprintf("%d wallpapers", len(ids))
 			}
 			log.Printf("Located %s while searching for %q.\n", found, query)
 		}
-		for _, wall := range walls {
+		for _, id := range ids {
 			start := time.Now()
-			err = update(wall)
+			err = update(id)
 			if err != nil {
 				return err
 			}
@@ -156,16 +145,16 @@ func walls() (err error) {
 }
 
 // update downloads the provided wallpaper and updates the current wallpaper.
-func update(wall *wallbase.Wall) (err error) {
+func update(id int) (err error) {
 	if flagVerbose {
-		log.Println("Downloading:", wall.Id)
+		log.Println("Downloading:", id)
 	}
-	err = wall.Download()
+	buf, ext, err := wallbase.Download(id)
 	if err != nil {
 		return err
 	}
-	imgPath := fmt.Sprintf("%s/%d.%s", wallPath, wall.Id, wall.Ext)
-	err = ioutil.WriteFile(imgPath, wall.Buf, 0644)
+	imgPath := fmt.Sprintf("%s/%d.%s", wallPath, id, ext)
+	err = ioutil.WriteFile(imgPath, buf, 0644)
 	if err != nil {
 		return err
 	}
