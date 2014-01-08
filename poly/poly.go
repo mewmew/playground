@@ -1,4 +1,4 @@
-// Package poly handles polynomials.
+// Package poly handles polynomial arithmatic.
 package poly
 
 import (
@@ -80,6 +80,24 @@ func (f Polynomial) Sub(g Polynomial) (h Polynomial) {
 	deg := max(f.Deg(), g.Deg())
 	for k := deg; k >= 0; k-- {
 		a := f.At(k) - g.At(k)
+		if a == 0 {
+			continue
+		}
+		if h == nil {
+			h = NewPoly(k)
+		}
+		h[k] = a
+	}
+	return h
+}
+
+// Add returns the result when adding g to f.
+//
+//    h(x) = f(x) + g(x).
+func (f Polynomial) Add(g Polynomial) (h Polynomial) {
+	deg := max(f.Deg(), g.Deg())
+	for k := deg; k >= 0; k-- {
+		a := f.At(k) + g.At(k)
 		if a == 0 {
 			continue
 		}
