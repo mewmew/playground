@@ -72,10 +72,10 @@ func TestPolynomialDiv(t *testing.T) {
 			rWant: Polynomial{-3},
 		},
 		// i=2
-		//    f(x) = 4x^3 + 2x^2 - x - 2
-		//    g(x) = 2x + 2
-		//    qWant(x) = 2x^2 - x + 1/2
-		//    rWant(x) = -3
+		//    f(x) = 4
+		//    g(x) = 2
+		//    qWant(x) = 2
+		//    rWant(x) = 0
 		{
 			f:     Polynomial{4},
 			g:     Polynomial{2},
@@ -114,6 +114,28 @@ func TestPolynomialDiv(t *testing.T) {
 			g:     nil,
 			qWant: nil,
 			rWant: Polynomial{0, -1, 0, 5},
+		},
+		// i=6
+		//    f(x) = 3x^3 + 8x^2 + 13x + 6
+		//    g(x) = 3x + 2
+		//    qWant(x) = x^2 + 2x + 3
+		//    rWant(x) = 0
+		{
+			f:     Polynomial{6, 13, 8, 3},
+			g:     Polynomial{2, 3},
+			qWant: Polynomial{3, 2, 1},
+			rWant: nil,
+		},
+		// i=7
+		//    f(x) = x^3 + (8/3)x^2 + (13/3)x + 2
+		//    g(x) = x + 2/3
+		//    qWant(x) = x^2 + 2x + 3
+		//    rWant(x) = 0
+		{
+			f:     Polynomial{2, 13.0 / 3.0, 8.0 / 3.0, 1},
+			g:     Polynomial{2.0 / 3.0, 1},
+			qWant: Polynomial{3, 2, 1},
+			rWant: nil,
 		},
 	}
 	for i, g := range golden {

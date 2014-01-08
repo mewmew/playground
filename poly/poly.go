@@ -22,7 +22,19 @@ func NewPoly(deg int) (f Polynomial) {
 	return f
 }
 
+// IsZero returns true if f is the zero polynomial and false otherwise.
+func (f Polynomial) IsZero() bool {
+	if f == nil || f.At(f.Deg()) == 0 {
+		return true
+	}
+	return false
+}
+
 func (f Polynomial) String() (s string) {
+	if f.IsZero() {
+		// Return zero for the zero polynomial.
+		return "0"
+	}
 	for k := f.Deg(); k >= 0; k-- {
 		a := f.At(k)
 		if a == 0 {
