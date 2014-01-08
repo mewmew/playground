@@ -132,8 +132,8 @@ func TestPolynomialDiv(t *testing.T) {
 		//    qWant(x) = x^2 + 2x + 3
 		//    rWant(x) = 0
 		{
-			f:     Polynomial{2, 13.0 / 3.0, 8.0 / 3.0, 1},
-			g:     Polynomial{2.0 / 3.0, 1},
+			f:     Polynomial{2, 13. / 3., 8. / 3., 1},
+			g:     Polynomial{2. / 3., 1},
 			qWant: Polynomial{3, 2, 1},
 			rWant: nil,
 		},
