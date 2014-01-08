@@ -137,6 +137,17 @@ func TestPolynomialDiv(t *testing.T) {
 			qWant: Polynomial{3, 2, 1},
 			rWant: nil,
 		},
+		// i=8
+		//    f(x) = 3x^3 + 7x^2 + 11x + 3
+		//    g(x) = x + 1/3
+		//    qWant(x) = 3x^2 + 6x + 9
+		//    rWant(x) = 0
+		{
+			f:     Polynomial{3, 11, 7, 3},
+			g:     Polynomial{1. / 3, 1},
+			qWant: Polynomial{9, 6, 3},
+			rWant: nil,
+		},
 	}
 	for i, g := range golden {
 		qGot, rGot := g.f.Div(g.g)
