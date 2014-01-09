@@ -91,10 +91,10 @@ func checkLine(line, filePath string, lineNum int) (err error) {
 	for col, r := range line {
 		if r < 128 {
 			if !unicode.IsSpace(rune(r)) && !unicode.IsPrint(rune(r)) {
-				return fmt.Errorf("%s (%d:%d) - non-printable character 0x%02X.", filePath, lineNum, col, r)
+				return fmt.Errorf("%s (%d:%d) - non-printable character 0x%02X", filePath, lineNum, col, r)
 			}
 		} else {
-			return fmt.Errorf("%s (%d:%d) - non-ascii character '%c'.", filePath, lineNum, col, r)
+			return fmt.Errorf("%s (%d:%d) - non-ascii character '%c'", filePath, lineNum, col, r)
 		}
 	}
 	return nil
