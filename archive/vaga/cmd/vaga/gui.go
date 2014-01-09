@@ -255,5 +255,5 @@ func screenToCoord(g *grid.Grid, x, y int) (col, row int, err error) {
 			}
 		}
 	}
-	return 0, 0, fmt.Errorf("screenToCoord: invalid cell (x=%d, y=%d).", x, y)
+	return 0, 0, fmt.Errorf("screenToCoord: invalid cell (x=%d, y=%d)", x, y)
 }

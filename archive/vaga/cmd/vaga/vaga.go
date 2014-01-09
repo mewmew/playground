@@ -57,7 +57,7 @@ func vaga() (err error) {
 	case grid.MarkX:
 		markB = grid.MarkO
 	default:
-		return fmt.Errorf("vaga: invalid start marker %q.", markA)
+		return fmt.Errorf("vaga: invalid start marker %q", markA)
 	}
 
 	if flag.NArg() == 0 {

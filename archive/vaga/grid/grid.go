@@ -35,7 +35,7 @@ func (mark *Mark) Set(s string) (err error) {
 	var ok bool
 	x, ok := m[s]
 	if !ok {
-		return fmt.Errorf("Mark.Set: unable to parse mark %q.", s)
+		return fmt.Errorf("Mark.Set: unable to parse mark %q", s)
 	}
 	*mark = x
 	return nil
@@ -78,19 +78,19 @@ func (g *Grid) String() (s string) {
 // Place places the marker at the specified grid cell.
 func (g *Grid) Place(col, row int, mark Mark) (err error) {
 	if col < 0 {
-		return fmt.Errorf("Place: negative col (%d).", col)
+		return fmt.Errorf("Grid.Place: negative col (%d)", col)
 	}
 	if col >= g.Width() {
-		return fmt.Errorf("Place: col (%d) above max (%d).", col, g.Width())
+		return fmt.Errorf("Grid.Place: col (%d) above max (%d)", col, g.Width())
 	}
 	if row < 0 {
-		return fmt.Errorf("Place: negative row (%d).", row)
+		return fmt.Errorf("Grid.Place: negative row (%d)", row)
 	}
 	if row >= g.Height() {
-		return fmt.Errorf("Place: row (%d) above max (%d).", row, g.Height())
+		return fmt.Errorf("Grid.Place: row (%d) above max (%d)", row, g.Height())
 	}
 	if g[col][row] != MarkNone {
-		return fmt.Errorf("Place: grid cell (%d, %d) not empty.", col, row)
+		return fmt.Errorf("Grid.Place: grid cell (%d, %d) not empty", col, row)
 	}
 	g[col][row] = mark
 	return nil
