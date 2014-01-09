@@ -43,7 +43,7 @@ func aquarium(username string) (err error) {
 	if err != nil {
 		return err
 	}
-	userId, err := sess.UserId(username)
+	userID, err := sess.UserID(username)
 	if err != nil {
 		return err
 	}
@@ -58,19 +58,19 @@ func aquarium(username string) (err error) {
 	}
 
 	// Songs.
-	err = songs(sess, userId, base)
+	err = songs(sess, userID, base)
 	if err != nil {
 		return err
 	}
 
 	// Favorites.
-	err = favorites(sess, userId, base)
+	err = favorites(sess, userID, base)
 	if err != nil {
 		return err
 	}
 
 	// Playlists.
-	err = playlists(sess, userId, dir)
+	err = playlists(sess, userID, dir)
 	if err != nil {
 		return err
 	}
@@ -88,7 +88,7 @@ func writeSongs(w io.Writer, songs []*gs.Song) (err error) {
 	return nil
 }
 
-func songs(sess *gs.Session, userId int, dir string) (err error) {
+func songs(sess *gs.Session, userID int, dir string) (err error) {
 	filePath := fmt.Sprintf("%s/songs.txt", dir)
 	f, err := os.Create(filePath)
 	if err != nil {
@@ -96,7 +96,7 @@ func songs(sess *gs.Session, userId int, dir string) (err error) {
 	}
 	defer f.Close()
 
-	songs, err := sess.UserSongs(userId)
+	songs, err := sess.UserSongs(userID)
 	if err != nil {
 		return err
 	}
@@ -108,7 +108,7 @@ func songs(sess *gs.Session, userId int, dir string) (err error) {
 	return nil
 }
 
-func favorites(sess *gs.Session, userId int, dir string) (err error) {
+func favorites(sess *gs.Session, userID int, dir string) (err error) {
 	filePath := fmt.Sprintf("%s/favorites.txt", dir)
 	f, err := os.Create(filePath)
 	if err != nil {
@@ -116,7 +116,7 @@ func favorites(sess *gs.Session, userId int, dir string) (err error) {
 	}
 	defer f.Close()
 
-	songs, err := sess.UserFavorites(userId)
+	songs, err := sess.UserFavorites(userID)
 	if err != nil {
 		return err
 	}
@@ -128,8 +128,8 @@ func favorites(sess *gs.Session, userId int, dir string) (err error) {
 	return nil
 }
 
-func playlists(sess *gs.Session, userId int, dir string) (err error) {
-	playlists, err := sess.UserPlaylists(userId)
+func playlists(sess *gs.Session, userID int, dir string) (err error) {
+	playlists, err := sess.UserPlaylists(userID)
 	if err != nil {
 		return err
 	}

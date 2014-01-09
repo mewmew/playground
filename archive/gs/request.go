@@ -50,7 +50,7 @@ func (sess *Session) init() (err error) {
 		}
 	}
 
-	return errors.New("Session.init: unable to locate the PHPSESSID session cookie.")
+	return errors.New("Session.init: unable to locate the PHPSESSID session cookie")
 }
 
 type gsReqCommToken struct {
@@ -104,7 +104,7 @@ func (sess *Session) initCommToken() (err error) {
 	return nil
 }
 
-type gsReqUserId struct {
+type gsReqUserID struct {
 	Name string `json:"name"`
 }
 
@@ -136,25 +136,25 @@ type gsReqUserId struct {
 //          "Username": "Alice"
 //       }
 //    }
-type gsRespUserId struct {
-	Result gsRespUserIdResult `json:"result"`
+type gsRespUserID struct {
+	Result gsRespUserIDResult `json:"result"`
 	Err    *gsRespError       `json:"fault"`
 }
 
-type gsRespUserIdResult struct {
-	User gsRespUserIdUser `json:"user"`
+type gsRespUserIDResult struct {
+	User gsRespUserIDUser `json:"user"`
 }
 
-type gsRespUserIdUser struct {
+type gsRespUserIDUser struct {
 	UserID int
 }
 
-//  userId returns the user id associated with the provided username.
-func (sess *Session) userId(username string) (userId int, err error) {
+//  userID returns the user id associated with the provided username.
+func (sess *Session) userID(username string) (userID int, err error) {
 	// Perform request.
 	// TODO(u): use getUserIDFromUsername method instead.
 	method := "getItemByPageName"
-	params := gsReqUserId{
+	params := gsReqUserID{
 		Name: username,
 	}
 	buf, err := sess.request(method, params)
@@ -177,7 +177,7 @@ func (sess *Session) userId(username string) (userId int, err error) {
 
 type gsReqCollection struct {
 	Page   string `json:"page"`
-	UserId int    `json:"userID"`
+	UserID int    `json:"userID"`
 }
 
 type gsRespCollection struct {
@@ -254,12 +254,12 @@ func (gsSong *gsSong) Song() (song *Song, err error) {
 
 // collection returns a list of the songs in the provided user collection's
 // page. hasMore is true if there are more pages available.
-func (sess *Session) collection(userId int, page int) (songs []*gsSong, hasMore bool, err error) {
+func (sess *Session) collection(userID int, page int) (songs []*gsSong, hasMore bool, err error) {
 	// Perform request.
 	method := "userGetSongsInLibrary"
 	params := gsReqCollection{
 		Page:   strconv.Itoa(page),
-		UserId: userId,
+		UserID: userID,
 	}
 	buf, err := sess.request(method, params)
 	if err != nil {
@@ -281,7 +281,7 @@ func (sess *Session) collection(userId int, page int) (songs []*gsSong, hasMore 
 
 type gsReqFavorites struct {
 	OfWhat string `json:"ofWhat"`
-	UserId int    `json:"userID"`
+	UserID int    `json:"userID"`
 }
 
 // Example response:
@@ -310,12 +310,12 @@ type gsRespFavorites struct {
 }
 
 // favorites returns a list of the provided user's favorite songs.
-func (sess *Session) favorites(userId int) (songs []*gsSong, err error) {
+func (sess *Session) favorites(userID int) (songs []*gsSong, err error) {
 	// Perform request.
 	method := "getFavorites"
 	params := gsReqFavorites{
 		OfWhat: "Songs",
-		UserId: userId,
+		UserID: userID,
 	}
 	buf, err := sess.request(method, params)
 	if err != nil {
@@ -336,7 +336,7 @@ func (sess *Session) favorites(userId int) (songs []*gsSong, err error) {
 }
 
 type gsReqPlaylists struct {
-	UserId int `json:"userID"`
+	UserID int `json:"userID"`
 }
 
 // Example response:
@@ -371,11 +371,11 @@ type gsPlaylist struct {
 }
 
 // playlists  returns a list of the provided user's playlists.
-func (sess *Session) playlists(userId int) (playlists []*gsPlaylist, err error) {
+func (sess *Session) playlists(userID int) (playlists []*gsPlaylist, err error) {
 	// Perform request.
 	method := "userGetPlaylists"
 	params := gsReqPlaylists{
-		UserId: userId,
+		UserID: userID,
 	}
 	buf, err := sess.request(method, params)
 	if err != nil {
@@ -396,7 +396,7 @@ func (sess *Session) playlists(userId int) (playlists []*gsPlaylist, err error) 
 }
 
 type gsReqPlaylistSongs struct {
-	PlaylistId int `json:"playlistID"`
+	PlaylistID int `json:"playlistID"`
 }
 
 // Example response:
@@ -436,11 +436,11 @@ type gsRespPlaylistSongsResult struct {
 }
 
 // playlistSongs  returns a list of all songs in the provided playlist.
-func (sess *Session) playlistSongs(playlistId int) (songs []*gsSong, err error) {
+func (sess *Session) playlistSongs(playlistID int) (songs []*gsSong, err error) {
 	// Perform request.
 	method := "playlistGetSongs"
 	params := gsReqPlaylistSongs{
-		PlaylistId: playlistId,
+		PlaylistID: playlistID,
 	}
 	buf, err := sess.request(method, params)
 	if err != nil {

@@ -33,23 +33,23 @@ func NewSession() (sess *Session, err error) {
 	return sess, nil
 }
 
-// UserId returns the user id associated with the provided username.
-func (sess *Session) UserId(username string) (userId int, err error) {
-	userId, err = sess.userId(username)
+// UserID returns the user id associated with the provided username.
+func (sess *Session) UserID(username string) (userID int, err error) {
+	userID, err = sess.userID(username)
 	if err != nil {
 		return 0, err
 	}
-	if userId == 0 {
-		return 0, fmt.Errorf("Session.UserId: unable to locate user id for %q.", username)
+	if userID == 0 {
+		return 0, fmt.Errorf("Session.UserID: unable to locate user id for %q", username)
 	}
-	return userId, nil
+	return userID, nil
 }
 
 // UserSongs returns a list of all songs in the provided user's collection.
-func (sess *Session) UserSongs(userId int) (songs []*Song, err error) {
+func (sess *Session) UserSongs(userID int) (songs []*Song, err error) {
 	// Get one page at the time.
 	for page := 0; ; page++ {
-		gsSongs, hasMore, err := sess.collection(userId, page)
+		gsSongs, hasMore, err := sess.collection(userID, page)
 		if err != nil {
 			return nil, err
 		}
@@ -69,8 +69,8 @@ func (sess *Session) UserSongs(userId int) (songs []*Song, err error) {
 }
 
 // UserFavorites returns a list of the provided user's favorite songs.
-func (sess *Session) UserFavorites(userId int) (songs []*Song, err error) {
-	gsSongs, err := sess.favorites(userId)
+func (sess *Session) UserFavorites(userID int) (songs []*Song, err error) {
+	gsSongs, err := sess.favorites(userID)
 	if err != nil {
 		return nil, err
 	}
@@ -86,9 +86,9 @@ func (sess *Session) UserFavorites(userId int) (songs []*Song, err error) {
 }
 
 // UserPlaylists returns a list of the provided user's playlists.
-func (sess *Session) UserPlaylists(userId int) (playlists []*Playlist, err error) {
+func (sess *Session) UserPlaylists(userID int) (playlists []*Playlist, err error) {
 	// Locate user playlists.
-	gsPlaylists, err := sess.playlists(userId)
+	gsPlaylists, err := sess.playlists(userID)
 	if err != nil {
 		return nil, err
 	}
@@ -129,7 +129,7 @@ type Song struct {
 	// Song id.
 	id int
 	// Artist id.
-	artistId int
+	artistID int
 }
 
 func (song *Song) String() string {
