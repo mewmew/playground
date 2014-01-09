@@ -54,7 +54,7 @@ func Search(query string) (ids []int, err error) {
 		}
 		end := bytes.IndexByte(buf[pos:], '"')
 		if end == -1 {
-			return nil, errors.New("wallbase.Search: unmatched quote in wallpaper URL.")
+			return nil, errors.New("wallbase.Search: unmatched quote in wallpaper URL")
 		}
 		rawID := buf[pos : pos+end]
 		buf = buf[pos+end:]
@@ -81,11 +81,11 @@ func Download(id int) (buf []byte, ext string, err error) {
 	// Locate the wallpaper image URL.
 	pos := bytes.Index(page, []byte("http://wallpapers.wallbase.cc/"))
 	if pos == -1 {
-		return nil, "", fmt.Errorf("wallbase.Download: unable to locate wallpaper image URL for %d.", id)
+		return nil, "", fmt.Errorf("wallbase.Download: unable to locate wallpaper image URL for %d", id)
 	}
 	end := bytes.IndexByte(page[pos:], '"')
 	if end == -1 {
-		return nil, "", errors.New("wallbase.Download: unmatched quote in wallpaper URL.")
+		return nil, "", errors.New("wallbase.Download: unmatched quote in wallpaper URL")
 	}
 	wallURL := page[pos : pos+end]
 
