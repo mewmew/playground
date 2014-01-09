@@ -50,13 +50,13 @@ func parseFile(filePath string) (err error) {
 		line := s.Text()
 		parts := strings.Split(line, " ")
 		if len(parts) != 2 {
-			return fmt.Errorf("invalid line %q, doesn't contain two parts.", line)
+			return fmt.Errorf("invalid line %q, doesn't contain two parts", line)
 		}
 		// bits correspond to the bit representation of an instruction, for
 		// instance: 000000NNNNNNNNNNNNNNNNNNNNNNNNNN
 		bits := parts[0]
 		if len(bits) != 32 {
-			fmt.Errorf("invalid bit string %q, doesnt' contain 32 bits.", bits)
+			return fmt.Errorf("invalid bit string %q, doesnt' contain 32 bits", bits)
 		}
 		// mnemonic correspond to the mnemonic of an instruction, for instance:
 		// l.j
@@ -240,7 +240,7 @@ func (off *Offset) Mask() (mask uint32) {
 }
 
 const padFormat = `   if buf&0x%08X != 0 {
-      return nil, errors.New("invalid padding.")
+      return nil, errors.New("invalid padding")
    }
 `
 

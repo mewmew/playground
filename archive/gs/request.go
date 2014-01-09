@@ -163,7 +163,7 @@ func (sess *Session) userID(username string) (userID int, err error) {
 	}
 
 	// Unmarshal JSON response.
-	var resp gsRespUserId
+	var resp gsRespUserID
 	err = json.Unmarshal(buf, &resp)
 	if err != nil {
 		return 0, err
@@ -244,7 +244,7 @@ func (gsSong *gsSong) Song() (song *Song, err error) {
 		}
 	}
 	if gsSong.ArtistID != "" {
-		song.artistId, err = strconv.Atoi(gsSong.ArtistID)
+		song.artistID, err = strconv.Atoi(gsSong.ArtistID)
 		if err != nil {
 			return nil, err
 		}

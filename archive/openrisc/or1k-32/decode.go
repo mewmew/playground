@@ -51,7 +51,7 @@ func Decode(buf uint32) (inst interface{}, err error) {
 	case buf&0xFF000000 == 0x15000000:
 		// 00010101--------KKKKKKKKKKKKKKKK
 		if buf&0x00FF0000 != 0 {
-			return nil, errors.New("invalid padding.")
+			return nil, errors.New("invalid padding")
 		}
 		k := buf & 0x0000FFFF
 		inst = &orbis.Nop{
@@ -63,7 +63,7 @@ func Decode(buf uint32) (inst interface{}, err error) {
 	case buf&0xFC010000 == 0x18000000:
 		// 000110DDDDD----0KKKKKKKKKKKKKKKK
 		if buf&0x001E0000 != 0 {
-			return nil, errors.New("invalid padding.")
+			return nil, errors.New("invalid padding")
 		}
 		d := buf & 0x03E00000 >> 21
 		k := buf & 0x0000FFFF
@@ -77,7 +77,7 @@ func Decode(buf uint32) (inst interface{}, err error) {
 	case buf&0xFC01FFFF == 0x18010000:
 		// 000110DDDDD----10000000000000000
 		if buf&0x001E0000 != 0 {
-			return nil, errors.New("invalid padding.")
+			return nil, errors.New("invalid padding")
 		}
 		d := buf & 0x03E00000 >> 21
 		inst = &orbis.Macrc{
@@ -128,7 +128,7 @@ func Decode(buf uint32) (inst interface{}, err error) {
 	case buf&0xFC000000 == 0x24000000:
 		// 001001--------------------------
 		if buf&0x03FFFFFF != 0 {
-			return nil, errors.New("invalid padding.")
+			return nil, errors.New("invalid padding")
 		}
 		inst = &orbis.Rfe{
 			Code: orbis.CodeRfe,
@@ -139,7 +139,7 @@ func Decode(buf uint32) (inst interface{}, err error) {
 	   case buf&0xFC0000F0 == 0x280000C0:
 	      // 001010------------------1100----
 	      if buf&0x03FFFF0F != 0 {
-	         return nil, errors.New("invalid padding.")
+	         return nil, errors.New("invalid padding")
 	      }
 	*/
 
@@ -148,7 +148,7 @@ func Decode(buf uint32) (inst interface{}, err error) {
 	   case buf&0xFC0000F0 == 0x280000D0:
 	      // 001010------------------1101----
 	      if buf&0x03FFFF0F != 0 {
-	         return nil, errors.New("invalid padding.")
+	         return nil, errors.New("invalid padding")
 	      }
 	*/
 
@@ -157,7 +157,7 @@ func Decode(buf uint32) (inst interface{}, err error) {
 	   case buf&0xFC0000F0 == 0x280000E0:
 	      // 001010------------------1110----
 	      if buf&0x03FFFF0F != 0 {
-	         return nil, errors.New("invalid padding.")
+	         return nil, errors.New("invalid padding")
 	      }
 	*/
 
@@ -166,7 +166,7 @@ func Decode(buf uint32) (inst interface{}, err error) {
 	   case buf&0xFC0000F0 == 0x280000F0:
 	      // 001010------------------1111----
 	      if buf&0x03FFFF0F != 0 {
-	         return nil, errors.New("invalid padding.")
+	         return nil, errors.New("invalid padding")
 	      }
 	*/
 
@@ -175,7 +175,7 @@ func Decode(buf uint32) (inst interface{}, err error) {
 	   case buf&0xFC0000FF == 0x28000010:
 	      // 001010DDDDDAAAAABBBBB---00010000
 	      if buf&0x00000700 != 0 {
-	         return nil, errors.New("invalid padding.")
+	         return nil, errors.New("invalid padding")
 	      }
 	      a := buf&0x001F0000 >> 16
 	      b := buf&0x0000F800 >> 11
@@ -187,7 +187,7 @@ func Decode(buf uint32) (inst interface{}, err error) {
 	   case buf&0xFC0000FF == 0x28000011:
 	      // 001010DDDDDAAAAABBBBB---00010001
 	      if buf&0x00000700 != 0 {
-	         return nil, errors.New("invalid padding.")
+	         return nil, errors.New("invalid padding")
 	      }
 	      a := buf&0x001F0000 >> 16
 	      b := buf&0x0000F800 >> 11
@@ -199,7 +199,7 @@ func Decode(buf uint32) (inst interface{}, err error) {
 	   case buf&0xFC0000FF == 0x28000012:
 	      // 001010DDDDDAAAAABBBBB---00010010
 	      if buf&0x00000700 != 0 {
-	         return nil, errors.New("invalid padding.")
+	         return nil, errors.New("invalid padding")
 	      }
 	      a := buf&0x001F0000 >> 16
 	      b := buf&0x0000F800 >> 11
@@ -211,7 +211,7 @@ func Decode(buf uint32) (inst interface{}, err error) {
 	   case buf&0xFC0000FF == 0x28000013:
 	      // 001010DDDDDAAAAABBBBB---00010011
 	      if buf&0x00000700 != 0 {
-	         return nil, errors.New("invalid padding.")
+	         return nil, errors.New("invalid padding")
 	      }
 	      a := buf&0x001F0000 >> 16
 	      b := buf&0x0000F800 >> 11
@@ -223,7 +223,7 @@ func Decode(buf uint32) (inst interface{}, err error) {
 	   case buf&0xFC0000FF == 0x28000014:
 	      // 001010DDDDDAAAAABBBBB---00010100
 	      if buf&0x00000700 != 0 {
-	         return nil, errors.New("invalid padding.")
+	         return nil, errors.New("invalid padding")
 	      }
 	      a := buf&0x001F0000 >> 16
 	      b := buf&0x0000F800 >> 11
@@ -235,7 +235,7 @@ func Decode(buf uint32) (inst interface{}, err error) {
 	   case buf&0xFC0000FF == 0x28000015:
 	      // 001010DDDDDAAAAABBBBB---00010101
 	      if buf&0x00000700 != 0 {
-	         return nil, errors.New("invalid padding.")
+	         return nil, errors.New("invalid padding")
 	      }
 	      a := buf&0x001F0000 >> 16
 	      b := buf&0x0000F800 >> 11
@@ -247,7 +247,7 @@ func Decode(buf uint32) (inst interface{}, err error) {
 	   case buf&0xFC0000FF == 0x28000016:
 	      // 001010DDDDDAAAAABBBBB---00010110
 	      if buf&0x00000700 != 0 {
-	         return nil, errors.New("invalid padding.")
+	         return nil, errors.New("invalid padding")
 	      }
 	      a := buf&0x001F0000 >> 16
 	      b := buf&0x0000F800 >> 11
@@ -259,7 +259,7 @@ func Decode(buf uint32) (inst interface{}, err error) {
 	   case buf&0xFC0000FF == 0x28000017:
 	      // 001010DDDDDAAAAABBBBB---00010111
 	      if buf&0x00000700 != 0 {
-	         return nil, errors.New("invalid padding.")
+	         return nil, errors.New("invalid padding")
 	      }
 	      a := buf&0x001F0000 >> 16
 	      b := buf&0x0000F800 >> 11
@@ -271,7 +271,7 @@ func Decode(buf uint32) (inst interface{}, err error) {
 	   case buf&0xFC0000FF == 0x28000018:
 	      // 001010DDDDDAAAAABBBBB---00011000
 	      if buf&0x00000700 != 0 {
-	         return nil, errors.New("invalid padding.")
+	         return nil, errors.New("invalid padding")
 	      }
 	      a := buf&0x001F0000 >> 16
 	      b := buf&0x0000F800 >> 11
@@ -283,7 +283,7 @@ func Decode(buf uint32) (inst interface{}, err error) {
 	   case buf&0xFC0000FF == 0x28000019:
 	      // 001010DDDDDAAAAABBBBB---00011001
 	      if buf&0x00000700 != 0 {
-	         return nil, errors.New("invalid padding.")
+	         return nil, errors.New("invalid padding")
 	      }
 	      a := buf&0x001F0000 >> 16
 	      b := buf&0x0000F800 >> 11
@@ -295,7 +295,7 @@ func Decode(buf uint32) (inst interface{}, err error) {
 	   case buf&0xFC0000FF == 0x2800001A:
 	      // 001010DDDDDAAAAABBBBB---00011010
 	      if buf&0x00000700 != 0 {
-	         return nil, errors.New("invalid padding.")
+	         return nil, errors.New("invalid padding")
 	      }
 	      a := buf&0x001F0000 >> 16
 	      b := buf&0x0000F800 >> 11
@@ -307,7 +307,7 @@ func Decode(buf uint32) (inst interface{}, err error) {
 	   case buf&0xFC0000FF == 0x2800001B:
 	      // 001010DDDDDAAAAABBBBB---00011011
 	      if buf&0x00000700 != 0 {
-	         return nil, errors.New("invalid padding.")
+	         return nil, errors.New("invalid padding")
 	      }
 	      a := buf&0x001F0000 >> 16
 	      b := buf&0x0000F800 >> 11
@@ -319,7 +319,7 @@ func Decode(buf uint32) (inst interface{}, err error) {
 	   case buf&0xFC0000FF == 0x28000020:
 	      // 001010DDDDDAAAAABBBBB---00100000
 	      if buf&0x00000700 != 0 {
-	         return nil, errors.New("invalid padding.")
+	         return nil, errors.New("invalid padding")
 	      }
 	      a := buf&0x001F0000 >> 16
 	      b := buf&0x0000F800 >> 11
@@ -331,7 +331,7 @@ func Decode(buf uint32) (inst interface{}, err error) {
 	   case buf&0xFC0000FF == 0x28000021:
 	      // 001010DDDDDAAAAABBBBB---00100001
 	      if buf&0x00000700 != 0 {
-	         return nil, errors.New("invalid padding.")
+	         return nil, errors.New("invalid padding")
 	      }
 	      a := buf&0x001F0000 >> 16
 	      b := buf&0x0000F800 >> 11
@@ -343,7 +343,7 @@ func Decode(buf uint32) (inst interface{}, err error) {
 	   case buf&0xFC0000FF == 0x28000022:
 	      // 001010DDDDDAAAAABBBBB---00100010
 	      if buf&0x00000700 != 0 {
-	         return nil, errors.New("invalid padding.")
+	         return nil, errors.New("invalid padding")
 	      }
 	      a := buf&0x001F0000 >> 16
 	      b := buf&0x0000F800 >> 11
@@ -355,7 +355,7 @@ func Decode(buf uint32) (inst interface{}, err error) {
 	   case buf&0xFC0000FF == 0x28000023:
 	      // 001010DDDDDAAAAABBBBB---00100011
 	      if buf&0x00000700 != 0 {
-	         return nil, errors.New("invalid padding.")
+	         return nil, errors.New("invalid padding")
 	      }
 	      a := buf&0x001F0000 >> 16
 	      b := buf&0x0000F800 >> 11
@@ -367,7 +367,7 @@ func Decode(buf uint32) (inst interface{}, err error) {
 	   case buf&0xFC0000FF == 0x28000024:
 	      // 001010DDDDDAAAAABBBBB---00100100
 	      if buf&0x00000700 != 0 {
-	         return nil, errors.New("invalid padding.")
+	         return nil, errors.New("invalid padding")
 	      }
 	      a := buf&0x001F0000 >> 16
 	      b := buf&0x0000F800 >> 11
@@ -379,7 +379,7 @@ func Decode(buf uint32) (inst interface{}, err error) {
 	   case buf&0xFC0000FF == 0x28000025:
 	      // 001010DDDDDAAAAABBBBB---00100101
 	      if buf&0x00000700 != 0 {
-	         return nil, errors.New("invalid padding.")
+	         return nil, errors.New("invalid padding")
 	      }
 	      a := buf&0x001F0000 >> 16
 	      b := buf&0x0000F800 >> 11
@@ -391,7 +391,7 @@ func Decode(buf uint32) (inst interface{}, err error) {
 	   case buf&0xFC0000FF == 0x28000026:
 	      // 001010DDDDDAAAAABBBBB---00100110
 	      if buf&0x00000700 != 0 {
-	         return nil, errors.New("invalid padding.")
+	         return nil, errors.New("invalid padding")
 	      }
 	      a := buf&0x001F0000 >> 16
 	      b := buf&0x0000F800 >> 11
@@ -403,7 +403,7 @@ func Decode(buf uint32) (inst interface{}, err error) {
 	   case buf&0xFC0000FF == 0x28000027:
 	      // 001010DDDDDAAAAABBBBB---00100111
 	      if buf&0x00000700 != 0 {
-	         return nil, errors.New("invalid padding.")
+	         return nil, errors.New("invalid padding")
 	      }
 	      a := buf&0x001F0000 >> 16
 	      b := buf&0x0000F800 >> 11
@@ -415,7 +415,7 @@ func Decode(buf uint32) (inst interface{}, err error) {
 	   case buf&0xFC0000FF == 0x28000028:
 	      // 001010DDDDDAAAAABBBBB---00101000
 	      if buf&0x00000700 != 0 {
-	         return nil, errors.New("invalid padding.")
+	         return nil, errors.New("invalid padding")
 	      }
 	      a := buf&0x001F0000 >> 16
 	      b := buf&0x0000F800 >> 11
@@ -427,7 +427,7 @@ func Decode(buf uint32) (inst interface{}, err error) {
 	   case buf&0xFC0000FF == 0x28000029:
 	      // 001010DDDDDAAAAABBBBB---00101001
 	      if buf&0x00000700 != 0 {
-	         return nil, errors.New("invalid padding.")
+	         return nil, errors.New("invalid padding")
 	      }
 	      a := buf&0x001F0000 >> 16
 	      b := buf&0x0000F800 >> 11
@@ -439,7 +439,7 @@ func Decode(buf uint32) (inst interface{}, err error) {
 	   case buf&0xFC0000FF == 0x2800002A:
 	      // 001010DDDDDAAAAABBBBB---00101010
 	      if buf&0x00000700 != 0 {
-	         return nil, errors.New("invalid padding.")
+	         return nil, errors.New("invalid padding")
 	      }
 	      a := buf&0x001F0000 >> 16
 	      b := buf&0x0000F800 >> 11
@@ -451,7 +451,7 @@ func Decode(buf uint32) (inst interface{}, err error) {
 	   case buf&0xFC0000FF == 0x2800002B:
 	      // 001010DDDDDAAAAABBBBB---00101011
 	      if buf&0x00000700 != 0 {
-	         return nil, errors.New("invalid padding.")
+	         return nil, errors.New("invalid padding")
 	      }
 	      a := buf&0x001F0000 >> 16
 	      b := buf&0x0000F800 >> 11
@@ -463,7 +463,7 @@ func Decode(buf uint32) (inst interface{}, err error) {
 	   case buf&0xFC0000FF == 0x28000030:
 	      // 001010DDDDDAAAAABBBBB---00110000
 	      if buf&0x00000700 != 0 {
-	         return nil, errors.New("invalid padding.")
+	         return nil, errors.New("invalid padding")
 	      }
 	      a := buf&0x001F0000 >> 16
 	      b := buf&0x0000F800 >> 11
@@ -475,7 +475,7 @@ func Decode(buf uint32) (inst interface{}, err error) {
 	   case buf&0xFC0000FF == 0x28000031:
 	      // 001010DDDDDAAAAABBBBB---00110001
 	      if buf&0x00000700 != 0 {
-	         return nil, errors.New("invalid padding.")
+	         return nil, errors.New("invalid padding")
 	      }
 	      a := buf&0x001F0000 >> 16
 	      b := buf&0x0000F800 >> 11
@@ -487,7 +487,7 @@ func Decode(buf uint32) (inst interface{}, err error) {
 	   case buf&0xFC0000FF == 0x28000032:
 	      // 001010DDDDDAAAAABBBBB---00110010
 	      if buf&0x00000700 != 0 {
-	         return nil, errors.New("invalid padding.")
+	         return nil, errors.New("invalid padding")
 	      }
 	      a := buf&0x001F0000 >> 16
 	      b := buf&0x0000F800 >> 11
@@ -499,7 +499,7 @@ func Decode(buf uint32) (inst interface{}, err error) {
 	   case buf&0xFC0000FF == 0x28000033:
 	      // 001010DDDDDAAAAABBBBB---00110011
 	      if buf&0x00000700 != 0 {
-	         return nil, errors.New("invalid padding.")
+	         return nil, errors.New("invalid padding")
 	      }
 	      a := buf&0x001F0000 >> 16
 	      b := buf&0x0000F800 >> 11
@@ -511,7 +511,7 @@ func Decode(buf uint32) (inst interface{}, err error) {
 	   case buf&0xFC0000FF == 0x28000034:
 	      // 001010DDDDDAAAAABBBBB---00110100
 	      if buf&0x00000700 != 0 {
-	         return nil, errors.New("invalid padding.")
+	         return nil, errors.New("invalid padding")
 	      }
 	      a := buf&0x001F0000 >> 16
 	      b := buf&0x0000F800 >> 11
@@ -523,7 +523,7 @@ func Decode(buf uint32) (inst interface{}, err error) {
 	   case buf&0xFC0000FF == 0x28000035:
 	      // 001010DDDDDAAAAABBBBB---00110101
 	      if buf&0x00000700 != 0 {
-	         return nil, errors.New("invalid padding.")
+	         return nil, errors.New("invalid padding")
 	      }
 	      a := buf&0x001F0000 >> 16
 	      b := buf&0x0000F800 >> 11
@@ -535,7 +535,7 @@ func Decode(buf uint32) (inst interface{}, err error) {
 	   case buf&0xFC0000FF == 0x28000036:
 	      // 001010DDDDDAAAAABBBBB---00110110
 	      if buf&0x00000700 != 0 {
-	         return nil, errors.New("invalid padding.")
+	         return nil, errors.New("invalid padding")
 	      }
 	      a := buf&0x001F0000 >> 16
 	      b := buf&0x0000F800 >> 11
@@ -547,7 +547,7 @@ func Decode(buf uint32) (inst interface{}, err error) {
 	   case buf&0xFC0000FF == 0x28000037:
 	      // 001010DDDDDAAAAABBBBB---00110111
 	      if buf&0x00000700 != 0 {
-	         return nil, errors.New("invalid padding.")
+	         return nil, errors.New("invalid padding")
 	      }
 	      a := buf&0x001F0000 >> 16
 	      b := buf&0x0000F800 >> 11
@@ -559,7 +559,7 @@ func Decode(buf uint32) (inst interface{}, err error) {
 	   case buf&0xFC0000FF == 0x28000038:
 	      // 001010DDDDDAAAAABBBBB---00111000
 	      if buf&0x00000700 != 0 {
-	         return nil, errors.New("invalid padding.")
+	         return nil, errors.New("invalid padding")
 	      }
 	      a := buf&0x001F0000 >> 16
 	      b := buf&0x0000F800 >> 11
@@ -571,7 +571,7 @@ func Decode(buf uint32) (inst interface{}, err error) {
 	   case buf&0xFC0000FF == 0x28000039:
 	      // 001010DDDDDAAAAABBBBB---00111001
 	      if buf&0x00000700 != 0 {
-	         return nil, errors.New("invalid padding.")
+	         return nil, errors.New("invalid padding")
 	      }
 	      a := buf&0x001F0000 >> 16
 	      b := buf&0x0000F800 >> 11
@@ -583,7 +583,7 @@ func Decode(buf uint32) (inst interface{}, err error) {
 	   case buf&0xFC0000FF == 0x2800003A:
 	      // 001010DDDDDAAAAABBBBB---00111010
 	      if buf&0x00000700 != 0 {
-	         return nil, errors.New("invalid padding.")
+	         return nil, errors.New("invalid padding")
 	      }
 	      a := buf&0x001F0000 >> 16
 	      b := buf&0x0000F800 >> 11
@@ -595,7 +595,7 @@ func Decode(buf uint32) (inst interface{}, err error) {
 	   case buf&0xFC0000FF == 0x28000040:
 	      // 001010DDDDDAAAAABBBBB---01000000
 	      if buf&0x00000700 != 0 {
-	         return nil, errors.New("invalid padding.")
+	         return nil, errors.New("invalid padding")
 	      }
 	      a := buf&0x001F0000 >> 16
 	      b := buf&0x0000F800 >> 11
@@ -607,7 +607,7 @@ func Decode(buf uint32) (inst interface{}, err error) {
 	   case buf&0xFC0000FF == 0x28000041:
 	      // 001010DDDDDAAAAABBBBB---01000001
 	      if buf&0x00000700 != 0 {
-	         return nil, errors.New("invalid padding.")
+	         return nil, errors.New("invalid padding")
 	      }
 	      a := buf&0x001F0000 >> 16
 	      b := buf&0x0000F800 >> 11
@@ -619,7 +619,7 @@ func Decode(buf uint32) (inst interface{}, err error) {
 	   case buf&0xFC0000FF == 0x28000042:
 	      // 001010DDDDDAAAAABBBBB---01000010
 	      if buf&0x00000700 != 0 {
-	         return nil, errors.New("invalid padding.")
+	         return nil, errors.New("invalid padding")
 	      }
 	      a := buf&0x001F0000 >> 16
 	      b := buf&0x0000F800 >> 11
@@ -631,7 +631,7 @@ func Decode(buf uint32) (inst interface{}, err error) {
 	   case buf&0xFC0000FF == 0x28000043:
 	      // 001010DDDDDAAAAABBBBB---01000011
 	      if buf&0x00000700 != 0 {
-	         return nil, errors.New("invalid padding.")
+	         return nil, errors.New("invalid padding")
 	      }
 	      a := buf&0x001F0000 >> 16
 	      b := buf&0x0000F800 >> 11
@@ -643,7 +643,7 @@ func Decode(buf uint32) (inst interface{}, err error) {
 	   case buf&0xFC0000FF == 0x28000044:
 	      // 001010DDDDDAAAAABBBBB---01000100
 	      if buf&0x00000700 != 0 {
-	         return nil, errors.New("invalid padding.")
+	         return nil, errors.New("invalid padding")
 	      }
 	      a := buf&0x001F0000 >> 16
 	      b := buf&0x0000F800 >> 11
@@ -655,7 +655,7 @@ func Decode(buf uint32) (inst interface{}, err error) {
 	   case buf&0xFC0000FF == 0x28000045:
 	      // 001010DDDDDAAAAABBBBB---01000101
 	      if buf&0x00000700 != 0 {
-	         return nil, errors.New("invalid padding.")
+	         return nil, errors.New("invalid padding")
 	      }
 	      a := buf&0x001F0000 >> 16
 	      b := buf&0x0000F800 >> 11
@@ -667,7 +667,7 @@ func Decode(buf uint32) (inst interface{}, err error) {
 	   case buf&0xFC0000FF == 0x28000046:
 	      // 001010DDDDDAAAAABBBBB---01000110
 	      if buf&0x00000700 != 0 {
-	         return nil, errors.New("invalid padding.")
+	         return nil, errors.New("invalid padding")
 	      }
 	      a := buf&0x001F0000 >> 16
 	      b := buf&0x0000F800 >> 11
@@ -679,7 +679,7 @@ func Decode(buf uint32) (inst interface{}, err error) {
 	   case buf&0xFC0000FF == 0x28000047:
 	      // 001010DDDDDAAAAABBBBB---01000111
 	      if buf&0x00000700 != 0 {
-	         return nil, errors.New("invalid padding.")
+	         return nil, errors.New("invalid padding")
 	      }
 	      a := buf&0x001F0000 >> 16
 	      b := buf&0x0000F800 >> 11
@@ -691,7 +691,7 @@ func Decode(buf uint32) (inst interface{}, err error) {
 	   case buf&0xFC0000FF == 0x28000048:
 	      // 001010DDDDDAAAAABBBBB---01001000
 	      if buf&0x00000700 != 0 {
-	         return nil, errors.New("invalid padding.")
+	         return nil, errors.New("invalid padding")
 	      }
 	      a := buf&0x001F0000 >> 16
 	      b := buf&0x0000F800 >> 11
@@ -703,7 +703,7 @@ func Decode(buf uint32) (inst interface{}, err error) {
 	   case buf&0xFC0000FF == 0x28000049:
 	      // 001010DDDDDAAAAABBBBB---01001001
 	      if buf&0x00000700 != 0 {
-	         return nil, errors.New("invalid padding.")
+	         return nil, errors.New("invalid padding")
 	      }
 	      a := buf&0x001F0000 >> 16
 	      b := buf&0x0000F800 >> 11
@@ -715,7 +715,7 @@ func Decode(buf uint32) (inst interface{}, err error) {
 	   case buf&0xFC0000FF == 0x2800004A:
 	      // 001010DDDDDAAAAABBBBB---01001010
 	      if buf&0x00000700 != 0 {
-	         return nil, errors.New("invalid padding.")
+	         return nil, errors.New("invalid padding")
 	      }
 	      a := buf&0x001F0000 >> 16
 	      b := buf&0x0000F800 >> 11
@@ -727,7 +727,7 @@ func Decode(buf uint32) (inst interface{}, err error) {
 	   case buf&0xFC0000FF == 0x2800004B:
 	      // 001010DDDDDAAAAABBBBB---01001011
 	      if buf&0x00000700 != 0 {
-	         return nil, errors.New("invalid padding.")
+	         return nil, errors.New("invalid padding")
 	      }
 	      a := buf&0x001F0000 >> 16
 	      b := buf&0x0000F800 >> 11
@@ -739,7 +739,7 @@ func Decode(buf uint32) (inst interface{}, err error) {
 	   case buf&0xFC0000FF == 0x28000054:
 	      // 001010DDDDDAAAAABBBBB---01010100
 	      if buf&0x00000700 != 0 {
-	         return nil, errors.New("invalid padding.")
+	         return nil, errors.New("invalid padding")
 	      }
 	      a := buf&0x001F0000 >> 16
 	      b := buf&0x0000F800 >> 11
@@ -751,7 +751,7 @@ func Decode(buf uint32) (inst interface{}, err error) {
 	   case buf&0xFC0000FF == 0x28000055:
 	      // 001010DDDDDAAAAABBBBB---01010101
 	      if buf&0x00000700 != 0 {
-	         return nil, errors.New("invalid padding.")
+	         return nil, errors.New("invalid padding")
 	      }
 	      a := buf&0x001F0000 >> 16
 	      b := buf&0x0000F800 >> 11
@@ -763,7 +763,7 @@ func Decode(buf uint32) (inst interface{}, err error) {
 	   case buf&0xFC0000FF == 0x28000056:
 	      // 001010DDDDDAAAAABBBBB---01010110
 	      if buf&0x00000700 != 0 {
-	         return nil, errors.New("invalid padding.")
+	         return nil, errors.New("invalid padding")
 	      }
 	      a := buf&0x001F0000 >> 16
 	      b := buf&0x0000F800 >> 11
@@ -775,7 +775,7 @@ func Decode(buf uint32) (inst interface{}, err error) {
 	   case buf&0xFC0000FF == 0x28000057:
 	      // 001010DDDDDAAAAABBBBB---01010111
 	      if buf&0x00000700 != 0 {
-	         return nil, errors.New("invalid padding.")
+	         return nil, errors.New("invalid padding")
 	      }
 	      a := buf&0x001F0000 >> 16
 	      b := buf&0x0000F800 >> 11
@@ -787,7 +787,7 @@ func Decode(buf uint32) (inst interface{}, err error) {
 	   case buf&0xFC0000FF == 0x28000058:
 	      // 001010DDDDDAAAAABBBBB---01011000
 	      if buf&0x00000700 != 0 {
-	         return nil, errors.New("invalid padding.")
+	         return nil, errors.New("invalid padding")
 	      }
 	      a := buf&0x001F0000 >> 16
 	      b := buf&0x0000F800 >> 11
@@ -799,7 +799,7 @@ func Decode(buf uint32) (inst interface{}, err error) {
 	   case buf&0xFC0000FF == 0x28000059:
 	      // 001010DDDDDAAAAABBBBB---01011001
 	      if buf&0x00000700 != 0 {
-	         return nil, errors.New("invalid padding.")
+	         return nil, errors.New("invalid padding")
 	      }
 	      a := buf&0x001F0000 >> 16
 	      b := buf&0x0000F800 >> 11
@@ -811,7 +811,7 @@ func Decode(buf uint32) (inst interface{}, err error) {
 	   case buf&0xFC0000FF == 0x2800005A:
 	      // 001010DDDDDAAAAABBBBB---01011010
 	      if buf&0x00000700 != 0 {
-	         return nil, errors.New("invalid padding.")
+	         return nil, errors.New("invalid padding")
 	      }
 	      a := buf&0x001F0000 >> 16
 	      b := buf&0x0000F800 >> 11
@@ -823,7 +823,7 @@ func Decode(buf uint32) (inst interface{}, err error) {
 	   case buf&0xFC0000FF == 0x2800005B:
 	      // 001010DDDDDAAAAABBBBB---01011011
 	      if buf&0x00000700 != 0 {
-	         return nil, errors.New("invalid padding.")
+	         return nil, errors.New("invalid padding")
 	      }
 	      a := buf&0x001F0000 >> 16
 	      b := buf&0x0000F800 >> 11
@@ -835,7 +835,7 @@ func Decode(buf uint32) (inst interface{}, err error) {
 	   case buf&0xFC0000FF == 0x2800005C:
 	      // 001010DDDDDAAAAABBBBB---01011100
 	      if buf&0x00000700 != 0 {
-	         return nil, errors.New("invalid padding.")
+	         return nil, errors.New("invalid padding")
 	      }
 	      a := buf&0x001F0000 >> 16
 	      b := buf&0x0000F800 >> 11
@@ -847,7 +847,7 @@ func Decode(buf uint32) (inst interface{}, err error) {
 	   case buf&0xFC0000FF == 0x2800005D:
 	      // 001010DDDDDAAAAABBBBB---01011101
 	      if buf&0x00000700 != 0 {
-	         return nil, errors.New("invalid padding.")
+	         return nil, errors.New("invalid padding")
 	      }
 	      a := buf&0x001F0000 >> 16
 	      b := buf&0x0000F800 >> 11
@@ -859,7 +859,7 @@ func Decode(buf uint32) (inst interface{}, err error) {
 	   case buf&0xFC0000FF == 0x2800005E:
 	      // 001010DDDDDAAAAABBBBB---01011110
 	      if buf&0x00000700 != 0 {
-	         return nil, errors.New("invalid padding.")
+	         return nil, errors.New("invalid padding")
 	      }
 	      a := buf&0x001F0000 >> 16
 	      b := buf&0x0000F800 >> 11
@@ -871,7 +871,7 @@ func Decode(buf uint32) (inst interface{}, err error) {
 	   case buf&0xFC0000FF == 0x2800005F:
 	      // 001010DDDDDAAAAABBBBB---01011111
 	      if buf&0x00000700 != 0 {
-	         return nil, errors.New("invalid padding.")
+	         return nil, errors.New("invalid padding")
 	      }
 	      a := buf&0x001F0000 >> 16
 	      b := buf&0x0000F800 >> 11
@@ -883,7 +883,7 @@ func Decode(buf uint32) (inst interface{}, err error) {
 	   case buf&0xFC0000FF == 0x28000060:
 	      // 001010DDDDDAAAAABBBBB---01100000
 	      if buf&0x00000700 != 0 {
-	         return nil, errors.New("invalid padding.")
+	         return nil, errors.New("invalid padding")
 	      }
 	      a := buf&0x001F0000 >> 16
 	      b := buf&0x0000F800 >> 11
@@ -895,7 +895,7 @@ func Decode(buf uint32) (inst interface{}, err error) {
 	   case buf&0xFC0000FF == 0x28000061:
 	      // 001010DDDDDAAAAABBBBB---01100001
 	      if buf&0x00000700 != 0 {
-	         return nil, errors.New("invalid padding.")
+	         return nil, errors.New("invalid padding")
 	      }
 	      a := buf&0x001F0000 >> 16
 	      b := buf&0x0000F800 >> 11
@@ -907,7 +907,7 @@ func Decode(buf uint32) (inst interface{}, err error) {
 	   case buf&0xFC0000FF == 0x28000062:
 	      // 001010DDDDDAAAAABBBBB---01100010
 	      if buf&0x00000700 != 0 {
-	         return nil, errors.New("invalid padding.")
+	         return nil, errors.New("invalid padding")
 	      }
 	      a := buf&0x001F0000 >> 16
 	      b := buf&0x0000F800 >> 11
@@ -919,7 +919,7 @@ func Decode(buf uint32) (inst interface{}, err error) {
 	   case buf&0xFC0000FF == 0x28000063:
 	      // 001010DDDDDAAAAABBBBB---01100011
 	      if buf&0x00000700 != 0 {
-	         return nil, errors.New("invalid padding.")
+	         return nil, errors.New("invalid padding")
 	      }
 	      a := buf&0x001F0000 >> 16
 	      b := buf&0x0000F800 >> 11
@@ -931,7 +931,7 @@ func Decode(buf uint32) (inst interface{}, err error) {
 	   case buf&0xFC0000FF == 0x28000064:
 	      // 001010DDDDDAAAAABBBBB---01100100
 	      if buf&0x00000700 != 0 {
-	         return nil, errors.New("invalid padding.")
+	         return nil, errors.New("invalid padding")
 	      }
 	      a := buf&0x001F0000 >> 16
 	      b := buf&0x0000F800 >> 11
@@ -943,7 +943,7 @@ func Decode(buf uint32) (inst interface{}, err error) {
 	   case buf&0xFC0000FF == 0x28000065:
 	      // 001010DDDDDAAAAABBBBB---01100101
 	      if buf&0x00000700 != 0 {
-	         return nil, errors.New("invalid padding.")
+	         return nil, errors.New("invalid padding")
 	      }
 	      a := buf&0x001F0000 >> 16
 	      b := buf&0x0000F800 >> 11
@@ -955,7 +955,7 @@ func Decode(buf uint32) (inst interface{}, err error) {
 	   case buf&0xFC0000FF == 0x28000066:
 	      // 001010DDDDDAAAAABBBBB---01100110
 	      if buf&0x00000700 != 0 {
-	         return nil, errors.New("invalid padding.")
+	         return nil, errors.New("invalid padding")
 	      }
 	      a := buf&0x001F0000 >> 16
 	      b := buf&0x0000F800 >> 11
@@ -967,7 +967,7 @@ func Decode(buf uint32) (inst interface{}, err error) {
 	   case buf&0xFC0000FF == 0x28000067:
 	      // 001010DDDDDAAAAABBBBB---01100111
 	      if buf&0x00000700 != 0 {
-	         return nil, errors.New("invalid padding.")
+	         return nil, errors.New("invalid padding")
 	      }
 	      a := buf&0x001F0000 >> 16
 	      b := buf&0x0000F800 >> 11
@@ -979,7 +979,7 @@ func Decode(buf uint32) (inst interface{}, err error) {
 	   case buf&0xFC0000FF == 0x28000068:
 	      // 001010DDDDDAAAAABBBBB---01101000
 	      if buf&0x00000700 != 0 {
-	         return nil, errors.New("invalid padding.")
+	         return nil, errors.New("invalid padding")
 	      }
 	      a := buf&0x001F0000 >> 16
 	      b := buf&0x0000F800 >> 11
@@ -991,7 +991,7 @@ func Decode(buf uint32) (inst interface{}, err error) {
 	   case buf&0xFC0000FF == 0x28000069:
 	      // 001010DDDDDAAAAABBBBB---01101001
 	      if buf&0x00000700 != 0 {
-	         return nil, errors.New("invalid padding.")
+	         return nil, errors.New("invalid padding")
 	      }
 	      a := buf&0x001F0000 >> 16
 	      b := buf&0x0000F800 >> 11
@@ -1003,7 +1003,7 @@ func Decode(buf uint32) (inst interface{}, err error) {
 	   case buf&0xFC0000FF == 0x2800006A:
 	      // 001010DDDDDAAAAABBBBB---01101010
 	      if buf&0x00000700 != 0 {
-	         return nil, errors.New("invalid padding.")
+	         return nil, errors.New("invalid padding")
 	      }
 	      a := buf&0x001F0000 >> 16
 	      b := buf&0x0000F800 >> 11
@@ -1015,7 +1015,7 @@ func Decode(buf uint32) (inst interface{}, err error) {
 	   case buf&0xFC0000FF == 0x2800006B:
 	      // 001010DDDDDAAAAABBBBB---01101011
 	      if buf&0x00000700 != 0 {
-	         return nil, errors.New("invalid padding.")
+	         return nil, errors.New("invalid padding")
 	      }
 	      a := buf&0x001F0000 >> 16
 	      b := buf&0x0000F800 >> 11
@@ -1027,7 +1027,7 @@ func Decode(buf uint32) (inst interface{}, err error) {
 	   case buf&0xFC0000FF == 0x2800006C:
 	      // 001010DDDDDAAAAABBBBB---01101100
 	      if buf&0x00000700 != 0 {
-	         return nil, errors.New("invalid padding.")
+	         return nil, errors.New("invalid padding")
 	      }
 	      a := buf&0x001F0000 >> 16
 	      b := buf&0x0000F800 >> 11
@@ -1039,7 +1039,7 @@ func Decode(buf uint32) (inst interface{}, err error) {
 	   case buf&0xFC0000FF == 0x2800006D:
 	      // 001010DDDDDAAAAABBBBB---01101101
 	      if buf&0x00000700 != 0 {
-	         return nil, errors.New("invalid padding.")
+	         return nil, errors.New("invalid padding")
 	      }
 	      a := buf&0x001F0000 >> 16
 	      b := buf&0x0000F800 >> 11
@@ -1051,7 +1051,7 @@ func Decode(buf uint32) (inst interface{}, err error) {
 	   case buf&0xFC0000FF == 0x2800006E:
 	      // 001010DDDDDAAAAABBBBB---01101110
 	      if buf&0x00000700 != 0 {
-	         return nil, errors.New("invalid padding.")
+	         return nil, errors.New("invalid padding")
 	      }
 	      a := buf&0x001F0000 >> 16
 	      b := buf&0x0000F800 >> 11
@@ -1063,7 +1063,7 @@ func Decode(buf uint32) (inst interface{}, err error) {
 	   case buf&0xFC0000FF == 0x2800006F:
 	      // 001010DDDDDAAAAABBBBB---01101111
 	      if buf&0x00000700 != 0 {
-	         return nil, errors.New("invalid padding.")
+	         return nil, errors.New("invalid padding")
 	      }
 	      a := buf&0x001F0000 >> 16
 	      b := buf&0x0000F800 >> 11
@@ -1075,7 +1075,7 @@ func Decode(buf uint32) (inst interface{}, err error) {
 	   case buf&0xFC0000FF == 0x28000070:
 	      // 001010DDDDDAAAAABBBBB---01110000
 	      if buf&0x00000700 != 0 {
-	         return nil, errors.New("invalid padding.")
+	         return nil, errors.New("invalid padding")
 	      }
 	      a := buf&0x001F0000 >> 16
 	      b := buf&0x0000F800 >> 11
@@ -1087,7 +1087,7 @@ func Decode(buf uint32) (inst interface{}, err error) {
 	   case buf&0xFC0000FF == 0x28000071:
 	      // 001010DDDDDAAAAABBBBB---01110001
 	      if buf&0x00000700 != 0 {
-	         return nil, errors.New("invalid padding.")
+	         return nil, errors.New("invalid padding")
 	      }
 	      a := buf&0x001F0000 >> 16
 	      b := buf&0x0000F800 >> 11
@@ -1099,7 +1099,7 @@ func Decode(buf uint32) (inst interface{}, err error) {
 	   case buf&0xFC0000FF == 0x28000072:
 	      // 001010DDDDDAAAAABBBBB---01110010
 	      if buf&0x00000700 != 0 {
-	         return nil, errors.New("invalid padding.")
+	         return nil, errors.New("invalid padding")
 	      }
 	      a := buf&0x001F0000 >> 16
 	      b := buf&0x0000F800 >> 11
@@ -1111,7 +1111,7 @@ func Decode(buf uint32) (inst interface{}, err error) {
 	   case buf&0xFC0000FF == 0x28000073:
 	      // 001010DDDDDAAAAABBBBB---01110011
 	      if buf&0x00000700 != 0 {
-	         return nil, errors.New("invalid padding.")
+	         return nil, errors.New("invalid padding")
 	      }
 	      a := buf&0x001F0000 >> 16
 	      b := buf&0x0000F800 >> 11
@@ -1123,7 +1123,7 @@ func Decode(buf uint32) (inst interface{}, err error) {
 	   case buf&0xFC0000FF == 0x28000074:
 	      // 001010DDDDDAAAAABBBBB---01110100
 	      if buf&0x00000700 != 0 {
-	         return nil, errors.New("invalid padding.")
+	         return nil, errors.New("invalid padding")
 	      }
 	      a := buf&0x001F0000 >> 16
 	      b := buf&0x0000F800 >> 11
@@ -1135,7 +1135,7 @@ func Decode(buf uint32) (inst interface{}, err error) {
 	   case buf&0xFC0000FF == 0x28000075:
 	      // 001010DDDDDAAAAABBBBB---01110101
 	      if buf&0x00000700 != 0 {
-	         return nil, errors.New("invalid padding.")
+	         return nil, errors.New("invalid padding")
 	      }
 	      a := buf&0x001F0000 >> 16
 	      b := buf&0x0000F800 >> 11
@@ -1147,7 +1147,7 @@ func Decode(buf uint32) (inst interface{}, err error) {
 	   case buf&0xFC0000FF == 0x28000076:
 	      // 001010DDDDDAAAAABBBBB---01110110
 	      if buf&0x00000700 != 0 {
-	         return nil, errors.New("invalid padding.")
+	         return nil, errors.New("invalid padding")
 	      }
 	      a := buf&0x001F0000 >> 16
 	      b := buf&0x0000F800 >> 11
@@ -1159,7 +1159,7 @@ func Decode(buf uint32) (inst interface{}, err error) {
 	   case buf&0xFC0000FF == 0x28000077:
 	      // 001010DDDDDAAAAABBBBB---01110111
 	      if buf&0x00000700 != 0 {
-	         return nil, errors.New("invalid padding.")
+	         return nil, errors.New("invalid padding")
 	      }
 	      a := buf&0x001F0000 >> 16
 	      b := buf&0x0000F800 >> 11
@@ -1171,7 +1171,7 @@ func Decode(buf uint32) (inst interface{}, err error) {
 	   case buf&0xFC0000FF == 0x28000078:
 	      // 001010DDDDDAAAAABBBBB---01111000
 	      if buf&0x00000700 != 0 {
-	         return nil, errors.New("invalid padding.")
+	         return nil, errors.New("invalid padding")
 	      }
 	      a := buf&0x001F0000 >> 16
 	      b := buf&0x0000F800 >> 11
@@ -1183,7 +1183,7 @@ func Decode(buf uint32) (inst interface{}, err error) {
 	   case buf&0xFC0000FF == 0x28000079:
 	      // 001010DDDDDAAAAABBBBB---01111001
 	      if buf&0x00000700 != 0 {
-	         return nil, errors.New("invalid padding.")
+	         return nil, errors.New("invalid padding")
 	      }
 	      a := buf&0x001F0000 >> 16
 	      b := buf&0x0000F800 >> 11
@@ -1195,7 +1195,7 @@ func Decode(buf uint32) (inst interface{}, err error) {
 	   case buf&0xFC0000FF == 0x2800007A:
 	      // 001010DDDDDAAAAABBBBB---01111010
 	      if buf&0x00000700 != 0 {
-	         return nil, errors.New("invalid padding.")
+	         return nil, errors.New("invalid padding")
 	      }
 	      a := buf&0x001F0000 >> 16
 	      b := buf&0x0000F800 >> 11
@@ -1207,7 +1207,7 @@ func Decode(buf uint32) (inst interface{}, err error) {
 	   case buf&0xFC0000FF == 0x2800007B:
 	      // 001010DDDDDAAAAABBBBB---01111011
 	      if buf&0x00000700 != 0 {
-	         return nil, errors.New("invalid padding.")
+	         return nil, errors.New("invalid padding")
 	      }
 	      a := buf&0x001F0000 >> 16
 	      b := buf&0x0000F800 >> 11
@@ -1218,7 +1218,7 @@ func Decode(buf uint32) (inst interface{}, err error) {
 	case buf&0xFC000000 == 0x44000000:
 		// 010001----------BBBBB-----------
 		if buf&0x03FF07FF != 0 {
-			return nil, errors.New("invalid padding.")
+			return nil, errors.New("invalid padding")
 		}
 		b := buf & 0x0000F800 >> 11
 		inst = &orbis.Jr{
@@ -1230,7 +1230,7 @@ func Decode(buf uint32) (inst interface{}, err error) {
 	case buf&0xFC000000 == 0x48000000:
 		// 010010----------BBBBB-----------
 		if buf&0x03FF07FF != 0 {
-			return nil, errors.New("invalid padding.")
+			return nil, errors.New("invalid padding")
 		}
 		b := buf & 0x0000F800 >> 11
 		inst = &orbis.Jalr{
@@ -1242,7 +1242,7 @@ func Decode(buf uint32) (inst interface{}, err error) {
 	case buf&0xFC000000 == 0x4C000000:
 		// 010011-----AAAAAIIIIIIIIIIIIIIII
 		if buf&0x03E00000 != 0 {
-			return nil, errors.New("invalid padding.")
+			return nil, errors.New("invalid padding")
 		}
 		a := buf & 0x001F0000 >> 16
 		i := buf & 0x0000FFFF
@@ -1474,7 +1474,7 @@ func Decode(buf uint32) (inst interface{}, err error) {
 	case buf&0xFC0000C0 == 0xB8000000:
 		// 101110DDDDDAAAAA--------00LLLLLL
 		if buf&0x0000FF00 != 0 {
-			return nil, errors.New("invalid padding.")
+			return nil, errors.New("invalid padding")
 		}
 		a := buf & 0x001F0000 >> 16
 		d := buf & 0x03E00000 >> 21
@@ -1490,7 +1490,7 @@ func Decode(buf uint32) (inst interface{}, err error) {
 	case buf&0xFC0000C0 == 0xB8000040:
 		// 101110DDDDDAAAAA--------01LLLLLL
 		if buf&0x0000FF00 != 0 {
-			return nil, errors.New("invalid padding.")
+			return nil, errors.New("invalid padding")
 		}
 		a := buf & 0x001F0000 >> 16
 		d := buf & 0x03E00000 >> 21
@@ -1506,7 +1506,7 @@ func Decode(buf uint32) (inst interface{}, err error) {
 	case buf&0xFC0000C0 == 0xB8000080:
 		// 101110DDDDDAAAAA--------10LLLLLL
 		if buf&0x0000FF00 != 0 {
-			return nil, errors.New("invalid padding.")
+			return nil, errors.New("invalid padding")
 		}
 		a := buf & 0x001F0000 >> 16
 		d := buf & 0x03E00000 >> 21
@@ -1522,7 +1522,7 @@ func Decode(buf uint32) (inst interface{}, err error) {
 	case buf&0xFC0000C0 == 0xB80000C0:
 		// 101110DDDDDAAAAA--------11LLLLLL
 		if buf&0x0000FF00 != 0 {
-			return nil, errors.New("invalid padding.")
+			return nil, errors.New("invalid padding")
 		}
 		a := buf & 0x001F0000 >> 16
 		d := buf & 0x03E00000 >> 21
@@ -1662,7 +1662,7 @@ func Decode(buf uint32) (inst interface{}, err error) {
 	case buf&0xFC00000F == 0xC4000001:
 		// 110001-----AAAAABBBBB-------0001
 		if buf&0x03E007F0 != 0 {
-			return nil, errors.New("invalid padding.")
+			return nil, errors.New("invalid padding")
 		}
 		a := buf & 0x001F0000 >> 16
 		b := buf & 0x0000F800 >> 11
@@ -1676,7 +1676,7 @@ func Decode(buf uint32) (inst interface{}, err error) {
 	case buf&0xFC00000F == 0xC4000003:
 		// 110001-----AAAAABBBBB-------0011
 		if buf&0x03E007F0 != 0 {
-			return nil, errors.New("invalid padding.")
+			return nil, errors.New("invalid padding")
 		}
 		a := buf & 0x001F0000 >> 16
 		b := buf & 0x0000F800 >> 11
@@ -1690,7 +1690,7 @@ func Decode(buf uint32) (inst interface{}, err error) {
 	case buf&0xFC00000F == 0xC4000002:
 		// 110001-----AAAAABBBBB-------0010
 		if buf&0x03E007F0 != 0 {
-			return nil, errors.New("invalid padding.")
+			return nil, errors.New("invalid padding")
 		}
 		a := buf & 0x001F0000 >> 16
 		b := buf & 0x0000F800 >> 11
@@ -1704,7 +1704,7 @@ func Decode(buf uint32) (inst interface{}, err error) {
 	case buf&0xFC00000F == 0xC4000004:
 		// 110001-----AAAAABBBBB-------0100
 		if buf&0x03E007F0 != 0 {
-			return nil, errors.New("invalid padding.")
+			return nil, errors.New("invalid padding")
 		}
 		a := buf & 0x001F0000 >> 16
 		b := buf & 0x0000F800 >> 11
@@ -1719,7 +1719,7 @@ func Decode(buf uint32) (inst interface{}, err error) {
 	   case buf&0xFC0000FF == 0xC8000008:
 	      // 110010-----AAAAABBBBB---00001000
 	      if buf&0x03E00700 != 0 {
-	         return nil, errors.New("invalid padding.")
+	         return nil, errors.New("invalid padding")
 	      }
 	      a := buf&0x001F0000 >> 16
 	      b := buf&0x0000F800 >> 11
@@ -1730,7 +1730,7 @@ func Decode(buf uint32) (inst interface{}, err error) {
 	   case buf&0xFC0000FF == 0xC8000009:
 	      // 110010-----AAAAABBBBB---00001001
 	      if buf&0x03E00700 != 0 {
-	         return nil, errors.New("invalid padding.")
+	         return nil, errors.New("invalid padding")
 	      }
 	      a := buf&0x001F0000 >> 16
 	      b := buf&0x0000F800 >> 11
@@ -1741,7 +1741,7 @@ func Decode(buf uint32) (inst interface{}, err error) {
 	   case buf&0xFC0000FF == 0xC800000A:
 	      // 110010-----AAAAABBBBB---00001010
 	      if buf&0x03E00700 != 0 {
-	         return nil, errors.New("invalid padding.")
+	         return nil, errors.New("invalid padding")
 	      }
 	      a := buf&0x001F0000 >> 16
 	      b := buf&0x0000F800 >> 11
@@ -1752,7 +1752,7 @@ func Decode(buf uint32) (inst interface{}, err error) {
 	   case buf&0xFC0000FF == 0xC800000B:
 	      // 110010-----AAAAABBBBB---00001011
 	      if buf&0x03E00700 != 0 {
-	         return nil, errors.New("invalid padding.")
+	         return nil, errors.New("invalid padding")
 	      }
 	      a := buf&0x001F0000 >> 16
 	      b := buf&0x0000F800 >> 11
@@ -1763,7 +1763,7 @@ func Decode(buf uint32) (inst interface{}, err error) {
 	   case buf&0xFC0000FF == 0xC800000C:
 	      // 110010-----AAAAABBBBB---00001100
 	      if buf&0x03E00700 != 0 {
-	         return nil, errors.New("invalid padding.")
+	         return nil, errors.New("invalid padding")
 	      }
 	      a := buf&0x001F0000 >> 16
 	      b := buf&0x0000F800 >> 11
@@ -1774,7 +1774,7 @@ func Decode(buf uint32) (inst interface{}, err error) {
 	   case buf&0xFC0000FF == 0xC800000D:
 	      // 110010-----AAAAABBBBB---00001101
 	      if buf&0x03E00700 != 0 {
-	         return nil, errors.New("invalid padding.")
+	         return nil, errors.New("invalid padding")
 	      }
 	      a := buf&0x001F0000 >> 16
 	      b := buf&0x0000F800 >> 11
@@ -1785,7 +1785,7 @@ func Decode(buf uint32) (inst interface{}, err error) {
 	   case buf&0xFC0000FF == 0xC8000018:
 	      // 110010-----AAAAABBBBB---00011000
 	      if buf&0x03E00700 != 0 {
-	         return nil, errors.New("invalid padding.")
+	         return nil, errors.New("invalid padding")
 	      }
 	      a := buf&0x001F0000 >> 16
 	      b := buf&0x0000F800 >> 11
@@ -1796,7 +1796,7 @@ func Decode(buf uint32) (inst interface{}, err error) {
 	   case buf&0xFC0000FF == 0xC8000019:
 	      // 110010-----AAAAABBBBB---00011001
 	      if buf&0x03E00700 != 0 {
-	         return nil, errors.New("invalid padding.")
+	         return nil, errors.New("invalid padding")
 	      }
 	      a := buf&0x001F0000 >> 16
 	      b := buf&0x0000F800 >> 11
@@ -1807,7 +1807,7 @@ func Decode(buf uint32) (inst interface{}, err error) {
 	   case buf&0xFC0000FF == 0xC800001A:
 	      // 110010-----AAAAABBBBB---00011010
 	      if buf&0x03E00700 != 0 {
-	         return nil, errors.New("invalid padding.")
+	         return nil, errors.New("invalid padding")
 	      }
 	      a := buf&0x001F0000 >> 16
 	      b := buf&0x0000F800 >> 11
@@ -1818,7 +1818,7 @@ func Decode(buf uint32) (inst interface{}, err error) {
 	   case buf&0xFC0000FF == 0xC800001B:
 	      // 110010-----AAAAABBBBB---00011011
 	      if buf&0x03E00700 != 0 {
-	         return nil, errors.New("invalid padding.")
+	         return nil, errors.New("invalid padding")
 	      }
 	      a := buf&0x001F0000 >> 16
 	      b := buf&0x0000F800 >> 11
@@ -1829,7 +1829,7 @@ func Decode(buf uint32) (inst interface{}, err error) {
 	   case buf&0xFC0000FF == 0xC800001C:
 	      // 110010-----AAAAABBBBB---00011100
 	      if buf&0x03E00700 != 0 {
-	         return nil, errors.New("invalid padding.")
+	         return nil, errors.New("invalid padding")
 	      }
 	      a := buf&0x001F0000 >> 16
 	      b := buf&0x0000F800 >> 11
@@ -1840,7 +1840,7 @@ func Decode(buf uint32) (inst interface{}, err error) {
 	   case buf&0xFC0000FF == 0xC800001D:
 	      // 110010-----AAAAABBBBB---00011101
 	      if buf&0x03E00700 != 0 {
-	         return nil, errors.New("invalid padding.")
+	         return nil, errors.New("invalid padding")
 	      }
 	      a := buf&0x001F0000 >> 16
 	      b := buf&0x0000F800 >> 11
@@ -1851,7 +1851,7 @@ func Decode(buf uint32) (inst interface{}, err error) {
 	   case buf&0xFC0000F0 == 0xC80000D0:
 	      // 110010-----AAAAABBBBB---1101----
 	      if buf&0x03E0070F != 0 {
-	         return nil, errors.New("invalid padding.")
+	         return nil, errors.New("invalid padding")
 	      }
 	      a := buf&0x001F0000 >> 16
 	      b := buf&0x0000F800 >> 11
@@ -1862,7 +1862,7 @@ func Decode(buf uint32) (inst interface{}, err error) {
 	   case buf&0xFC0000F0 == 0xC80000E0:
 	      // 110010-----AAAAABBBBB---1110----
 	      if buf&0x03E0070F != 0 {
-	         return nil, errors.New("invalid padding.")
+	         return nil, errors.New("invalid padding")
 	      }
 	      a := buf&0x001F0000 >> 16
 	      b := buf&0x0000F800 >> 11
@@ -1873,7 +1873,7 @@ func Decode(buf uint32) (inst interface{}, err error) {
 	   case buf&0xFC00F8FF == 0xC8000004:
 	      // 110010DDDDDAAAAA00000---00000100
 	      if buf&0x00000700 != 0 {
-	         return nil, errors.New("invalid padding.")
+	         return nil, errors.New("invalid padding")
 	      }
 	      a := buf&0x001F0000 >> 16
 	      d := buf&0x03E00000 >> 21
@@ -1884,7 +1884,7 @@ func Decode(buf uint32) (inst interface{}, err error) {
 	   case buf&0xFC00F8FF == 0xC8000005:
 	      // 110010DDDDDAAAAA00000---00000101
 	      if buf&0x00000700 != 0 {
-	         return nil, errors.New("invalid padding.")
+	         return nil, errors.New("invalid padding")
 	      }
 	      a := buf&0x001F0000 >> 16
 	      d := buf&0x03E00000 >> 21
@@ -1895,7 +1895,7 @@ func Decode(buf uint32) (inst interface{}, err error) {
 	   case buf&0xFC00F8FF == 0xC8000014:
 	      // 110010DDDDDAAAAA00000---00010100
 	      if buf&0x00000700 != 0 {
-	         return nil, errors.New("invalid padding.")
+	         return nil, errors.New("invalid padding")
 	      }
 	      a := buf&0x001F0000 >> 16
 	      d := buf&0x03E00000 >> 21
@@ -1906,7 +1906,7 @@ func Decode(buf uint32) (inst interface{}, err error) {
 	   case buf&0xFC00F8FF == 0xC8000015:
 	      // 110010DDDDDAAAAA00000---00010101
 	      if buf&0x00000700 != 0 {
-	         return nil, errors.New("invalid padding.")
+	         return nil, errors.New("invalid padding")
 	      }
 	      a := buf&0x001F0000 >> 16
 	      d := buf&0x03E00000 >> 21
@@ -1917,7 +1917,7 @@ func Decode(buf uint32) (inst interface{}, err error) {
 	   case buf&0xFC0000FF == 0xC8000000:
 	      // 110010DDDDDAAAAABBBBB---00000000
 	      if buf&0x00000700 != 0 {
-	         return nil, errors.New("invalid padding.")
+	         return nil, errors.New("invalid padding")
 	      }
 	      a := buf&0x001F0000 >> 16
 	      b := buf&0x0000F800 >> 11
@@ -1929,7 +1929,7 @@ func Decode(buf uint32) (inst interface{}, err error) {
 	   case buf&0xFC0000FF == 0xC8000001:
 	      // 110010DDDDDAAAAABBBBB---00000001
 	      if buf&0x00000700 != 0 {
-	         return nil, errors.New("invalid padding.")
+	         return nil, errors.New("invalid padding")
 	      }
 	      a := buf&0x001F0000 >> 16
 	      b := buf&0x0000F800 >> 11
@@ -1941,7 +1941,7 @@ func Decode(buf uint32) (inst interface{}, err error) {
 	   case buf&0xFC0000FF == 0xC8000002:
 	      // 110010DDDDDAAAAABBBBB---00000010
 	      if buf&0x00000700 != 0 {
-	         return nil, errors.New("invalid padding.")
+	         return nil, errors.New("invalid padding")
 	      }
 	      a := buf&0x001F0000 >> 16
 	      b := buf&0x0000F800 >> 11
@@ -1953,7 +1953,7 @@ func Decode(buf uint32) (inst interface{}, err error) {
 	   case buf&0xFC0000FF == 0xC8000003:
 	      // 110010DDDDDAAAAABBBBB---00000011
 	      if buf&0x00000700 != 0 {
-	         return nil, errors.New("invalid padding.")
+	         return nil, errors.New("invalid padding")
 	      }
 	      a := buf&0x001F0000 >> 16
 	      b := buf&0x0000F800 >> 11
@@ -1965,7 +1965,7 @@ func Decode(buf uint32) (inst interface{}, err error) {
 	   case buf&0xFC0000FF == 0xC8000006:
 	      // 110010DDDDDAAAAABBBBB---00000110
 	      if buf&0x00000700 != 0 {
-	         return nil, errors.New("invalid padding.")
+	         return nil, errors.New("invalid padding")
 	      }
 	      a := buf&0x001F0000 >> 16
 	      b := buf&0x0000F800 >> 11
@@ -1977,7 +1977,7 @@ func Decode(buf uint32) (inst interface{}, err error) {
 	   case buf&0xFC0000FF == 0xC8000007:
 	      // 110010DDDDDAAAAABBBBB---00000111
 	      if buf&0x00000700 != 0 {
-	         return nil, errors.New("invalid padding.")
+	         return nil, errors.New("invalid padding")
 	      }
 	      a := buf&0x001F0000 >> 16
 	      b := buf&0x0000F800 >> 11
@@ -1989,7 +1989,7 @@ func Decode(buf uint32) (inst interface{}, err error) {
 	   case buf&0xFC0000FF == 0xC8000010:
 	      // 110010DDDDDAAAAABBBBB---00010000
 	      if buf&0x00000700 != 0 {
-	         return nil, errors.New("invalid padding.")
+	         return nil, errors.New("invalid padding")
 	      }
 	      a := buf&0x001F0000 >> 16
 	      b := buf&0x0000F800 >> 11
@@ -2001,7 +2001,7 @@ func Decode(buf uint32) (inst interface{}, err error) {
 	   case buf&0xFC0000FF == 0xC8000011:
 	      // 110010DDDDDAAAAABBBBB---00010001
 	      if buf&0x00000700 != 0 {
-	         return nil, errors.New("invalid padding.")
+	         return nil, errors.New("invalid padding")
 	      }
 	      a := buf&0x001F0000 >> 16
 	      b := buf&0x0000F800 >> 11
@@ -2013,7 +2013,7 @@ func Decode(buf uint32) (inst interface{}, err error) {
 	   case buf&0xFC0000FF == 0xC8000012:
 	      // 110010DDDDDAAAAABBBBB---00010010
 	      if buf&0x00000700 != 0 {
-	         return nil, errors.New("invalid padding.")
+	         return nil, errors.New("invalid padding")
 	      }
 	      a := buf&0x001F0000 >> 16
 	      b := buf&0x0000F800 >> 11
@@ -2025,7 +2025,7 @@ func Decode(buf uint32) (inst interface{}, err error) {
 	   case buf&0xFC0000FF == 0xC8000013:
 	      // 110010DDDDDAAAAABBBBB---00010011
 	      if buf&0x00000700 != 0 {
-	         return nil, errors.New("invalid padding.")
+	         return nil, errors.New("invalid padding")
 	      }
 	      a := buf&0x001F0000 >> 16
 	      b := buf&0x0000F800 >> 11
@@ -2037,7 +2037,7 @@ func Decode(buf uint32) (inst interface{}, err error) {
 	   case buf&0xFC0000FF == 0xC8000016:
 	      // 110010DDDDDAAAAABBBBB---00010110
 	      if buf&0x00000700 != 0 {
-	         return nil, errors.New("invalid padding.")
+	         return nil, errors.New("invalid padding")
 	      }
 	      a := buf&0x001F0000 >> 16
 	      b := buf&0x0000F800 >> 11
@@ -2049,7 +2049,7 @@ func Decode(buf uint32) (inst interface{}, err error) {
 	   case buf&0xFC0000FF == 0xC8000017:
 	      // 110010DDDDDAAAAABBBBB---00010111
 	      if buf&0x00000700 != 0 {
-	         return nil, errors.New("invalid padding.")
+	         return nil, errors.New("invalid padding")
 	      }
 	      a := buf&0x001F0000 >> 16
 	      b := buf&0x0000F800 >> 11
@@ -2116,7 +2116,7 @@ func Decode(buf uint32) (inst interface{}, err error) {
 	case buf&0xFC0003CF == 0xE000000C:
 		// 111000DDDDDAAAAA------0000--1100
 		if buf&0x0000FC30 != 0 {
-			return nil, errors.New("invalid padding.")
+			return nil, errors.New("invalid padding")
 		}
 		a := buf & 0x001F0000 >> 16
 		d := buf & 0x03E00000 >> 21
@@ -2130,7 +2130,7 @@ func Decode(buf uint32) (inst interface{}, err error) {
 	case buf&0xFC0003CF == 0xE000000D:
 		// 111000DDDDDAAAAA------0000--1101
 		if buf&0x0000FC30 != 0 {
-			return nil, errors.New("invalid padding.")
+			return nil, errors.New("invalid padding")
 		}
 		a := buf & 0x001F0000 >> 16
 		d := buf & 0x03E00000 >> 21
@@ -2144,7 +2144,7 @@ func Decode(buf uint32) (inst interface{}, err error) {
 	case buf&0xFC0003CF == 0xE000004C:
 		// 111000DDDDDAAAAA------0001--1100
 		if buf&0x0000FC30 != 0 {
-			return nil, errors.New("invalid padding.")
+			return nil, errors.New("invalid padding")
 		}
 		a := buf & 0x001F0000 >> 16
 		d := buf & 0x03E00000 >> 21
@@ -2158,7 +2158,7 @@ func Decode(buf uint32) (inst interface{}, err error) {
 	case buf&0xFC0003CF == 0xE000004D:
 		// 111000DDDDDAAAAA------0001--1101
 		if buf&0x0000FC30 != 0 {
-			return nil, errors.New("invalid padding.")
+			return nil, errors.New("invalid padding")
 		}
 		a := buf & 0x001F0000 >> 16
 		d := buf & 0x03E00000 >> 21
@@ -2172,7 +2172,7 @@ func Decode(buf uint32) (inst interface{}, err error) {
 	case buf&0xFC0003CF == 0xE000008C:
 		// 111000DDDDDAAAAA------0010--1100
 		if buf&0x0000FC30 != 0 {
-			return nil, errors.New("invalid padding.")
+			return nil, errors.New("invalid padding")
 		}
 		a := buf & 0x001F0000 >> 16
 		d := buf & 0x03E00000 >> 21
@@ -2186,7 +2186,7 @@ func Decode(buf uint32) (inst interface{}, err error) {
 	case buf&0xFC0003CF == 0xE00000CC:
 		// 111000DDDDDAAAAA------0011--1100
 		if buf&0x0000FC30 != 0 {
-			return nil, errors.New("invalid padding.")
+			return nil, errors.New("invalid padding")
 		}
 		a := buf & 0x001F0000 >> 16
 		d := buf & 0x03E00000 >> 21
@@ -2200,7 +2200,7 @@ func Decode(buf uint32) (inst interface{}, err error) {
 	case buf&0xFC00030F == 0xE0000000:
 		// 111000DDDDDAAAAABBBBB-00----0000
 		if buf&0x000004F0 != 0 {
-			return nil, errors.New("invalid padding.")
+			return nil, errors.New("invalid padding")
 		}
 		a := buf & 0x001F0000 >> 16
 		b := buf & 0x0000F800 >> 11
@@ -2216,7 +2216,7 @@ func Decode(buf uint32) (inst interface{}, err error) {
 	case buf&0xFC00030F == 0xE0000001:
 		// 111000DDDDDAAAAABBBBB-00----0001
 		if buf&0x000004F0 != 0 {
-			return nil, errors.New("invalid padding.")
+			return nil, errors.New("invalid padding")
 		}
 		a := buf & 0x001F0000 >> 16
 		b := buf & 0x0000F800 >> 11
@@ -2232,7 +2232,7 @@ func Decode(buf uint32) (inst interface{}, err error) {
 	case buf&0xFC00030F == 0xE0000002:
 		// 111000DDDDDAAAAABBBBB-00----0010
 		if buf&0x000004F0 != 0 {
-			return nil, errors.New("invalid padding.")
+			return nil, errors.New("invalid padding")
 		}
 		a := buf & 0x001F0000 >> 16
 		b := buf & 0x0000F800 >> 11
@@ -2248,7 +2248,7 @@ func Decode(buf uint32) (inst interface{}, err error) {
 	case buf&0xFC00030F == 0xE0000003:
 		// 111000DDDDDAAAAABBBBB-00----0011
 		if buf&0x000004F0 != 0 {
-			return nil, errors.New("invalid padding.")
+			return nil, errors.New("invalid padding")
 		}
 		a := buf & 0x001F0000 >> 16
 		b := buf & 0x0000F800 >> 11
@@ -2264,7 +2264,7 @@ func Decode(buf uint32) (inst interface{}, err error) {
 	case buf&0xFC00030F == 0xE0000004:
 		// 111000DDDDDAAAAABBBBB-00----0100
 		if buf&0x000004F0 != 0 {
-			return nil, errors.New("invalid padding.")
+			return nil, errors.New("invalid padding")
 		}
 		a := buf & 0x001F0000 >> 16
 		b := buf & 0x0000F800 >> 11
@@ -2280,7 +2280,7 @@ func Decode(buf uint32) (inst interface{}, err error) {
 	case buf&0xFC00030F == 0xE0000005:
 		// 111000DDDDDAAAAABBBBB-00----0101
 		if buf&0x000004F0 != 0 {
-			return nil, errors.New("invalid padding.")
+			return nil, errors.New("invalid padding")
 		}
 		a := buf & 0x001F0000 >> 16
 		b := buf & 0x0000F800 >> 11
@@ -2296,7 +2296,7 @@ func Decode(buf uint32) (inst interface{}, err error) {
 	case buf&0xFC00030F == 0xE000000E:
 		// 111000DDDDDAAAAABBBBB-00----1110
 		if buf&0x000004F0 != 0 {
-			return nil, errors.New("invalid padding.")
+			return nil, errors.New("invalid padding")
 		}
 		a := buf & 0x001F0000 >> 16
 		b := buf & 0x0000F800 >> 11
@@ -2312,7 +2312,7 @@ func Decode(buf uint32) (inst interface{}, err error) {
 	case buf&0xFC00030F == 0xE000000F:
 		// 111000DDDDDAAAAA------00----1111
 		if buf&0x0000FCF0 != 0 {
-			return nil, errors.New("invalid padding.")
+			return nil, errors.New("invalid padding")
 		}
 		a := buf & 0x001F0000 >> 16
 		d := buf & 0x03E00000 >> 21
@@ -2326,7 +2326,7 @@ func Decode(buf uint32) (inst interface{}, err error) {
 	case buf&0xFC0003CF == 0xE0000008:
 		// 111000DDDDDAAAAABBBBB-0000--1000
 		if buf&0x00000430 != 0 {
-			return nil, errors.New("invalid padding.")
+			return nil, errors.New("invalid padding")
 		}
 		a := buf & 0x001F0000 >> 16
 		b := buf & 0x0000F800 >> 11
@@ -2342,7 +2342,7 @@ func Decode(buf uint32) (inst interface{}, err error) {
 	case buf&0xFC0003CF == 0xE0000048:
 		// 111000DDDDDAAAAABBBBB-0001--1000
 		if buf&0x00000430 != 0 {
-			return nil, errors.New("invalid padding.")
+			return nil, errors.New("invalid padding")
 		}
 		a := buf & 0x001F0000 >> 16
 		b := buf & 0x0000F800 >> 11
@@ -2358,7 +2358,7 @@ func Decode(buf uint32) (inst interface{}, err error) {
 	case buf&0xFC0003CF == 0xE0000088:
 		// 111000DDDDDAAAAABBBBB-0010--1000
 		if buf&0x00000430 != 0 {
-			return nil, errors.New("invalid padding.")
+			return nil, errors.New("invalid padding")
 		}
 		a := buf & 0x001F0000 >> 16
 		b := buf & 0x0000F800 >> 11
@@ -2374,7 +2374,7 @@ func Decode(buf uint32) (inst interface{}, err error) {
 	case buf&0xFC0003CF == 0xE00000C8:
 		// 111000DDDDDAAAAABBBBB-0011--1000
 		if buf&0x00000430 != 0 {
-			return nil, errors.New("invalid padding.")
+			return nil, errors.New("invalid padding")
 		}
 		a := buf & 0x001F0000 >> 16
 		b := buf & 0x0000F800 >> 11
@@ -2390,7 +2390,7 @@ func Decode(buf uint32) (inst interface{}, err error) {
 	case buf&0xFC00030F == 0xE000010F:
 		// 111000DDDDDAAAAA------01----1111
 		if buf&0x0000FCF0 != 0 {
-			return nil, errors.New("invalid padding.")
+			return nil, errors.New("invalid padding")
 		}
 		a := buf & 0x001F0000 >> 16
 		d := buf & 0x03E00000 >> 21
@@ -2404,7 +2404,7 @@ func Decode(buf uint32) (inst interface{}, err error) {
 	case buf&0xFC00030F == 0xE0000306:
 		// 111000DDDDDAAAAABBBBB-11----0110
 		if buf&0x000004F0 != 0 {
-			return nil, errors.New("invalid padding.")
+			return nil, errors.New("invalid padding")
 		}
 		a := buf & 0x001F0000 >> 16
 		b := buf & 0x0000F800 >> 11
@@ -2420,7 +2420,7 @@ func Decode(buf uint32) (inst interface{}, err error) {
 	case buf&0xFC00030F == 0xE0000307:
 		// 111000-----AAAAABBBBB-11----0111
 		if buf&0x03E004F0 != 0 {
-			return nil, errors.New("invalid padding.")
+			return nil, errors.New("invalid padding")
 		}
 		a := buf & 0x001F0000 >> 16
 		b := buf & 0x0000F800 >> 11
@@ -2434,7 +2434,7 @@ func Decode(buf uint32) (inst interface{}, err error) {
 	case buf&0xFC00030F == 0xE0000309:
 		// 111000DDDDDAAAAABBBBB-11----1001
 		if buf&0x000004F0 != 0 {
-			return nil, errors.New("invalid padding.")
+			return nil, errors.New("invalid padding")
 		}
 		a := buf & 0x001F0000 >> 16
 		b := buf & 0x0000F800 >> 11
@@ -2450,7 +2450,7 @@ func Decode(buf uint32) (inst interface{}, err error) {
 	case buf&0xFC00030F == 0xE000030A:
 		// 111000DDDDDAAAAABBBBB-11----1010
 		if buf&0x000004F0 != 0 {
-			return nil, errors.New("invalid padding.")
+			return nil, errors.New("invalid padding")
 		}
 		a := buf & 0x001F0000 >> 16
 		b := buf & 0x0000F800 >> 11
@@ -2466,7 +2466,7 @@ func Decode(buf uint32) (inst interface{}, err error) {
 	case buf&0xFC00030F == 0xE000030B:
 		// 111000DDDDDAAAAABBBBB-11----1011
 		if buf&0x000004F0 != 0 {
-			return nil, errors.New("invalid padding.")
+			return nil, errors.New("invalid padding")
 		}
 		a := buf & 0x001F0000 >> 16
 		b := buf & 0x0000F800 >> 11
@@ -2482,7 +2482,7 @@ func Decode(buf uint32) (inst interface{}, err error) {
 	case buf&0xFC00030F == 0xE000030C:
 		// 111000-----AAAAABBBBB-11----1100
 		if buf&0x03E004F0 != 0 {
-			return nil, errors.New("invalid padding.")
+			return nil, errors.New("invalid padding")
 		}
 		a := buf & 0x001F0000 >> 16
 		b := buf & 0x0000F800 >> 11
@@ -2496,7 +2496,7 @@ func Decode(buf uint32) (inst interface{}, err error) {
 	case buf&0xFFE00000 == 0xE4000000:
 		// 11100100000AAAAABBBBB-----------
 		if buf&0x000007FF != 0 {
-			return nil, errors.New("invalid padding.")
+			return nil, errors.New("invalid padding")
 		}
 		a := buf & 0x001F0000 >> 16
 		b := buf & 0x0000F800 >> 11
@@ -2510,7 +2510,7 @@ func Decode(buf uint32) (inst interface{}, err error) {
 	case buf&0xFFE00000 == 0xE4200000:
 		// 11100100001AAAAABBBBB-----------
 		if buf&0x000007FF != 0 {
-			return nil, errors.New("invalid padding.")
+			return nil, errors.New("invalid padding")
 		}
 		a := buf & 0x001F0000 >> 16
 		b := buf & 0x0000F800 >> 11
@@ -2524,7 +2524,7 @@ func Decode(buf uint32) (inst interface{}, err error) {
 	case buf&0xFFE00000 == 0xE4400000:
 		// 11100100010AAAAABBBBB-----------
 		if buf&0x000007FF != 0 {
-			return nil, errors.New("invalid padding.")
+			return nil, errors.New("invalid padding")
 		}
 		a := buf & 0x001F0000 >> 16
 		b := buf & 0x0000F800 >> 11
@@ -2538,7 +2538,7 @@ func Decode(buf uint32) (inst interface{}, err error) {
 	case buf&0xFFE00000 == 0xE4600000:
 		// 11100100011AAAAABBBBB-----------
 		if buf&0x000007FF != 0 {
-			return nil, errors.New("invalid padding.")
+			return nil, errors.New("invalid padding")
 		}
 		a := buf & 0x001F0000 >> 16
 		b := buf & 0x0000F800 >> 11
@@ -2552,7 +2552,7 @@ func Decode(buf uint32) (inst interface{}, err error) {
 	case buf&0xFFE00000 == 0xE4800000:
 		// 11100100100AAAAABBBBB-----------
 		if buf&0x000007FF != 0 {
-			return nil, errors.New("invalid padding.")
+			return nil, errors.New("invalid padding")
 		}
 		a := buf & 0x001F0000 >> 16
 		b := buf & 0x0000F800 >> 11
@@ -2566,7 +2566,7 @@ func Decode(buf uint32) (inst interface{}, err error) {
 	case buf&0xFFE00000 == 0xE4A00000:
 		// 11100100101AAAAABBBBB-----------
 		if buf&0x000007FF != 0 {
-			return nil, errors.New("invalid padding.")
+			return nil, errors.New("invalid padding")
 		}
 		a := buf & 0x001F0000 >> 16
 		b := buf & 0x0000F800 >> 11
@@ -2580,7 +2580,7 @@ func Decode(buf uint32) (inst interface{}, err error) {
 	case buf&0xFFE00000 == 0xE5400000:
 		// 11100101010AAAAABBBBB-----------
 		if buf&0x000007FF != 0 {
-			return nil, errors.New("invalid padding.")
+			return nil, errors.New("invalid padding")
 		}
 		a := buf & 0x001F0000 >> 16
 		b := buf & 0x0000F800 >> 11
@@ -2594,7 +2594,7 @@ func Decode(buf uint32) (inst interface{}, err error) {
 	case buf&0xFFE00000 == 0xE5600000:
 		// 11100101011AAAAABBBBB-----------
 		if buf&0x000007FF != 0 {
-			return nil, errors.New("invalid padding.")
+			return nil, errors.New("invalid padding")
 		}
 		a := buf & 0x001F0000 >> 16
 		b := buf & 0x0000F800 >> 11
@@ -2608,7 +2608,7 @@ func Decode(buf uint32) (inst interface{}, err error) {
 	case buf&0xFFE00000 == 0xE5800000:
 		// 11100101100AAAAABBBBB-----------
 		if buf&0x000007FF != 0 {
-			return nil, errors.New("invalid padding.")
+			return nil, errors.New("invalid padding")
 		}
 		a := buf & 0x001F0000 >> 16
 		b := buf & 0x0000F800 >> 11
@@ -2622,7 +2622,7 @@ func Decode(buf uint32) (inst interface{}, err error) {
 	case buf&0xFFE00000 == 0xE5A00000:
 		// 11100101101AAAAABBBBB-----------
 		if buf&0x000007FF != 0 {
-			return nil, errors.New("invalid padding.")
+			return nil, errors.New("invalid padding")
 		}
 		a := buf & 0x001F0000 >> 16
 		b := buf & 0x0000F800 >> 11
