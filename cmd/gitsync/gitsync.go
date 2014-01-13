@@ -1,42 +1,63 @@
-// TODO(u): remove hardcoded username to make the tool usable for more general
-// purposes.
-
-// gitsync keeps forked git repositories in sync with their parents.
+// gitsync keeps forked git repositories in sync with their parents. It does so
+// by locating the repositories of provided usernames and organizations. Then it
+// creates a shell script which will clone all repository forks, pull changes
+// from their parens and push those changes to the forked repository.
+//
+// Usage:
+//    gitsync USER...
 package main
 
 import (
+	"flag"
 	"fmt"
 	"log"
+	"os"
+	"strings"
 
 	"github.com/mewfork/go-github/github"
 )
 
+func init() {
+	flag.Usage = usage
+}
+
+func usage() {
+	fmt.Fprintln(os.Stderr, "gitsync USER...")
+}
+
 func main() {
-	err := gitsync()
-	if err != nil {
-		log.Fatalln(err)
+	flag.Parse()
+	for _, username := range flag.Args() {
+		err := gitsync(username)
+		if err != nil {
+			log.Fatalln(err)
+		}
 	}
 }
 
-func gitsync() (err error) {
+// gitsync locates the repositories of the provided username or organization. It
+// creates a shell script which will clone all repository forks, pull changes
+// from their parens and push those changes to the forked repository.
+func gitsync(username string) (err error) {
 	c := github.NewClient(nil)
 
-	repos, _, err := c.Repositories.List("mewpkg", nil)
+	repos, _, err := c.Repositories.List(username, nil)
 	if err != nil {
 		return err
 	}
-	fmt.Println("BASE_DIR = $PWD")
+	fmt.Println("export BASE_DIR=$PWD")
 	fmt.Println("eval `ssh-agent`")
 	fmt.Println("ssh-add ~/.ssh/id_rsa_mewmew")
 
 	for _, r := range repos {
-		repo, _, err := c.Repositories.Get("mewpkg", *r.Name)
+		repo, _, err := c.Repositories.Get(username, *r.Name)
 		if err != nil {
 			return err
 		}
 		if *repo.Fork {
+			gitCloneURL := getGitCloneURL(*repo.CloneURL)
 			fmt.Println("cd $BASE_DIR")
-			fmt.Println("git clone", *repo.CloneURL)
+			fmt.Println("git clone", gitCloneURL)
 			fmt.Printf("cd $BASE_DIR/%s\n", *repo.Name)
 			fmt.Println("git pull", *repo.Parent.CloneURL)
 			fmt.Println("git push -u origin master")
@@ -44,4 +65,8 @@ func gitsync() (err error) {
 	}
 
 	return nil
+}
+
+func getGitCloneURL(cloneURL string) string {
+	return strings.Replace(cloneURL, "https://github.com/", "git@github.com:", -1)
 }
