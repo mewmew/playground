@@ -28,7 +28,7 @@ var UserAgent = "Mozilla/5.0 (X11; Linux x86_64; rv:21.0) Gecko/20100101 Firefox
 // init initiates the session by retrieving a new session cookie (PHPSESSID).
 func (sess *Session) init() (err error) {
 	// A HEAD request is enough to get a session cookie.
-	req, err := http.NewRequest("HEAD", "http://grooveshark.com/", nil)
+	req, err := http.NewRequest("GET", "http://grooveshark.com/preload.php?getCommunicationToken=1&hash=", nil)
 	if err != nil {
 		return err
 	}
@@ -483,8 +483,10 @@ type client struct {
 // defaultClient is the client used for most requests.
 var defaultClient = &client{
 	Name: "htmlshark",
-	Rev:  "20120312",
-	Salt: "reallyHotSauce",
+	// Use get_keys.php from https://github.com/matt-/GrooveShark_PHP to update
+	// Rev and Salt.
+	Rev:  "20120830",
+	Salt: "greenPlants",
 }
 
 // jsqueue is the client used for streaming songs.
