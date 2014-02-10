@@ -46,12 +46,13 @@ func main() {
 // whilelist contains a list of all extensions believed to be plain text.
 var whitelist = map[string]bool{
 	".asm":  true,
-	".css":  true,
 	".c":    true,
+	".css":  true,
 	".go":   true,
 	".html": true,
 	".js":   true,
 	".md":   true,
+	".sml":  true,
 	".txt":  true,
 }
 
