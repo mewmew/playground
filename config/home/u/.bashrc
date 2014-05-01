@@ -8,6 +8,7 @@ alias grep='grep --color=auto'
 alias diff='diff -u'
 alias cal='cal -m'
 alias xin='xclip -in -selection clip'
+alias poly='rlwrap poly'
 
 export EDITOR="geany -i"
 export GOPATH=/home/u/goget:/home/u/Desktop/go
