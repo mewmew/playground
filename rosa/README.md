@@ -6,7 +6,7 @@ bioinformatics platform [Rosalind][]. I had a lot of fun trying to solve these
 problems and I recommend you to try them out for yourself before looking through
 the source code.
 
-[Rosalind]: http://rosalind.info/
+[Rosalind]: http://rosalind.info/about/
 [problem]: http://rosalind.info/problems/list-view/
 
 public domain
