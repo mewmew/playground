@@ -8,11 +8,13 @@ import (
 )
 
 func main() {
+	// Get input from stdin.
 	buf, err := ioutil.ReadAll(os.Stdin)
 	if err != nil {
 		log.Fatalln(err)
 	}
 	dna := string(buf)
+
 	fmt.Println(BaseCount(dna))
 }
 
