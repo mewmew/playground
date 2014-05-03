@@ -48,9 +48,33 @@ func RevPal(dna string) (locs, ns []int) {
 	return locs, ns
 }
 
+var (
+	// baseComp is a map from each DNA base to its complement.
+	baseComp = map[byte]byte{
+		'A': 'T',
+		'C': 'G',
+		'G': 'C',
+		'T': 'A',
+	}
+)
+
 // IsRevPal returns true if the provided DNA sequence is a reverse palindrome,
 // and false otherwise. A DNA sequence is a reverse palindrome if it is equal to
 // its reverse complement.
 func IsRevPal(dna string) bool {
-	return rosa.RevComp(dna) == dna
+	// The length of a reverse palindrome is always divisible by 2.
+	if len(dna)%2 != 0 {
+		return false
+	}
+
+	// This algorithm starts from both ends of the DNA sequence and successively
+	// works towards the middle. It compares the start and end neucleotides to
+	// verify that they are each others complement; and if not exits early.
+	for i := 0; i < len(dna)/2; i++ {
+		j := len(dna) - i - 1
+		if baseComp[dna[i]] != dna[j] {
+			return false
+		}
+	}
+	return true
 }
