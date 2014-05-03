@@ -21,7 +21,12 @@ func main() {
 		break
 	}
 
-	fmt.Println(rosa.RevComp(dna))
+	locs, ns := RevPal(dna)
+	for i := range locs {
+		loc := locs[i]
+		n := ns[i]
+		fmt.Println(loc+1, n)
+	}
 }
 
 // RevPal returns the location of length of every reverse palindrome in the
