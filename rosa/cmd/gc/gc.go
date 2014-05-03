@@ -33,7 +33,8 @@ func MaxGC(fas rosa.FASTA) (maxLabel string, maxGC float64) {
 	return maxLabel, maxGC
 }
 
-// GC returns the percentage of 'G' and 'C' nucleotides in a given DNA sequence.
+// GC returns the percentage of the provided DNA sequence's bases that are
+// either guanine or cytosine.
 func GC(dna string) (gc float64) {
 	for _, base := range dna {
 		switch base {

@@ -13,8 +13,8 @@ import (
 // compiler optimizations to remove redundant string allocations in RevComp.
 // Only the final string value will be accessed from other parts of the code.
 
-// RevComp returns the reverse complement of the provided DNA string. The bases
-// are complemented as follows:
+// RevComp returns the reverse complement of the provided DNA sequence. The
+// bases are complemented as follows:
 //    A: T
 //    C: G
 //    G: C
