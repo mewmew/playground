@@ -1,31 +1,29 @@
 package main
 
 import (
-	"bufio"
-	"errors"
 	"fmt"
-	"io"
 	"log"
 	"os"
-	"strings"
+
+	"github.com/mewmew/playground/rosa"
 )
 
 func main() {
 	// Parse FASTA from stdin.
-	f, err := ParseFASTA(os.Stdin)
+	fas, err := rosa.ParseFASTA(os.Stdin)
 	if err != nil {
 		log.Fatalln(err)
 	}
 
-	label, gc := MaxGC(f)
+	label, gc := MaxGC(fas)
 	fmt.Println(label)
 	fmt.Printf("%.6f\n", gc)
 }
 
 // MaxGC returns the label and GC-content of the DNA sequence with the highest
-// GC-content in f.
-func MaxGC(f fasta) (maxLabel string, maxGC float64) {
-	for label, dna := range f {
+// GC-content in fas.
+func MaxGC(fas rosa.FASTA) (maxLabel string, maxGC float64) {
+	for label, dna := range fas {
 		gc := GC(dna)
 		if gc > maxGC {
 			maxGC = gc
@@ -33,29 +31,6 @@ func MaxGC(f fasta) (maxLabel string, maxGC float64) {
 		}
 	}
 	return maxLabel, maxGC
-}
-
-// fasta is a map from FASTA label names to DNA sequences.
-type fasta map[string]string
-
-// ParseFASTA reads data from r and parses it according to the FASTA file
-// format.
-func ParseFASTA(r io.Reader) (f fasta, err error) {
-	s := bufio.NewScanner(r)
-	var label string
-	f = make(fasta)
-	for s.Scan() {
-		line := s.Text()
-		if strings.HasPrefix(line, ">") {
-			label = line[1:]
-			continue
-		}
-		if len(label) == 0 {
-			return nil, errors.New("parse: invalid label; zero length")
-		}
-		f[label] += strings.Replace(line, "\n", "", -1)
-	}
-	return f, s.Err()
 }
 
 // GC returns the percentage of 'G' and 'C' nucleotides in a given DNA sequence.

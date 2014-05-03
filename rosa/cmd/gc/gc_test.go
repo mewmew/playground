@@ -3,8 +3,9 @@ package main
 import (
 	"fmt"
 	"log"
-	"sort"
 	"strings"
+
+	"github.com/mewmew/playground/rosa"
 )
 
 const s = `>Rosalind_6404
@@ -19,45 +20,17 @@ TGGGAACCTGCGGGCAGTAGGTGGAAT`
 
 func ExampleMaxGC() {
 	// Parse FASTA.
-	f, err := ParseFASTA(strings.NewReader(s))
+	fas, err := rosa.ParseFASTA(strings.NewReader(s))
 	if err != nil {
 		log.Fatalln(err)
 	}
 
-	label, gc := MaxGC(f)
+	label, gc := MaxGC(fas)
 	fmt.Println(label)
 	fmt.Printf("%.6f\n", gc)
 	// Output:
 	// Rosalind_0808
 	// 60.919540
-}
-
-func ExampleParseFASTA() {
-	// Parse FASTA.
-	f, err := ParseFASTA(strings.NewReader(s))
-	if err != nil {
-		log.Fatalln(err)
-	}
-
-	// Sort keys.
-	var labels []string
-	for label := range f {
-		labels = append(labels, label)
-	}
-	sort.Strings(labels)
-
-	for _, label := range labels {
-		dna := f[label]
-		fmt.Println(label)
-		fmt.Println(dna)
-	}
-	// Output:
-	// Rosalind_0808
-	// CCACCCTCGTGGTATGGCTAGGCATTCAGGAACCGGAGAACGCTTCAGACCAGCCCGGACTGGGAACCTGCGGGCAGTAGGTGGAAT
-	// Rosalind_5959
-	// CCATCGGTAGCGCATCCTTAGTCCAATTAAGTCCCTATCCAGGCGCTCCGCCGAAGGTCTATATCCATTTGTCAGCAGACACGC
-	// Rosalind_6404
-	// CCTGCGGAAGATCGGCACTAGAATAGCCAGAACCGTTTCTCTGAGGCTTCCGGCCTTCCCTCCCACTAATAATTCTGAGG
 }
 
 func ExampleGC() {
