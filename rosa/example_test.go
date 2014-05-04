@@ -50,3 +50,13 @@ func ExampleParseFASTA() {
 	// Rosalind_6404
 	// CCTGCGGAAGATCGGCACTAGAATAGCCAGAACCGTTTCTCTGAGGCTTCCGGCCTTCCCTCCCACTAATAATTCTGAGG
 }
+
+func ExampleProt() {
+	rna := "AUGGCCAUGGCGCCCAGAACUGAGAUCAAUAGUACCCGUAUUAACGGGUGA"
+	prot, err := Prot(rna)
+	if err != nil {
+		log.Fatalln(err)
+	}
+	fmt.Println(prot)
+	// Output: MAMAPRTEINSTRING
+}
