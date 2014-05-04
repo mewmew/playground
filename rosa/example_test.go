@@ -7,6 +7,12 @@ import (
 	"strings"
 )
 
+func ExampleTrans() {
+	dna := "GATGGAACTTGACTACGTAAATT"
+	fmt.Println(Trans(dna))
+	// Output: GAUGGAACUUGACUACGUAAAUU
+}
+
 func ExampleRevComp() {
 	dna := "AAAACCCGGT"
 	fmt.Println(RevComp(dna))
