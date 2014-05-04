@@ -17,6 +17,7 @@ func main() {
 		log.Fatalln(err)
 	}
 
+	// Translate the RNA sequence into a protein.
 	prot, err := rosa.Prot(rna)
 	if err != nil {
 		log.Fatalln(err)

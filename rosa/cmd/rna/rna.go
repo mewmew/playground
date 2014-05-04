@@ -17,5 +17,6 @@ func main() {
 	}
 	dna := string(buf)
 
+	// Transcribe the DNA sequence into an RNA sequence.
 	fmt.Println(rosa.Trans(dna))
 }

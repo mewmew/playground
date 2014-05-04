@@ -14,6 +14,8 @@ func main() {
 		log.Fatalln(err)
 	}
 
+	// Calculate the number of rabbits that are alive after n months were each
+	// mature rabbit gives k offsprings.
 	fmt.Println(Fib(n, k))
 }
 

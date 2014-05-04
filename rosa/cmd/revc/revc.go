@@ -17,5 +17,6 @@ func main() {
 	}
 	dna := string(buf)
 
+	// Obtain the reverse complement of the provided DNA sequence.
 	fmt.Println(rosa.RevComp(dna))
 }

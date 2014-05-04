@@ -21,7 +21,7 @@ func main() {
 		log.Fatalln(err)
 	}
 
-	// Print all locations with indicies starting at 1.
+	// Print all locations of the substring t in s with indicies starting at 1.
 	locs := Subs(s, t)
 	for i, loc := range locs {
 		fmt.Print(loc + 1)

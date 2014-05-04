@@ -15,6 +15,7 @@ func main() {
 		log.Fatalln(err)
 	}
 
+	// Locate the DNA sequence with the highest GC-content.
 	label, gc := MaxGC(fas)
 	fmt.Println(label)
 	fmt.Printf("%.6f\n", gc)

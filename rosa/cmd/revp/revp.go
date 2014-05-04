@@ -15,12 +15,15 @@ func main() {
 		log.Fatalln(err)
 	}
 
+	// Locate the single DNA sequence present in the FASTA file.
 	var dna string
 	for label := range fas {
 		dna = fas[label]
 		break
 	}
 
+	// Calculate the length and locating of each reverse palindrome within the
+	// DNA sequence which has a length of between 4 and 12 nucleotides.
 	locs, ns := RevPal(dna)
 	for i := range locs {
 		loc := locs[i]

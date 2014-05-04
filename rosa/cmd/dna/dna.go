@@ -15,6 +15,7 @@ func main() {
 	}
 	dna := string(buf)
 
+	// Count the nucleotide occurrences within the DNA sequence.
 	fmt.Println(BaseCount(dna))
 }
 
