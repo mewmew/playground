@@ -4,27 +4,12 @@ import (
 	"fmt"
 	"log"
 	"os"
-	"strconv"
-
-	"github.com/mewkiz/pkg/bufioutil"
 )
 
 func main() {
 	// Get input from stdin.
-	br := bufioutil.NewReader(os.Stdin)
-	nraw, err := br.ReadLine()
-	if err != nil {
-		log.Fatalln(err)
-	}
-	n, err := strconv.Atoi(nraw)
-	if err != nil {
-		log.Fatalln(err)
-	}
-	kraw, err := br.ReadLine()
-	if err != nil {
-		log.Fatalln(err)
-	}
-	k, err := strconv.Atoi(kraw)
+	var n, k int
+	_, err := fmt.Fscanf(os.Stdin, "%d %d", &n, &k)
 	if err != nil {
 		log.Fatalln(err)
 	}
