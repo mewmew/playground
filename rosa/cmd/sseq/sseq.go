@@ -43,8 +43,8 @@ func main() {
 	fmt.Println()
 }
 
-// SubSeq returns the location of each character in sep as a subsequence of s,
-// or nil if no match was found.
+// SubSeq returns the first location of each character in sep as a subsequence
+// of s, or nil if no match was found.
 func SubSeq(s, sep string) (locs []int) {
 	var i int
 	for j := 0; j < len(sep); j++ {
