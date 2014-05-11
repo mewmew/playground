@@ -23,8 +23,8 @@ func main() {
 
 // MaxGC returns the label and GC-content of the DNA sequence with the highest
 // GC-content in fas.
-func MaxGC(fas rosa.FASTA) (maxLabel string, maxGC float64) {
-	for label, dna := range fas {
+func MaxGC(fas *rosa.FASTA) (maxLabel string, maxGC float64) {
+	for label, dna := range fas.Seqs {
 		gc := GC(dna)
 		if gc > maxGC {
 			maxGC = gc

@@ -16,21 +16,16 @@ func main() {
 		log.Fatalln(err)
 	}
 
-	// The longest sequence in the FASTA file is the DNA sequence and all other
+	// The first sequence in the FASTA file is the DNA sequence and all other
 	// sequences are introns.
-	var dnaLabel string
-	var max int
-	for label, s := range fas {
-		if len(s) > max {
-			max = len(s)
-			dnaLabel = label
-		}
+	dnaLabel, err := fas.Label(0)
+	if err != nil {
+		log.Fatalln(err)
 	}
-	var dna string
-	introns := make([]string, len(fas)-1)
-	for label, s := range fas {
+	dna := fas.Seqs[dnaLabel]
+	introns := make([]string, len(fas.Seqs)-1)
+	for label, s := range fas.Seqs {
 		if label == dnaLabel {
-			dna = s
 			continue
 		}
 		introns = append(introns, s)

@@ -42,27 +42,43 @@ func RevComp(dna string) (revc string) {
 	return revc
 }
 
-// FASTA is a map from FASTA label names to DNA sequences.
-type FASTA map[string]string
+// FASTA handles labeled DNA sequences.
+type FASTA struct {
+	// Seqs is a map from FASTA label names to DNA sequences.
+	Seqs map[string]string
+	// labels keeps track of the order in which labels occur in the FASTA file.
+	labels []string
+}
 
 // ParseFASTA reads data from r and parses it according to the FASTA file
 // format.
-func ParseFASTA(r io.Reader) (fas FASTA, err error) {
+func ParseFASTA(r io.Reader) (fas *FASTA, err error) {
 	s := bufio.NewScanner(r)
 	var label string
-	fas = make(FASTA)
+	fas = &FASTA{
+		Seqs: make(map[string]string),
+	}
 	for s.Scan() {
 		line := s.Text()
 		if strings.HasPrefix(line, ">") {
 			label = line[1:]
+			fas.labels = append(fas.labels, label)
 			continue
 		}
 		if len(label) == 0 {
-			return nil, errors.New("parse: invalid label; zero length")
+			return nil, errors.New("rosa.ParseFASTA: invalid label; zero length")
 		}
-		fas[label] += strings.Replace(line, "\n", "", -1)
+		fas.Seqs[label] += strings.Replace(line, "\n", "", -1)
 	}
 	return fas, s.Err()
+}
+
+// Label returns the nth label of the FASTA file.
+func (fas *FASTA) Label(n int) (label string, err error) {
+	if n >= len(fas.labels) {
+		return "", fmt.Errorf("FASTA.Label: invalid index %d; out of bounds for %d-element slice", n, len(fas.labels))
+	}
+	return fas.labels[n], nil
 }
 
 const (
@@ -99,7 +115,7 @@ var aminos = map[string]byte{
 // sequence of amino acids.
 func Prot(rna string) (prot string, err error) {
 	if len(rna)%3 != 0 {
-		return "", fmt.Errorf("Prot: invalid RNA length; not divisible by 3")
+		return "", fmt.Errorf("rosa.Prot: invalid RNA length; not divisible by 3")
 	}
 
 	buf := make([]byte, len(rna)/3)
@@ -108,7 +124,7 @@ func Prot(rna string) (prot string, err error) {
 		codon := rna[j : j+3]
 		amino, ok := aminos[codon]
 		if !ok {
-			return "", fmt.Errorf("Prot: invalid codon %q", codon)
+			return "", fmt.Errorf("rosa.Prot: invalid codon %q", codon)
 		}
 
 		// Break when a stop codon has been located.

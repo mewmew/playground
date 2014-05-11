@@ -38,13 +38,13 @@ func ExampleParseFASTA() {
 
 	// Sort keys.
 	var labels []string
-	for label := range fas {
+	for label := range fas.Seqs {
 		labels = append(labels, label)
 	}
 	sort.Strings(labels)
 
 	for _, label := range labels {
-		dna := fas[label]
+		dna := fas.Seqs[label]
 		fmt.Println(label)
 		fmt.Println(dna)
 	}

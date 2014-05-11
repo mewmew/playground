@@ -16,21 +16,18 @@ func main() {
 		log.Fatalln(err)
 	}
 
-	// The longest sequence in the FASTA file is the DNA sequence and the other
+	// The first sequence in the FASTA file is the DNA sequence and the second
 	// sequence is the subsequence sep.
-	var dna, sep string
-	var max int
-	for _, s := range fas {
-		if len(s) > max {
-			if len(dna) != 0 {
-				sep = dna
-			}
-			max = len(s)
-			dna = s
-		} else {
-			sep = s
-		}
+	dnaLabel, err := fas.Label(0)
+	if err != nil {
+		log.Fatalln(err)
 	}
+	sepLabel, err := fas.Label(1)
+	if err != nil {
+		log.Fatalln(err)
+	}
+	dna := fas.Seqs[dnaLabel]
+	sep := fas.Seqs[sepLabel]
 
 	// Print the location of each character in sep as a subsequence of dna.
 	locs := SubSeq(dna, sep)
