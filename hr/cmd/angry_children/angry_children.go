@@ -22,23 +22,12 @@ func main() {
 	}
 
 	// Calculate the minimum unfairness.
-	min, err := MinUnfair(cs, k)
-	if err != nil {
-		log.Fatalln(err)
-	}
-	fmt.Println(min)
+	fmt.Println(MinUnfair(cs, k))
 }
 
 // MinUnfair calculates the minimum unfairness of distributing a packet of candy
 // to each of k children.
-func MinUnfair(cs []int, k int) (min int, err error) {
-	if k < 1 {
-		return 0, fmt.Errorf("MinUnfair: invalid k; number of children (%d) below 1", k)
-	}
-	if k > len(cs) {
-		return 0, fmt.Errorf("MinUnfair: invalid k; number of children (%d) exceed the number of packages (%d)", k, len(cs))
-	}
-
+func MinUnfair(cs []int, k int) (min int) {
 	sort.Ints(cs)
 	for i := 0; i <= len(cs)-k; i++ {
 		delta := cs[i+k-1] - cs[i]
@@ -46,6 +35,5 @@ func MinUnfair(cs []int, k int) (min int, err error) {
 			min = delta
 		}
 	}
-
-	return min, nil
+	return min
 }
