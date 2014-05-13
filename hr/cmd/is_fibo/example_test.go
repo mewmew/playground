@@ -10,12 +10,12 @@ func ExampleIsFib() {
 	fib := NewFib()
 	for _, n := range ns {
 		if fib.IsFib(n) {
-			fmt.Println("IsFib")
+			fmt.Println("IsFibo")
 		} else {
-			fmt.Println("IsNotFib")
+			fmt.Println("IsNotFibo")
 		}
 	}
-	// Output: IsFib
-	// IsNotFib
-	// IsFib
+	// Output: IsFibo
+	// IsNotFibo
+	// IsFibo
 }
