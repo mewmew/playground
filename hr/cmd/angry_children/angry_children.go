@@ -8,57 +8,44 @@ import (
 
 func main() {
 	// Parse input.
-	var count int
-	_, err := fmt.Scan(&count)
+	var n, k int
+	_, err := fmt.Scan(&n, &k)
 	if err != nil {
 		log.Fatalln(err)
 	}
-	var k int
-	_, err = fmt.Scan(&k)
-	if err != nil {
-		log.Fatalln(err)
-	}
-	pkts := make([]int, count)
-	for i := 0; i < count; i++ {
-		_, err = fmt.Scan(&pkts[i])
+	cs := make([]int, n)
+	for i := 0; i < n; i++ {
+		_, err = fmt.Scan(&cs[i])
 		if err != nil {
 			log.Fatalln(err)
 		}
 	}
 
 	// Calculate the minimum unfairness.
-	min, err := MinUnfairness(pkts, k)
+	min, err := MinUnfair(cs, k)
 	if err != nil {
 		log.Fatalln(err)
 	}
 	fmt.Println(min)
 }
 
-// MinUnfairness calculates the minimum unfairness of distributing a packet of
-// candy to each of k children.
-func MinUnfairness(pkts []int, k int) (min int, err error) {
-	sort.Ints(pkts)
-	if k > len(pkts) {
-		return 0, fmt.Errorf("MinUnfairness: invalid k; number of children (%d) exceed the number of packages (%d)", k, len(pkts))
+// MinUnfair calculates the minimum unfairness of distributing a packet of candy
+// to each of k children.
+func MinUnfair(cs []int, k int) (min int, err error) {
+	if k < 1 {
+		return 0, fmt.Errorf("MinUnfair: invalid k; number of children (%d) below 1", k)
 	}
-	for i, a := range pkts {
-		j := i + k - 1
-		if j >= len(pkts) {
-			break
-		}
-		b := pkts[j]
-		delta := abs(a - b)
+	if k > len(cs) {
+		return 0, fmt.Errorf("MinUnfair: invalid k; number of children (%d) exceed the number of packages (%d)", k, len(cs))
+	}
+
+	sort.Ints(cs)
+	for i := 0; i <= len(cs)-k; i++ {
+		delta := cs[i+k-1] - cs[i]
 		if i == 0 || delta < min {
 			min = delta
 		}
 	}
-	return min, nil
-}
 
-// abs returns the absolute value of x.
-func abs(x int) int {
-	if x < 0 {
-		return -x
-	}
-	return x
+	return min, nil
 }
