@@ -22,9 +22,9 @@ func main() {
 	}
 
 	// Check which input numbers that are fibonacci numbers.
-	fs := NewFib()
+	fib := NewFib()
 	for _, n := range ns {
-		if fs.IsFib(n) {
+		if fib.IsFib(n) {
 			fmt.Println("IsFibo")
 		} else {
 			fmt.Println("IsNotFibo")
