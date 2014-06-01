@@ -40,7 +40,7 @@ Command documentation
 
 Command documentation provided by GoDoc.
 
-- [walls][]
+- [walls][]: updates the desktop wallpaper at specified time intervals.
 
 [walls]: http://godoc.org/github.com/mewmew/playground/archive/wallbase/cmd/walls
 
