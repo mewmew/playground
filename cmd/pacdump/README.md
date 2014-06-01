@@ -7,7 +7,7 @@ packages.
 Installation
 ------------
 
-	$ go get github.com/mewmew/playground/cmd/pacdump
+	go get github.com/mewmew/playground/cmd/pacdump
 
 Usage
 -----

@@ -19,7 +19,7 @@ Documentation provided by GoDoc.
 Installation
 ------------
 
-	$ go get github.com/mewmew/playground/archive/vaga/cmd/vaga
+	go get github.com/mewmew/playground/archive/vaga/cmd/vaga
 
 Screenshots
 -----------

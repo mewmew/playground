@@ -6,7 +6,7 @@ This tool examines files and reports non-ascii characters.
 Installation
 ------------
 
-	$ go get github.com/mewmew/playground/cmd/ascii
+	go get github.com/mewmew/playground/cmd/ascii
 
 Usage
 -----
@@ -21,9 +21,7 @@ Flags:
 Examples
 --------
 
-	$ echo "Hello, 世界" > foo.txt
-	$ ascii foo.txt
-
-Output:
-
-	foo.txt (1:7) - non-ascii character '世'
+	echo "Hello, 世界" > foo.txt
+	ascii foo.txt
+	// Output:
+	// foo.txt (1:7) - non-ascii character '世'
