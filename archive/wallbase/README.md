@@ -11,7 +11,7 @@ Documentation
 
 Documentation provided by GoDoc.
 
-- [wallbase][]
+- [wallbase][]: implements search and download functions for [wallbase.cc][].
 
 [wallbase]: http://godoc.org/github.com/mewmew/playground/archive/wallbase
 
