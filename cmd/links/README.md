@@ -16,6 +16,8 @@ Usage
 Examples
 --------
 
+1. Report any invalid links in the set of files [a.html][] and [b.html][].
+
 	cd testdata/
 	links *.html
 	// Output:
