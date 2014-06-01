@@ -7,9 +7,17 @@ import (
 	"math"
 	"os"
 
-	gps "github.com/kurtcc/goexifgps"
+	gps "github.com/kurtcoke/goexifgps"
 	"github.com/rwcarlsen/goexif/exif"
 )
+
+func init() {
+	flag.Usage = usage
+}
+
+func usage() {
+	fmt.Fprintln(os.Stderr, "Usage: metagps PATH...")
+}
 
 func main() {
 	flag.Parse()
@@ -19,7 +27,7 @@ func main() {
 			continue
 		}
 		fmt.Println("path:", imgPath)
-		fmt.Println("coord:", geoCoord)
+		fmt.Println("coord:", geoCoord.LatRef, geoCoord.Lat, geoCoord.LongRef, geoCoord.Long)
 		fmt.Println()
 	}
 }
