@@ -1,8 +1,8 @@
 vaga
 ====
 
-Project vaga aims to implement a simple game (tic-tac-toe) which makes use of a
-simple game engine.
+Project vaga aims to implement a tic-tac-toe game which makes use of a simple
+game engine.
 
 The name is based on a direct translation from Swedish: Vagabond Chess
 (luffarschack).
@@ -12,7 +12,7 @@ Documentation
 
 Documentation provided by GoDoc.
 
-   - [grid][]
+- [grid][]: implements a grid with markers for tic-tac-toe.
 
 [grid]: http://godoc.org/github.com/mewmew/playground/archive/vaga/grid
 
