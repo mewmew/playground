@@ -1,4 +1,4 @@
-// package naming specifies a few naming convensions by example.
+// package naming specifies a few naming conventions by example.
 package naming
 
 import (

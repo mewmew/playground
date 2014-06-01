@@ -10,7 +10,7 @@ Documentation
 
 Documentation provided by GoDoc.
 
-- [gs][]:  implements an unofficial API for [grooveshark.com][].
+- [gs][]: implements an unofficial API for [grooveshark.com][].
 
 [gs]: http://godoc.org/github.com/mewmew/playground/archive/gs
 
