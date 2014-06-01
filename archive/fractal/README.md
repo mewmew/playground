@@ -9,9 +9,10 @@ Documentation
 Documentation provided by GoDoc.
 
 - [mset][]: constructs visual representations of the [Mandelbrot set][].
-- [buddha][]: constructs visual representations of the Buddhabrot.
+- [buddha][]: constructs visual representations of the [Buddhabrot][].
 
 [Mandelbrot set]: https://en.wikipedia.org/wiki/Mandelbrot_set
+[Buddhabrot]: https://en.wikipedia.org/wiki/Buddhabrot
 [mset]: http://godoc.org/github.com/mewmew/playground/archive/fractal/mset
 [buddha]: http://godoc.org/github.com/mewmew/playground/archive/fractal/buddha
 
