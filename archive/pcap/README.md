@@ -14,7 +14,7 @@ Documentation
 
 Documentation provided by GoDoc.
 
-	- [pcap][]
+- [pcap][]: provides support for reading pcap files.
 
 [pcap]: http://godoc.org/github.com/mewmew/playground/archive/pcap
 
