@@ -10,3 +10,10 @@ The status of each repository can be one or more of the following:
    - Unstaged changes
    - Staged changes
    - Ahead
+
+public domain
+-------------
+
+This code is hereby released into the *[public domain][]*.
+
+[public domain]: https://creativecommons.org/publicdomain/zero/1.0/

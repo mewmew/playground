@@ -21,10 +21,10 @@ func init() {
 }
 
 func usage() {
-	fmt.Fprintln(os.Stderr, "Usage: linkck PATH...")
-	fmt.Fprintln(os.Stderr, "Report invalid links in HTML files.")
+	fmt.Fprintln(os.Stderr, "Usage: links PATH...")
+	fmt.Fprintln(os.Stderr, "Reports invalid links in HTML files.")
 	fmt.Fprintln(os.Stderr)
-	fmt.Fprintln(os.Stderr, "Invoke linkck with one or more filenames or directories.")
+	fmt.Fprintln(os.Stderr, "Invoke links with one or more filenames or directories.")
 }
 
 func main() {

@@ -25,3 +25,10 @@ Examples
 	ascii foo.txt
 	// Output:
 	// foo.txt (1:7) - non-ascii character '世'
+
+public domain
+-------------
+
+This code is hereby released into the *[public domain][]*.
+
+[public domain]: https://creativecommons.org/publicdomain/zero/1.0/
