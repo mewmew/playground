@@ -1,5 +1,5 @@
-hr
-==
+hackerrank
+==========
 
 This repository contains code samples and solutions to various programming
 [challenges][] at [HackerRank][]. The challenges have been solved
