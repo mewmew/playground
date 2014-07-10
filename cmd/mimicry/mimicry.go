@@ -1,4 +1,4 @@
-// The mimicry tool creates a git repository which mimics the image using a
+// The mimicry tool creates a git repository which mimics an image using a
 // contribution history of carefully crafted commit dates. It expects a 51x7
 // image with a transparent background.
 package main
@@ -25,7 +25,7 @@ func init() {
 
 func usage() {
 	fmt.Fprintln(os.Stderr, "Usage: mimicry IMAGE")
-	fmt.Fprintln(os.Stderr, "Creates a git repository which mimics the image using a contribution history of carefully crafted commit dates. It expects a 51x7 image with a transparent background.")
+	fmt.Fprintln(os.Stderr, "Creates a git repository which mimics an image using a contribution history of carefully crafted commit dates. It expects a 51x7 image with a transparent background.")
 }
 
 func main() {
@@ -46,7 +46,7 @@ const (
 	Height = 7
 )
 
-// mimicry creates a git repository which mimics the image using a contribution
+// mimicry creates a git repository which mimics an image using a contribution
 // history of carefully crafted commit dates. It expects a 51x7 image with a
 // transparent background.
 func mimicry(imgPath string) (err error) {
