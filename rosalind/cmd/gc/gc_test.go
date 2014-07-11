@@ -5,7 +5,7 @@ import (
 	"log"
 	"strings"
 
-	"github.com/mewmew/playground/rosa"
+	"github.com/mewmew/playground/rosalind/rosa"
 )
 
 const s = `>Rosalind_6404

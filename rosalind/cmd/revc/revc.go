@@ -6,7 +6,7 @@ import (
 	"log"
 	"os"
 
-	"github.com/mewmew/playground/rosa"
+	"github.com/mewmew/playground/rosalind/rosa"
 )
 
 func main() {
