@@ -18,14 +18,13 @@ Usage
 Examples
 --------
 
-The mimicry command was used in a second attempt to create the [hello][]
-repository. Below is a screenshot of its contribution history as of 2014-07-11.
+The mimicry command was used to create the [hello][] repository. Below is a screenshot of its contribution history as of 2014-07-11.
 
 	mimicry hello.png
 
-![Screenshot - first try](https://raw.github.com/mewmew/playground/master/cmd/mimicry/hello world.png)
+![Screenshot](https://raw.github.com/mewmew/playground/master/cmd/mimicry/hello world.png)
 
-[hello]: https://github.com/yumpie2/hello
+[hello]: https://github.com/yumpie/hello
 
 public domain
 -------------
