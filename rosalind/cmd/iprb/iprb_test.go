@@ -4,7 +4,7 @@ import (
 	"fmt"
 )
 
-func ExampleBaseCount() {
+func ExampleDominantProb() {
 	// Calculate the probability that two randomly selected mating organisms will
 	// produce an individual possessing a dominant allele.
 	k, m, n := 2, 2, 2

@@ -4,7 +4,7 @@ import (
 	"fmt"
 )
 
-func ExampleBaseCount() {
+func ExampleSubSeq() {
 	// Print the location of each character in sep as a subsequence of dna.
 	dna := "ACGTACGTGACG"
 	sep := "GTA"

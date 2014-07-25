@@ -4,7 +4,7 @@ import (
 	"fmt"
 )
 
-func ExampleBaseCount() {
+func ExampleFib() {
 	n := 5
 	k := 3
 	fmt.Println(Fib(n, k))
