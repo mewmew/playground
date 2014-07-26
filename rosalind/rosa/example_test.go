@@ -57,6 +57,40 @@ func ExampleParseFASTA() {
 	// CCTGCGGAAGATCGGCACTAGAATAGCCAGAACCGTTTCTCTGAGGCTTCCGGCCTTCCCTCCCACTAATAATTCTGAGG
 }
 
+func ExampleFASTA_Label() {
+	// Parse FASTA.
+	fas, err := ParseFASTA(strings.NewReader(s))
+	if err != nil {
+		log.Fatalln(err)
+	}
+
+	// Locate the second label.
+	label, err := fas.Label(1)
+	if err != nil {
+		log.Fatalln(err)
+	}
+	fmt.Println(label)
+	// Output:
+	// Rosalind_5959
+}
+
+func ExampleFASTA_Index() {
+	// Parse FASTA.
+	fas, err := ParseFASTA(strings.NewReader(s))
+	if err != nil {
+		log.Fatalln(err)
+	}
+
+	// Locate the index of the label named "Rosalind_0808".
+	i, err := fas.Index("Rosalind_0808")
+	if err != nil {
+		log.Fatalln(err)
+	}
+	fmt.Println(i)
+	// Output:
+	// 2
+}
+
 func ExampleProt() {
 	rna := "AUGGCCAUGGCGCCCAGAACUGAGAUCAAUAGUACCCGUAUUAACGGGUGA"
 	prot, err := Prot(rna)
