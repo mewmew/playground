@@ -17,6 +17,8 @@ func main() {
 		log.Fatalln(err)
 	}
 
+	// Create a profile of the provided DNA-sequences and use it to calculate the
+	// consensus sequence.
 	var seqs []string
 	for _, seq := range fas.Seqs {
 		seqs = append(seqs, seq)

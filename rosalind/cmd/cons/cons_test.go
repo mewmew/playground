@@ -16,6 +16,7 @@ var seqs = []string{
 }
 
 func ExampleNewProfile() {
+	// Create a profile of the provided DNA-sequences.
 	profile, err := NewProfile(seqs, true)
 	if err != nil {
 		log.Fatalln(err)
@@ -29,6 +30,8 @@ func ExampleNewProfile() {
 }
 
 func ExampleProfile_Cons() {
+	// Create a profile of the provided DNA-sequences and use it to calculate the
+	// consensus sequence.
 	profile, err := NewProfile(seqs, true)
 	if err != nil {
 		log.Fatalln(err)

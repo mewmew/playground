@@ -3,6 +3,7 @@
 package rosa
 
 import (
+	"bytes"
 	"fmt"
 	"strings"
 )
@@ -13,10 +14,6 @@ func Trans(dna string) (rna string) {
 	return strings.Replace(dna, "T", "U", -1)
 }
 
-// TODO(u): The limited scope of revc should make it possible for future
-// compiler optimizations to remove redundant string allocations in RevComp.
-// Only the final string value will be accessed from other parts of the code.
-
 // RevComp returns the reverse complement of the provided DNA sequence. The
 // bases are complemented as follows:
 //    A: T
@@ -24,24 +21,25 @@ func Trans(dna string) (rna string) {
 //    G: C
 //    T: A
 func RevComp(dna string) (revc string) {
+	buf := new(bytes.Buffer)
 	for i := len(dna) - 1; i >= 0; i-- {
 		switch dna[i] {
 		case 'A':
-			revc += "T"
+			fmt.Fprint(buf, "T")
 		case 'C':
-			revc += "G"
+			fmt.Fprint(buf, "G")
 		case 'G':
-			revc += "C"
+			fmt.Fprint(buf, "C")
 		case 'T':
-			revc += "A"
+			fmt.Fprint(buf, "A")
 		}
 	}
-	return revc
+	return buf.String()
 }
 
 const (
 	// Stop indicates the stop of amino acid translation.
-	Stop = 0
+	Stop byte = 0
 )
 
 // aminos is a map from codons to amino acids.
