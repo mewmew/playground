@@ -6,6 +6,7 @@ import (
 	"errors"
 	"fmt"
 	"image"
+	_ "image/gif"  // enable gif decoding.
 	_ "image/jpeg" // enable jpeg decoding.
 	_ "image/png"  // enable png decoding.
 	"io/ioutil"
