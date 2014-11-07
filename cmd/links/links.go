@@ -10,7 +10,7 @@ import (
 	"path"
 	"path/filepath"
 
-	"code.google.com/p/go.net/html"
+	"golang.org/x/net/html"
 )
 
 var flagVerbose bool
