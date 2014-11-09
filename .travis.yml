@@ -1,0 +1,22 @@
+language: go
+
+notifications:
+  email: false
+
+env:
+  global:
+    - secure: "AP4LEOpS4UspqZCkswzkNNWWlPTckS7C6Aoqm1wNFqidBTqeqCj6p1FR5WgmIItILoO+/tKwIVdRT5A0oJalNnaLluc5YANnaaLohn/YWs3/UVzmNowgQG0Ee/YUT1yNhgdfLHASE/QY102mrD4GRHDA4j8PWFv+uga4rOLamUo="
+    - PATH=$HOME/gopath/bin:$PATH
+
+install:
+  - go get code.google.com/p/go.tools/cmd/cover
+  - go get code.google.com/p/go.tools/cmd/goimports
+  - go get code.google.com/p/go.tools/cmd/vet
+  - go get github.com/golang/lint/golint
+  - go get github.com/mattn/goveralls
+  - go get github.com/mewmew/playground/...
+
+script:
+  - wget https://gist.githubusercontent.com/mewmew/379014c9a2e6885e238d/raw/fb0c7d164113b1428f886dd470a613c74b9a9997/goclean.sh
+  - chmod +x goclean.sh
+  - ./goclean.sh
