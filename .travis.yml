@@ -8,6 +8,10 @@ env:
     - secure: "AP4LEOpS4UspqZCkswzkNNWWlPTckS7C6Aoqm1wNFqidBTqeqCj6p1FR5WgmIItILoO+/tKwIVdRT5A0oJalNnaLluc5YANnaaLohn/YWs3/UVzmNowgQG0Ee/YUT1yNhgdfLHASE/QY102mrD4GRHDA4j8PWFv+uga4rOLamUo="
     - PATH=$HOME/gopath/bin:$PATH
 
+before_install:
+  - sudo apt-get update -qq
+  - sudo apt-get install -y libglfw3 libglfw3-dev
+
 install:
   - go get code.google.com/p/go.tools/cmd/cover
   - go get code.google.com/p/go.tools/cmd/goimports
