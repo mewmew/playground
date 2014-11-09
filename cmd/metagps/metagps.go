@@ -7,7 +7,7 @@ import (
 	"math"
 	"os"
 
-	gps "github.com/kurtcoke/goexifgps"
+	gps "github.com/mewpull/goexifgps"
 	"github.com/rwcarlsen/goexif/exif"
 )
 
