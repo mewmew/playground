@@ -9,8 +9,8 @@ import (
 
 	"azul3d.org/audio.v1"
 	_ "azul3d.org/audio/flac.dev"
-	"github.com/davecheney/profile"
 	"azul3d.org/audio/wav.v1"
+	"github.com/davecheney/profile"
 	"github.com/mewkiz/pkg/osutil"
 	"github.com/mewkiz/pkg/pathutil"
 )
@@ -61,7 +61,7 @@ func flac2wav(path string) error {
 			return err
 		}
 		if exists {
-			return fmt.Errorf("the file %q exists already.", wavPath)
+			return fmt.Errorf("the file %q exists already", wavPath)
 		}
 	}
 	fw, err := os.Create(wavPath)
