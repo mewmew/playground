@@ -8,6 +8,12 @@ import (
 	"github.com/mewmew/playground/cmd/gitstat/git"
 )
 
+var flagPush bool
+
+func init() {
+	flag.BoolVar(&flagPush, "push", false, "Push if local repo is ahead of remote repo.")
+}
+
 func main() {
 	flag.Parse()
 	for _, dir := range flag.Args() {
@@ -81,13 +87,15 @@ func gitstat(dir string) (err error) {
 	// === [ repo work ] ========================================================
 
 	// Ahead.
-	if len(aheadRepos) > 0 {
-		fmt.Println("=== [ ahead ] ===")
-		fmt.Println()
-		for _, repo := range aheadRepos {
-			err = repo.Push()
-			if err != nil {
-				return err
+	if flagPush {
+		if len(aheadRepos) > 0 {
+			fmt.Println("=== [ ahead ] ===")
+			fmt.Println()
+			for _, repo := range aheadRepos {
+				err = repo.Push()
+				if err != nil {
+					return err
+				}
 			}
 		}
 	}

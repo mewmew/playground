@@ -81,13 +81,18 @@ func (stat Stat) IsAhead() bool {
 }
 
 var bytesClean = []byte("nothing to commit, working directory clean")
-var bytesUntracked = []byte("# Untracked files:")
-var bytesUnstaged = []byte("# Changes not staged for commit")
-var bytesStaged = []byte("# Changes to be committed:")
+var bytesUntracked = []byte("Untracked files:")
+var bytesUnstaged = []byte("Changes not staged for commit:")
+var bytesStaged = []byte("Changes to be committed:")
 var bytesAhead = []byte("Your branch is ahead of")
 
 func (repo *Repo) ParseStatus() (err error) {
 	// Get output from `git status` command.
+	cwd, err := os.Getwd()
+	if err != nil {
+		return err
+	}
+	defer os.Chdir(cwd)
 	err = os.Chdir(repo.Path)
 	if err != nil {
 		return err

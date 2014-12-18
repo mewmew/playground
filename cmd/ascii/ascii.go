@@ -20,10 +20,13 @@ func init() {
 }
 
 func usage() {
-	fmt.Fprintln(os.Stderr, "Usage: ascii PATH...")
+	fmt.Fprintln(os.Stderr, "Usage: ascii [OPTION]... PATH...")
 	fmt.Fprintln(os.Stderr, "Report non-ascii characters in files.")
 	fmt.Fprintln(os.Stderr)
 	fmt.Fprintln(os.Stderr, "Invoke ascii with one or more filenames or directories.")
+	fmt.Fprintln(os.Stderr)
+	fmt.Fprintln(os.Stderr, "Flags:")
+	flag.PrintDefaults()
 }
 
 func main() {
