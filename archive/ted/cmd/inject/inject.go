@@ -26,7 +26,7 @@ func main() {
 func inject(talks []ted.Talk) {
 	for _, talk := range talks {
 		date := talk.Date.Format("2006-01")
-		fmt.Printf("wget -O \"%s - %s (%s) [%v]\" %s.mp4\n", date, talk.Title, talk.Event, talk.Duration, talk.Download)
+		fmt.Printf("wget -O \"%s - %s (%s) [%v].mp4\" %s\n", date, talk.Title, talk.Event, talk.Duration, talk.Download)
 	}
 }
 

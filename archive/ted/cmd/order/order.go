@@ -41,8 +41,9 @@ func order(talks []ted.Talk) {
 			}
 			defer f.Close()
 			w = f
+			fmt.Fprintf(w, "mkdir -p %q\n", date)
 		}
-		fmt.Fprintf(w, "wget -O \"%s - %s (%s) [%v].mp4\" %s\n", date, talk.Title, talk.Event, talk.Duration, talk.Download)
+		fmt.Fprintf(w, "wget -O \"%s/%s (%s) [%v].mp4\" %s\n", date, talk.Title, talk.Event, talk.Duration, talk.Download)
 		prev = date
 	}
 }
