@@ -39,7 +39,7 @@ var talks []ted.Talk
 func stash(url string) error {
 	// Crawl page.
 	if flagAll {
-		fmt.Fprintln(os.Stdout, "crawling:", url)
+		fmt.Fprintln(os.Stderr, "crawling:", url)
 	}
 	doc, err := goquery.NewDocument(url)
 	if err != nil {
