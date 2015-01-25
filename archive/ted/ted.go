@@ -1,4 +1,4 @@
-// Package ted declares the type used to represent a TED talk.
+// Package ted declares the type used to represent TED talks.
 package ted
 
 import "time"
