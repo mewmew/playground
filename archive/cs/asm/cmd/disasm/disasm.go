@@ -60,7 +60,7 @@ func disasm() (insts []interface{}, err error) {
 // parseHex parses the provided hexadecimal string into a slice of instructions.
 func parseHex(s string) (insts []interface{}, err error) {
 	if len(s)%4 != 0 {
-		return nil, fmt.Errorf("parseHex: string len (%d) not evenly dividable by 4.", len(s))
+		return nil, fmt.Errorf("parseHex: string len (%d) not evenly dividable by 4", len(s))
 	}
 
 	insts = make([]interface{}, 0, len(s)/4)

@@ -30,12 +30,12 @@ func (pc *PC) Inc(n int) (err error) {
 	case n < 0:
 		// A negative n value should never make PC larger.
 		if newPC > oldPC {
-			return fmt.Errorf("PC.Inc: integer underflow occurred; old PC (%d), new PC (%d), n (%d).", oldPC, newPC, n)
+			return fmt.Errorf("PC.Inc: integer underflow occurred; old PC (%d), new PC (%d), n (%d)", oldPC, newPC, n)
 		}
 	case n > 0:
 		// A positive n value should never make PC smaller.
 		if newPC < oldPC {
-			return fmt.Errorf("PC.Inc: integer overflow occurred; old PC (%d), new PC (%d), n (%d).", oldPC, newPC, n)
+			return fmt.Errorf("PC.Inc: integer overflow occurred; old PC (%d), new PC (%d), n (%d)", oldPC, newPC, n)
 		}
 	}
 	*pc = newPC
@@ -71,7 +71,7 @@ func New(r io.Reader) (sys *System, err error) {
 // FetchInst fetches the next instruction and increments the program counter.
 func (sys *System) FetchInst() (buf uint16, err error) {
 	if int(sys.PC)+op.InstSize > len(sys.Mem) {
-		return 0, fmt.Errorf("System.FetchInst: instruction at PC (%d) is outside of Mem.", sys.PC)
+		return 0, fmt.Errorf("System.FetchInst: instruction at PC (%d) is outside of Mem", sys.PC)
 	}
 	buf = binary.BigEndian.Uint16(sys.Mem[sys.PC:])
 	err = sys.PC.Inc(op.InstSize)
@@ -83,7 +83,7 @@ func (sys *System) FetchInst() (buf uint16, err error) {
 
 // ErrHalted is returned when trying to execute an instruction while the system
 // is halted.
-var ErrHalted = errors.New("emu: system is halted.")
+var ErrHalted = errors.New("emu: system is halted")
 
 // Step decodes and executes one instruction.
 func (sys *System) Step() (err error) {
@@ -170,7 +170,7 @@ func (sys *System) Exec(inst interface{}) (err error) {
 			return err
 		}
 	default:
-		return fmt.Errorf("System.Step: instruction (%T) not handled.", inst)
+		return fmt.Errorf("System.Step: instruction (%T) not handled", inst)
 	}
 	return nil
 }

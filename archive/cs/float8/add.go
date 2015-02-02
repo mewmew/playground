@@ -73,10 +73,10 @@ func Add(x, y Float8) (z Float8, err error) {
 	// TODO(u): Allow the Float8 value to overflow and underflow?
 	if pos > 10 {
 		// exponent overflow.
-		return 0, fmt.Errorf("float8.Add: exponent overflow; can't represent %v + %v in 8-bit floating-point notation.", x, y)
+		return 0, fmt.Errorf("float8.Add: exponent overflow; can't represent %v + %v in 8-bit floating-point notation", x, y)
 	} else if pos < 3 {
 		// exponent underflow.
-		return 0, fmt.Errorf("float8.Add: exponent underflow; can't represent %v + %v in 8-bit floating-point notation.", x, y)
+		return 0, fmt.Errorf("float8.Add: exponent underflow; can't represent %v + %v in 8-bit floating-point notation", x, y)
 	}
 
 	// Encode exponent of z.

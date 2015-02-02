@@ -15,7 +15,7 @@ func Encode(inst interface{}) (buf uint16, err error) {
 		//    R refers to the dst register.
 		//    XY refers to the src memory address.
 		if v.Dst >= RegCount {
-			return 0, fmt.Errorf("op.Encode: invalid dst register %d in %s.", v.Dst, v.Code)
+			return 0, fmt.Errorf("op.Encode: invalid dst register %d in %s", v.Dst, v.Code)
 		}
 
 		// op-code
@@ -33,7 +33,7 @@ func Encode(inst interface{}) (buf uint16, err error) {
 		//    R refers to the dst register.
 		//    XY refers to the src immediate value.
 		if v.Dst >= RegCount {
-			return 0, fmt.Errorf("op.Encode: invalid dst register %d in %s.", v.Dst, v.Code)
+			return 0, fmt.Errorf("op.Encode: invalid dst register %d in %s", v.Dst, v.Code)
 		}
 
 		// op-code
@@ -51,7 +51,7 @@ func Encode(inst interface{}) (buf uint16, err error) {
 		//    R refers to the src register.
 		//    XY refers to the dst memory address.
 		if v.Src >= RegCount {
-			return 0, fmt.Errorf("op.Encode: invalid src register %d in %s.", v.Src, v.Code)
+			return 0, fmt.Errorf("op.Encode: invalid src register %d in %s", v.Src, v.Code)
 		}
 
 		// op-code
@@ -69,10 +69,10 @@ func Encode(inst interface{}) (buf uint16, err error) {
 		//    R refers to the src register.
 		//    S refers to the dst register.
 		if v.Dst >= RegCount {
-			return 0, fmt.Errorf("op.Encode: invalid dst register %d in %s.", v.Dst, v.Code)
+			return 0, fmt.Errorf("op.Encode: invalid dst register %d in %s", v.Dst, v.Code)
 		}
 		if v.Src >= RegCount {
-			return 0, fmt.Errorf("op.Encode: invalid src register %d in %s.", v.Src, v.Code)
+			return 0, fmt.Errorf("op.Encode: invalid src register %d in %s", v.Src, v.Code)
 		}
 
 		// op-code
@@ -91,13 +91,13 @@ func Encode(inst interface{}) (buf uint16, err error) {
 		//    S refers to the src1 register.
 		//    T refers to the src2 register.
 		if v.Dst >= RegCount {
-			return 0, fmt.Errorf("op.Encode: invalid dst register %d in %s.", v.Dst, v.Code)
+			return 0, fmt.Errorf("op.Encode: invalid dst register %d in %s", v.Dst, v.Code)
 		}
 		if v.Src1 >= RegCount {
-			return 0, fmt.Errorf("op.Encode: invalid src1 register %d in %s.", v.Src1, v.Code)
+			return 0, fmt.Errorf("op.Encode: invalid src1 register %d in %s", v.Src1, v.Code)
 		}
 		if v.Src2 >= RegCount {
-			return 0, fmt.Errorf("op.Encode: invalid src2 register %d in %s.", v.Src2, v.Code)
+			return 0, fmt.Errorf("op.Encode: invalid src2 register %d in %s", v.Src2, v.Code)
 		}
 
 		// op-code
@@ -119,13 +119,13 @@ func Encode(inst interface{}) (buf uint16, err error) {
 		//    S refers to the src1 register.
 		//    T refers to the src2 register.
 		if v.Dst >= RegCount {
-			return 0, fmt.Errorf("op.Encode: invalid dst register %d in %s.", v.Dst, v.Code)
+			return 0, fmt.Errorf("op.Encode: invalid dst register %d in %s", v.Dst, v.Code)
 		}
 		if v.Src1 >= RegCount {
-			return 0, fmt.Errorf("op.Encode: invalid src1 register %d in %s.", v.Src1, v.Code)
+			return 0, fmt.Errorf("op.Encode: invalid src1 register %d in %s", v.Src1, v.Code)
 		}
 		if v.Src2 >= RegCount {
-			return 0, fmt.Errorf("op.Encode: invalid src2 register %d in %s.", v.Src2, v.Code)
+			return 0, fmt.Errorf("op.Encode: invalid src2 register %d in %s", v.Src2, v.Code)
 		}
 
 		// op-code
@@ -147,13 +147,13 @@ func Encode(inst interface{}) (buf uint16, err error) {
 		//    S refers to the src1 register.
 		//    T refers to the src2 register.
 		if v.Dst >= RegCount {
-			return 0, fmt.Errorf("op.Encode: invalid dst register %d in %s.", v.Dst, v.Code)
+			return 0, fmt.Errorf("op.Encode: invalid dst register %d in %s", v.Dst, v.Code)
 		}
 		if v.Src1 >= RegCount {
-			return 0, fmt.Errorf("op.Encode: invalid src1 register %d in %s.", v.Src1, v.Code)
+			return 0, fmt.Errorf("op.Encode: invalid src1 register %d in %s", v.Src1, v.Code)
 		}
 		if v.Src2 >= RegCount {
-			return 0, fmt.Errorf("op.Encode: invalid src2 register %d in %s.", v.Src2, v.Code)
+			return 0, fmt.Errorf("op.Encode: invalid src2 register %d in %s", v.Src2, v.Code)
 		}
 
 		// op-code
@@ -175,13 +175,13 @@ func Encode(inst interface{}) (buf uint16, err error) {
 		//    S refers to the src1 register.
 		//    T refers to the src2 register.
 		if v.Dst >= RegCount {
-			return 0, fmt.Errorf("op.Encode: invalid dst register %d in %s.", v.Dst, v.Code)
+			return 0, fmt.Errorf("op.Encode: invalid dst register %d in %s", v.Dst, v.Code)
 		}
 		if v.Src1 >= RegCount {
-			return 0, fmt.Errorf("op.Encode: invalid src1 register %d in %s.", v.Src1, v.Code)
+			return 0, fmt.Errorf("op.Encode: invalid src1 register %d in %s", v.Src1, v.Code)
 		}
 		if v.Src2 >= RegCount {
-			return 0, fmt.Errorf("op.Encode: invalid src2 register %d in %s.", v.Src2, v.Code)
+			return 0, fmt.Errorf("op.Encode: invalid src2 register %d in %s", v.Src2, v.Code)
 		}
 
 		// op-code
@@ -203,13 +203,13 @@ func Encode(inst interface{}) (buf uint16, err error) {
 		//    S refers to the src1 register.
 		//    T refers to the src2 register.
 		if v.Dst >= RegCount {
-			return 0, fmt.Errorf("op.Encode: invalid dst register %d in %s.", v.Dst, v.Code)
+			return 0, fmt.Errorf("op.Encode: invalid dst register %d in %s", v.Dst, v.Code)
 		}
 		if v.Src1 >= RegCount {
-			return 0, fmt.Errorf("op.Encode: invalid src1 register %d in %s.", v.Src1, v.Code)
+			return 0, fmt.Errorf("op.Encode: invalid src1 register %d in %s", v.Src1, v.Code)
 		}
 		if v.Src2 >= RegCount {
-			return 0, fmt.Errorf("op.Encode: invalid src2 register %d in %s.", v.Src2, v.Code)
+			return 0, fmt.Errorf("op.Encode: invalid src2 register %d in %s", v.Src2, v.Code)
 		}
 
 		// op-code
@@ -230,10 +230,10 @@ func Encode(inst interface{}) (buf uint16, err error) {
 		//    R refers to the register.
 		//    X refers to the immediate value x.
 		if v.Reg >= RegCount {
-			return 0, fmt.Errorf("op.Encode: invalid register %d in %s.", v.Reg, v.Code)
+			return 0, fmt.Errorf("op.Encode: invalid register %d in %s", v.Reg, v.Code)
 		}
 		if v.X >= RegSize {
-			return 0, fmt.Errorf("op.Encode: invalid x (%d) in %s; above %d.", v.X, v.Code, RegSize-1)
+			return 0, fmt.Errorf("op.Encode: invalid x (%d) in %s; above %d", v.X, v.Code, RegSize-1)
 		}
 
 		// op-code
@@ -251,7 +251,7 @@ func Encode(inst interface{}) (buf uint16, err error) {
 		//    R refers to the cmp register.
 		//    XY refers to the memory address addr.
 		if v.Cmp >= RegCount {
-			return 0, fmt.Errorf("op.Encode: invalid cmp register %d in %s.", v.Cmp, v.Code)
+			return 0, fmt.Errorf("op.Encode: invalid cmp register %d in %s", v.Cmp, v.Code)
 		}
 
 		// op-code
@@ -271,7 +271,7 @@ func Encode(inst interface{}) (buf uint16, err error) {
 		buf |= 0xC000
 
 	default:
-		return 0, fmt.Errorf("op.Encode: unable to encode instruction (%T).", inst)
+		return 0, fmt.Errorf("op.Encode: unable to encode instruction (%T)", inst)
 	}
 
 	return buf, nil

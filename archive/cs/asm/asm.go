@@ -34,7 +34,7 @@ func Decode(r io.Reader) (insts []interface{}, err error) {
 // DecodeSlice decodes and returns the instructions of the byte slice.
 func DecodeSlice(p []byte) (insts []interface{}, err error) {
 	if len(p)%op.InstSize != 0 {
-		return nil, fmt.Errorf("asm.DecodeSlice: p len (%d) not evenly dividable by %d.", len(p), op.InstSize)
+		return nil, fmt.Errorf("asm.DecodeSlice: p len (%d) not evenly dividable by %d", len(p), op.InstSize)
 	}
 
 	insts = make([]interface{}, 0, len(p)/op.InstSize)

@@ -12,7 +12,7 @@ func Decode(buf uint16) (inst interface{}, err error) {
 		// padding.
 		pad := buf & 0x0FFF
 		if pad != 0 {
-			return nil, fmt.Errorf("op.Decode: invalid padding (%X) in %04X (%s).", pad, buf, code)
+			return nil, fmt.Errorf("op.Decode: invalid padding (%X) in %04X (%s)", pad, buf, code)
 		}
 
 		inst = &Nop{
@@ -27,7 +27,7 @@ func Decode(buf uint16) (inst interface{}, err error) {
 		// dst register.
 		dst := Reg(buf & 0x0F00 >> 8)
 		if dst >= RegCount {
-			return nil, fmt.Errorf("op.Decode: invalid dst register (%d) in %04X (%s).", dst, buf, code)
+			return nil, fmt.Errorf("op.Decode: invalid dst register (%d) in %04X (%s)", dst, buf, code)
 		}
 
 		// src memory address.
@@ -47,7 +47,7 @@ func Decode(buf uint16) (inst interface{}, err error) {
 		// dst register.
 		dst := Reg(buf & 0x0F00 >> 8)
 		if dst >= RegCount {
-			return nil, fmt.Errorf("op.Decode: invalid dst register (%d) in %04X (%s).", dst, buf, code)
+			return nil, fmt.Errorf("op.Decode: invalid dst register (%d) in %04X (%s)", dst, buf, code)
 		}
 
 		// src immediate value.
@@ -67,7 +67,7 @@ func Decode(buf uint16) (inst interface{}, err error) {
 		// src register.
 		src := Reg(buf & 0x0F00 >> 8)
 		if src >= RegCount {
-			return nil, fmt.Errorf("op.Decode: invalid src register (%d) in %04X (%s).", src, buf, code)
+			return nil, fmt.Errorf("op.Decode: invalid src register (%d) in %04X (%s)", src, buf, code)
 		}
 
 		// dst memory address.
@@ -87,19 +87,19 @@ func Decode(buf uint16) (inst interface{}, err error) {
 		// padding.
 		pad := buf & 0x0F00 >> 8
 		if pad != 0 {
-			return nil, fmt.Errorf("op.Decode: invalid padding (%X) in %04X (%s).", pad, buf, code)
+			return nil, fmt.Errorf("op.Decode: invalid padding (%X) in %04X (%s)", pad, buf, code)
 		}
 
 		// src register.
 		src := Reg(buf & 0x00F0 >> 4)
 		if src >= RegCount {
-			return nil, fmt.Errorf("op.Decode: invalid src register (%d) in %04X (%s).", src, buf, code)
+			return nil, fmt.Errorf("op.Decode: invalid src register (%d) in %04X (%s)", src, buf, code)
 		}
 
 		// dst register.
 		dst := Reg(buf & 0x000F)
 		if dst >= RegCount {
-			return nil, fmt.Errorf("op.Decode: invalid dst register (%d) in %04X (%s).", dst, buf, code)
+			return nil, fmt.Errorf("op.Decode: invalid dst register (%d) in %04X (%s)", dst, buf, code)
 		}
 
 		inst = &Move{
@@ -117,19 +117,19 @@ func Decode(buf uint16) (inst interface{}, err error) {
 		// dst register.
 		dst := Reg(buf & 0x0F00 >> 8)
 		if dst >= RegCount {
-			return nil, fmt.Errorf("op.Decode: invalid dst register (%d) in %04X (%s).", dst, buf, code)
+			return nil, fmt.Errorf("op.Decode: invalid dst register (%d) in %04X (%s)", dst, buf, code)
 		}
 
 		// src1 register.
 		src1 := Reg(buf & 0x00F0 >> 4)
 		if src1 >= RegCount {
-			return nil, fmt.Errorf("op.Decode: invalid src1 register (%d) in %04X (%s).", src1, buf, code)
+			return nil, fmt.Errorf("op.Decode: invalid src1 register (%d) in %04X (%s)", src1, buf, code)
 		}
 
 		// src2 register.
 		src2 := Reg(buf & 0x000F)
 		if src2 >= RegCount {
-			return nil, fmt.Errorf("op.Decode: invalid src2 register (%d) in %04X (%s).", src2, buf, code)
+			return nil, fmt.Errorf("op.Decode: invalid src2 register (%d) in %04X (%s)", src2, buf, code)
 		}
 
 		inst = &Add{
@@ -148,19 +148,19 @@ func Decode(buf uint16) (inst interface{}, err error) {
 		// dst register.
 		dst := Reg(buf & 0x0F00 >> 8)
 		if dst >= RegCount {
-			return nil, fmt.Errorf("op.Decode: invalid dst register (%d) in %04X (%s).", dst, buf, code)
+			return nil, fmt.Errorf("op.Decode: invalid dst register (%d) in %04X (%s)", dst, buf, code)
 		}
 
 		// src1 register.
 		src1 := Reg(buf & 0x00F0 >> 4)
 		if src1 >= RegCount {
-			return nil, fmt.Errorf("op.Decode: invalid src1 register (%d) in %04X (%s).", src1, buf, code)
+			return nil, fmt.Errorf("op.Decode: invalid src1 register (%d) in %04X (%s)", src1, buf, code)
 		}
 
 		// src2 register.
 		src2 := Reg(buf & 0x000F)
 		if src2 >= RegCount {
-			return nil, fmt.Errorf("op.Decode: invalid src2 register (%d) in %04X (%s).", src2, buf, code)
+			return nil, fmt.Errorf("op.Decode: invalid src2 register (%d) in %04X (%s)", src2, buf, code)
 		}
 
 		inst = &AddFloat{
@@ -179,19 +179,19 @@ func Decode(buf uint16) (inst interface{}, err error) {
 		// dst register.
 		dst := Reg(buf & 0x0F00 >> 8)
 		if dst >= RegCount {
-			return nil, fmt.Errorf("op.Decode: invalid dst register (%d) in %04X (%s).", dst, buf, code)
+			return nil, fmt.Errorf("op.Decode: invalid dst register (%d) in %04X (%s)", dst, buf, code)
 		}
 
 		// src1 register.
 		src1 := Reg(buf & 0x00F0 >> 4)
 		if src1 >= RegCount {
-			return nil, fmt.Errorf("op.Decode: invalid src1 register (%d) in %04X (%s).", src1, buf, code)
+			return nil, fmt.Errorf("op.Decode: invalid src1 register (%d) in %04X (%s)", src1, buf, code)
 		}
 
 		// src2 register.
 		src2 := Reg(buf & 0x000F)
 		if src2 >= RegCount {
-			return nil, fmt.Errorf("op.Decode: invalid src2 register (%d) in %04X (%s).", src2, buf, code)
+			return nil, fmt.Errorf("op.Decode: invalid src2 register (%d) in %04X (%s)", src2, buf, code)
 		}
 
 		inst = &Or{
@@ -210,19 +210,19 @@ func Decode(buf uint16) (inst interface{}, err error) {
 		// dst register.
 		dst := Reg(buf & 0x0F00 >> 8)
 		if dst >= RegCount {
-			return nil, fmt.Errorf("op.Decode: invalid dst register (%d) in %04X (%s).", dst, buf, code)
+			return nil, fmt.Errorf("op.Decode: invalid dst register (%d) in %04X (%s)", dst, buf, code)
 		}
 
 		// src1 register.
 		src1 := Reg(buf & 0x00F0 >> 4)
 		if src1 >= RegCount {
-			return nil, fmt.Errorf("op.Decode: invalid src1 register (%d) in %04X (%s).", src1, buf, code)
+			return nil, fmt.Errorf("op.Decode: invalid src1 register (%d) in %04X (%s)", src1, buf, code)
 		}
 
 		// src2 register.
 		src2 := Reg(buf & 0x000F)
 		if src2 >= RegCount {
-			return nil, fmt.Errorf("op.Decode: invalid src2 register (%d) in %04X (%s).", src2, buf, code)
+			return nil, fmt.Errorf("op.Decode: invalid src2 register (%d) in %04X (%s)", src2, buf, code)
 		}
 
 		inst = &And{
@@ -241,19 +241,19 @@ func Decode(buf uint16) (inst interface{}, err error) {
 		// dst register.
 		dst := Reg(buf & 0x0F00 >> 8)
 		if dst >= RegCount {
-			return nil, fmt.Errorf("op.Decode: invalid dst register (%d) in %04X (%s).", dst, buf, code)
+			return nil, fmt.Errorf("op.Decode: invalid dst register (%d) in %04X (%s)", dst, buf, code)
 		}
 
 		// src1 register.
 		src1 := Reg(buf & 0x00F0 >> 4)
 		if src1 >= RegCount {
-			return nil, fmt.Errorf("op.Decode: invalid src1 register (%d) in %04X (%s).", src1, buf, code)
+			return nil, fmt.Errorf("op.Decode: invalid src1 register (%d) in %04X (%s)", src1, buf, code)
 		}
 
 		// src2 register.
 		src2 := Reg(buf & 0x000F)
 		if src2 >= RegCount {
-			return nil, fmt.Errorf("op.Decode: invalid src2 register (%d) in %04X (%s).", src2, buf, code)
+			return nil, fmt.Errorf("op.Decode: invalid src2 register (%d) in %04X (%s)", src2, buf, code)
 		}
 
 		inst = &Xor{
@@ -271,19 +271,19 @@ func Decode(buf uint16) (inst interface{}, err error) {
 		// register.
 		reg := Reg(buf & 0x0F00 >> 8)
 		if reg >= RegCount {
-			return nil, fmt.Errorf("op.Decode: invalid register (%d) in %04X (%s).", reg, buf, code)
+			return nil, fmt.Errorf("op.Decode: invalid register (%d) in %04X (%s)", reg, buf, code)
 		}
 
 		// padding.
 		pad := buf & 0x00F0 >> 4
 		if pad != 0 {
-			return nil, fmt.Errorf("op.Decode: invalid padding (%X) in %04X (%s).", pad, buf, code)
+			return nil, fmt.Errorf("op.Decode: invalid padding (%X) in %04X (%s)", pad, buf, code)
 		}
 
 		// immediate value x.
 		x := Val(buf & 0x000F)
 		if x >= RegSize {
-			return nil, fmt.Errorf("op.Decode: invalid x (%d) in %04X (%s); above %d.", x, buf, code, RegSize-1)
+			return nil, fmt.Errorf("op.Decode: invalid x (%d) in %04X (%s); above %d", x, buf, code, RegSize-1)
 		}
 
 		inst = &Ror{
@@ -300,7 +300,7 @@ func Decode(buf uint16) (inst interface{}, err error) {
 		// cmp register.
 		cmp := Reg(buf & 0x0F00 >> 8)
 		if cmp >= RegCount {
-			return nil, fmt.Errorf("op.Decode: invalid cmp register (%d) in %04X (%s).", cmp, buf, code)
+			return nil, fmt.Errorf("op.Decode: invalid cmp register (%d) in %04X (%s)", cmp, buf, code)
 		}
 
 		// memory address addr.
@@ -318,7 +318,7 @@ func Decode(buf uint16) (inst interface{}, err error) {
 		// padding.
 		pad := buf & 0x0FFF
 		if pad != 0 {
-			return nil, fmt.Errorf("op.Decode: invalid padding (%X) in %04X (%s).", pad, buf, code)
+			return nil, fmt.Errorf("op.Decode: invalid padding (%X) in %04X (%s)", pad, buf, code)
 		}
 
 		inst = &Halt{
@@ -326,7 +326,7 @@ func Decode(buf uint16) (inst interface{}, err error) {
 		}
 
 	default:
-		return nil, fmt.Errorf("op.Decode: invalid code (%d) in %04X.", code, buf)
+		return nil, fmt.Errorf("op.Decode: invalid code (%d) in %04X", code, buf)
 	}
 
 	return inst, nil

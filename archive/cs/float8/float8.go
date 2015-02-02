@@ -97,11 +97,11 @@ func New(x float32) (f Float8, err error) {
 	// Exponent.
 	exp := int(bits & 0x7F800000 >> 23)
 	exp -= 127 // excess 127 notation.
-	exp += 1   // adjust exponent for the implicit 1.
+	exp++      // adjust exponent for the implicit 1.
 	if exp < -4 {
-		return 0, fmt.Errorf("float8.New: invalid exponent (%d) for %v; below -4.", exp, x)
+		return 0, fmt.Errorf("float8.New: invalid exponent (%d) for %v; below -4", exp, x)
 	} else if exp > 3 {
-		return 0, fmt.Errorf("float8.New: invalid exponent (%d) for %v; above 3.", exp, x)
+		return 0, fmt.Errorf("float8.New: invalid exponent (%d) for %v; above 3", exp, x)
 	}
 
 	// Encode exponent.
@@ -141,7 +141,7 @@ func (f Float8) Float32() float32 {
 
 	// Exponent.
 	exp := f.Exp()
-	exp -= 1 // adjust exponent for the implicit 1.
+	exp-- // adjust exponent for the implicit 1.
 
 	// Encode exponent.
 	xexp := uint8(exp)
@@ -181,7 +181,7 @@ func (f Float8) Mantissa() uint {
 	mantissa := uint(f & 0xF)
 	if mantissa != 0 && mantissa&0x8 == 0 {
 		// The mantissa is not represented in normalized form.
-		panic(fmt.Sprintf("mantissa (%04b) in f (%08b) is not represented in normalized form.", mantissa, f))
+		panic(fmt.Sprintf("mantissa (%04b) in f (%08b) is not represented in normalized form", mantissa, f))
 	}
 	return mantissa
 }

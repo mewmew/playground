@@ -21,110 +21,112 @@ type Code uint8
 
 // Op-codes.
 const (
-	// op-code: 0
-	// operand: 000
-	// desc:
-	//    No operation.
-	CodeNop Code = iota
-	// op-code: 1
-	// operand: RXY
-	//    R refers to the dst register.
-	//    XY refers to the src memory address.
-	// desc:
-	//    Load the contents of the src memory address into the dst register.
-	CodeLoadMem
-	// op-code: 2
-	// operand: RXY
-	//    R refers to the dst register.
-	//    XY refers to the src immediate value.
-	// desc:
-	//    Load the src immediate value into the dst register.
-	CodeLoadVal
-	// op-code: 3
-	// operand: RXY
-	//    R refers to the src register.
-	//    XY refers to the dst memory address.
-	// desc:
-	//    Store the contents of the src register into the dst memory address.
-	CodeStore
-	// op-code: 4
-	// operand: 0RS
-	//    R refers to the src register.
-	//    S refers to the dst register.
-	// desc:
-	//    Move the contents of the src register into the dst register.
-	CodeMove
-	// op-code: 5
-	// operand: RST
-	//    R refers to the dst register.
-	//    S refers to the src1 register.
-	//    T refers to the src2 register.
-	// desc:
-	//    Add the contents of the src1 and src2 registers, as though they
-	//    represented values in two's complement notation, and store the result
-	//    in the dst register.
-	CodeAdd
-	// op-code: 6
-	// operand: RST
-	//    R refers to the dst register.
-	//    S refers to the src1 register.
-	//    T refers to the src2 register.
-	// desc:
-	//    Add the contents of the src1 and src2 registers, as though they
-	//    represented values in floating-point notation, and store the result in
-	//    the dst register.
-	CodeAddFloat
-	// op-code: 7
-	// operand: RST
-	//    R refers to the dst register.
-	//    S refers to the src1 register.
-	//    T refers to the src2 register.
-	// desc:
-	//    Or the bit patterns in the src1 and src2 registers and store the result
-	//    in the dst register.
-	CodeOr
-	// op-code: 8
-	// operand: RST
-	//    R refers to the dst register.
-	//    S refers to the src1 register.
-	//    T refers to the src2 register.
-	// desc:
-	//    And the bit patterns in the src1 and src2 registers and store the
-	//    result in the dst register.
-	CodeAnd
-	// op-code: 9
-	// operand: RST
-	//    R refers to the dst register.
-	//    S refers to the src1 register.
-	//    T refers to the src2 register.
-	// desc:
-	//    Xor the bit patterns in the src1 and src2 registers and store the
-	//    result in the dst register.
-	CodeXor
-	// op-code: A
-	// operand: R0X
-	//    R refers to the register.
-	//    X refers to the immediate value x.
-	// desc:
-	//    Rotate the bit pattern in the reg register x bits to the right. Each
-	//    time a bit is rotated out of the low-order end it is placed at the
-	//    high-order end.
-	CodeRor
-	// op-code: B
-	// operand: RXY
-	//    R refers to the cmp register.
-	//    XY refers to the memory address addr.
-	// desc:
-	//    Jump to the instruction located at the addr memory address if the
-	//    contents of the cmp registers is equal to the contents of the 0
-	//    register. Otherwise, continue with the normal sequence of execution.
+	// CodeNop performs no operation.
 	//
-	//    This jump is "unconditional" when cmp == 0.
+	//    op-code: 0
+	//    operand: 000
+	CodeNop Code = iota
+	// CodeLoadMem loads the contents of the src memory address into the dst
+	// register.
+	//
+	//    op-code: 1
+	//    operand: RXY
+	//       R refers to the dst register.
+	//       XY refers to the src memory address.
+	CodeLoadMem
+	// CodeLoadVal loads the src immediate value into the dst register.
+	//
+	//    op-code: 2
+	//    operand: RXY
+	//       R refers to the dst register.
+	//       XY refers to the src immediate value.
+	CodeLoadVal
+	// CodeStore stores the contents of the src register into the dst memory
+	// address.
+	//
+	//    op-code: 3
+	//    operand: RXY
+	//       R refers to the src register.
+	//       XY refers to the dst memory address.
+	CodeStore
+	// CodeMove moves the contents of the src register into the dst register.
+	//
+	//    op-code: 4
+	//    operand: 0RS
+	//       R refers to the src register.
+	//       S refers to the dst register.
+	CodeMove
+	// CodeAdd adds the contents of the src1 and src2 registers, as though they
+	// represented values in two's complement notation, and store the result in
+	// the dst register.
+	//
+	//    op-code: 5
+	//    operand: RST
+	//       R refers to the dst register.
+	//       S refers to the src1 register.
+	//       T refers to the src2 register.
+	CodeAdd
+	// CodeAddFloat adds the contents of the src1 and src2 registers, as though
+	// they represented values in floating-point notation, and store the result
+	// in the dst register.
+	//
+	//    op-code: 6
+	//    operand: RST
+	//       R refers to the dst register.
+	//       S refers to the src1 register.
+	//       T refers to the src2 register.
+	CodeAddFloat
+	// CodeOr performs a bitwise OR operation between the bit patterns in the
+	// src1 and src2 registers and store the result in the dst register.
+	//
+	//    op-code: 7
+	//    operand: RST
+	//       R refers to the dst register.
+	//       S refers to the src1 register.
+	//       T refers to the src2 register.
+	CodeOr
+	// CodeAnd performs a bitwise AND operation between the bit patterns in the
+	// src1 and src2 registers and store the result in the dst register.
+	//
+	//    op-code: 8
+	//    operand: RST
+	//       R refers to the dst register.
+	//       S refers to the src1 register.
+	//       T refers to the src2 register.
+	CodeAnd
+	// CodeXor performs a bitwise XOR operation between the bit patterns in the
+	// src1 and src2 registers and store the result in the dst register.
+	//
+	//    op-code: 9
+	//    operand: RST
+	//       R refers to the dst register.
+	//       S refers to the src1 register.
+	//       T refers to the src2 register.
+	CodeXor
+	// CodeRor rotates the bit pattern in the reg register x bits to the right.
+	// Each time a bit is rotated out of the low-order end it is placed at the
+	// high-order end.
+	//
+	//    op-code: A
+	//    operand: R0X
+	//       R refers to the register.
+	//       X refers to the immediate value x.
+	CodeRor
+	// CodeCmpBranch jumps to the instruction located at the addr memory address
+	// if the contents of the cmp registers is equal to the contents of the 0
+	// register. Otherwise, continue with the normal sequence of execution.
+	//
+	// This jump is "unconditional" when cmp == 0.
+	//
+	//    op-code: B
+	//    operand: RXY
+	//       R refers to the cmp register.
+	//       XY refers to the memory address addr.
 	CodeCmpBranch
-	// op-code: C
-	// operand: 000
-	// desc:
-	//    Halt execution.
+	// CodeHalt halts execution.
+	//
+	//    op-code: C
+	//    operand: 000
 	CodeHalt
 )
 
