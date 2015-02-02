@@ -205,17 +205,17 @@ func getCellPt(col, row int, mark grid.Mark) (pt image.Point) {
 	}
 
 	var pts = [][]image.Point{
-		[]image.Point{
+		{
 			image.Pt(0+dx, 0+dy),   // 0, 0
 			image.Pt(0+dx, 136+dy), // 0, 1
 			image.Pt(0+dx, 270+dy), // 0, 2
 		},
-		[]image.Point{
+		{
 			image.Pt(165+dx, 0+dy),   // 1, 0
 			image.Pt(165+dx, 136+dy), // 1, 1
 			image.Pt(165+dx, 270+dy), // 1, 2
 		},
-		[]image.Point{
+		{
 			image.Pt(323+dx, 0+dy),   // 2, 0
 			image.Pt(323+dx, 136+dy), // 2, 1
 			image.Pt(323+dx, 270+dy), // 2, 2
@@ -230,17 +230,17 @@ func screenToCoord(g *grid.Grid, x, y int) (col, row int, err error) {
 	// Note: a regular grid would simplify this code a lot.
 
 	var area = [][]image.Rectangle{
-		[]image.Rectangle{
+		{
 			image.Rect(0, 0, 138, 119),   // 0, 0
 			image.Rect(0, 133, 146, 243), // 0, 1
 			image.Rect(0, 244, 157, 409), // 0, 2
 		},
-		[]image.Rectangle{
+		{
 			image.Rect(154, 0, 309, 116),   // 1, 0
 			image.Rect(165, 136, 299, 245), // 1, 1
 			image.Rect(158, 261, 322, 409), // 1, 2
 		},
-		[]image.Rectangle{
+		{
 			image.Rect(310, 0, 499, 128),   // 2, 0
 			image.Rect(317, 129, 499, 258), // 2, 1
 			image.Rect(323, 270, 499, 409), // 2, 2
