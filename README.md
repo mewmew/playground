@@ -1,5 +1,4 @@
-playground
-==========
+# playground
 
 [![Build Status](https://travis-ci.org/mewmew/playground.svg?branch=master)](https://travis-ci.org/mewmew/playground)
 [![Coverage Status](https://img.shields.io/coveralls/mewmew/playground.svg)](https://coveralls.io/r/mewmew/playground?branch=master)
@@ -8,9 +7,8 @@ playground
 You will probably not find anything that useful in here. If you do however, feel
 free to do whatever you want with it.
 
-public domain
--------------
+## Public domain
 
-This code is hereby released into the *[public domain][]*.
+The source code and any original content of this repository is hereby released into the [public domain].
 
 [public domain]: https://creativecommons.org/publicdomain/zero/1.0/
