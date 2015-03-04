@@ -1,3 +1,7 @@
+//go:generate usagen usagen
+
+// usagen generates usage documentation for a given command. It does so by
+// executing the command with the "--help" flag and parsing the output.
 package main
 
 import (
@@ -24,7 +28,7 @@ Generate usage documentation for a given command.
 Flags:`
 
 func init() {
-	flag.StringVar(&flagOut, "o", "usage.go", "Output path.")
+	flag.StringVar(&flagOut, "o", "z_usage.go", "Output path.")
 	flag.BoolVar(&flagPlain, "plain", false, "Plain text output (default: Go source code)")
 	flag.Usage = func() {
 		fmt.Fprintln(os.Stderr, use[1:])
