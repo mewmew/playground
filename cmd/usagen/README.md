@@ -10,6 +10,9 @@
 
     usagen CMD
 
+    Flags:
+        -o="usage.go": Output path.
+        -plain=false:  Plain text output (default: Go source code)
 ## Examples
 
     $ usagen ll2dot

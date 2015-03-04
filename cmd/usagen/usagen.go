@@ -1,5 +1,3 @@
-// usagen generates usage documentation for a given command. It does so by
-// executing the command with the "--help" flag and parsing the output.
 package main
 
 import (
@@ -12,14 +10,25 @@ import (
 	"strings"
 )
 
+var (
+	// flagOut specifies the output path.
+	flagOut string
+	// flagPlain specifies if the output should be plain text or Go source code.
+	flagPlain bool
+)
+
 const use = `
-Usage: usagen CMD
+Usage: usagen [OPTION]... CMD
 Generate usage documentation for a given command.
-`
+
+Flags:`
 
 func init() {
+	flag.StringVar(&flagOut, "o", "usage.go", "Output path.")
+	flag.BoolVar(&flagPlain, "plain", false, "Plain text output (default: Go source code)")
 	flag.Usage = func() {
 		fmt.Fprintln(os.Stderr, use[1:])
+		flag.PrintDefaults()
 	}
 }
 
@@ -65,11 +74,11 @@ func genUsage(cmdName string) error {
 		}
 		if inFlags {
 			parts := strings.Split(line, ":")
-			if len(parts) != 2 {
+			if len(parts) < 2 {
 				continue
 			}
 			flagSpec := strings.TrimSpace(parts[0]) + ":"
-			flagDesc := strings.TrimSpace(parts[1])
+			flagDesc := strings.TrimSpace(strings.Join(parts[1:], ":"))
 			flagSpecs = append(flagSpecs, flagSpec)
 			flagDescs = append(flagDescs, flagDesc)
 		}
@@ -79,15 +88,16 @@ func genUsage(cmdName string) error {
 	}
 
 	// Print usage message.
+	out := new(bytes.Buffer)
 	const format = `
-// Usage:
-//
-//     %s
-//
-// Flags:
-//
+Usage:
+
+    %s
+
+Flags:
+
 `
-	fmt.Printf(format[1:], usage)
+	fmt.Fprintf(out, format[1:], usage)
 
 	// Print command line flags using padding.
 	max := 0
@@ -97,11 +107,44 @@ func genUsage(cmdName string) error {
 		}
 	}
 	for i := 0; i < len(flagSpecs); i++ {
-		fmt.Printf("//    %-*s %s\n", max, flagSpecs[i], flagDescs[i])
+		fmt.Fprintf(out, "    %-*s %s\n", max, flagSpecs[i], flagDescs[i])
 	}
-
-	// Print package clause.
-	fmt.Println("package main")
+	return output(out.String())
 
 	return nil
+}
+
+// output writes the usage message to the specified output file.
+func output(usage string) error {
+	f, err := os.Create(flagOut)
+	if err != nil {
+		return err
+	}
+	defer f.Close()
+
+	// Early exit for plain text output.
+	if flagPlain {
+		_, err = fmt.Fprint(f, usage)
+		return err
+	}
+
+	// Go source code output.
+	lines := strings.Split(usage, "\n")
+	for i, line := range lines {
+		// Skip trailing newline.
+		if i == len(lines)-1 && len(line) == 0 {
+			break
+		}
+
+		pre := "//"
+		if len(line) > 0 {
+			pre = "// "
+		}
+		_, err = fmt.Fprintln(f, pre+line)
+		if err != nil {
+			return err
+		}
+	}
+	_, err = fmt.Fprintln(f, "package main")
+	return err
 }
