@@ -24,7 +24,7 @@ Installation
 Screenshots
 -----------
 
-![vaga](https://raw.github.com/mewmew/playground/master/archive/vaga/cmd/vaga/vaga.png)
+![vaga](https://raw.githubusercontent.com/mewmew/playground/master/archive/vaga/cmd/vaga/vaga.png)
 
 public domain
 -------------

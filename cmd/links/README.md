@@ -24,8 +24,8 @@ Examples
 		// invalid fragment id to "b.html#a" in file "a.html".
 		// invalid link target "c.html" in file "b.html".
 
-[a.html]: https://raw.github.com/mewmew/playground/master/cmd/links/testdata/a.html
-[b.html]: https://raw.github.com/mewmew/playground/master/cmd/links/testdata/b.html
+[a.html]: https://raw.githubusercontent.com/mewmew/playground/master/cmd/links/testdata/a.html
+[b.html]: https://raw.githubusercontent.com/mewmew/playground/master/cmd/links/testdata/b.html
 
 public domain
 -------------
