@@ -1,20 +1,16 @@
-links
-=====
+# links
 
 This tool examines HTML files and reports invalid links.
 
-Installation
-------------
+## Installation
 
 	go get github.com/mewmew/playground/cmd/links
 
-Usage
------
+## Usage
 
 	links PATH...
 
-Examples
---------
+## Examples
 
 1. Report any invalid links in the set of files [a.html][] and [b.html][].
 
@@ -27,9 +23,8 @@ Examples
 [a.html]: https://raw.githubusercontent.com/mewmew/playground/master/cmd/links/testdata/a.html
 [b.html]: https://raw.githubusercontent.com/mewmew/playground/master/cmd/links/testdata/b.html
 
-public domain
--------------
+## Public domain
 
-This code is hereby released into the *[public domain][]*.
+The source code and any original content of this repository is hereby released into the [public domain].
 
 [public domain]: https://creativecommons.org/publicdomain/zero/1.0/

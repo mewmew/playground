@@ -1,20 +1,16 @@
-prime
-=====
+# prime
 
 This tool prints the prime numbers in ascending order.
 
-Installation
-------------
+## Installation
 
 	go get github.com/mewmew/playground/cmd/prime
 
-Usage
------
+## Usage
 
 	prime COUNT
 
-Examples
---------
+## Examples
 
 	prime 10
 	// Output:
@@ -29,9 +25,8 @@ Examples
 	// 23
 	// 29
 
-public domain
--------------
+## Public domain
 
-This code is hereby released into the *[public domain][]*.
+The source code and any original content of this repository is hereby released into the [public domain].
 
 [public domain]: https://creativecommons.org/publicdomain/zero/1.0/

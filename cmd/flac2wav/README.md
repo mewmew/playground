@@ -1,15 +1,12 @@
-flac2wav
-========
+# flac2wav
 
 The flac2wav tool converts FLAC files to WAV files.
 
-Installation
-------------
+## Installation
 
 	go get github.com/mewmew/playground/cmd/flac2wav
 
-Usage
------
+## Usage
 
 	flac2wav [OPTION]... FILE...
 
@@ -18,9 +15,8 @@ Flags:
 	-f (default=false)
 		Force overwrite.
 
-public domain
--------------
+## Public domain
 
-This code is hereby released into the *[public domain][]*.
+The source code and any original content of this repository is hereby released into the [public domain].
 
 [public domain]: https://creativecommons.org/publicdomain/zero/1.0/

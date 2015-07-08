@@ -1,22 +1,18 @@
-mimicry
-=======
+# mimicry
 
 This tool creates a git repository which mimics an image using a contribution
 history of carefully crafted commit dates. It expects a 51x7 image with a
 transparent background.
 
-Installation
-------------
+## Installation
 
 	go get github.com/mewmew/playground/cmd/mimicry
 
-Usage
------
+## Usage
 
 	mimicry IMAGE
 
-Examples
---------
+## Examples
 
 The mimicry command was used to create the [hello][] repository. Below is a screenshot of its contribution history as of 2014-07-11.
 
@@ -26,9 +22,8 @@ The mimicry command was used to create the [hello][] repository. Below is a scre
 
 [hello]: https://github.com/yumpie/hello
 
-public domain
--------------
+## Public domain
 
-This code is hereby released into the *[public domain][]*.
+The source code and any original content of this repository is hereby released into the [public domain].
 
 [public domain]: https://creativecommons.org/publicdomain/zero/1.0/
