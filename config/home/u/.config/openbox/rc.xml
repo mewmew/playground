@@ -128,7 +128,7 @@
 		<!-- Keybindings for running applications -->
 		<keybind key="W-e">
 			<action name="Execute">
-				<command>thunar</command>
+				<command>spacefm</command>
 			</action>
 		</keybind>
 		<keybind key="W-r">
@@ -171,16 +171,28 @@
 				<command>scrot -s -b '/home/u/Desktop/%F %T.png'</command>
 			</action>
 		</keybind>
-	  <keybind key="XF86AudioLowerVolume">
-		 <action name="Execute">
-			<command>amixer set Master 2-</command>
-		 </action>
-	  </keybind>
-	  <keybind key="XF86AudioRaiseVolume">
-		 <action name="Execute">
-			<command>amixer set Master 2+</command>
-		 </action>
-	  </keybind>
+		<keybind key="XF86AudioLowerVolume">
+			<action name="Execute">
+				<command>pactl set-sink-volume 0 -3%</command>
+			</action>
+			<action name="Execute">
+				<command>pactl set-sink-volume 1 -3%</command>
+			</action>
+			<action name="Execute">
+				<command>pactl set-sink-volume 2 -3%</command>
+			</action>
+		</keybind>
+		<keybind key="XF86AudioRaiseVolume">
+			<action name="Execute">
+				<command>pactl set-sink-volume 0 +3%</command>
+			</action>
+			<action name="Execute">
+				<command>pactl set-sink-volume 1 +3%</command>
+			</action>
+			<action name="Execute">
+				<command>pactl set-sink-volume 2 +3%</command>
+			</action>
+		</keybind>
 
 		<!-- Keybindings for menus -->
 		<keybind key="W-m">

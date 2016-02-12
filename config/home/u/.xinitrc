@@ -1,6 +1,4 @@
-export GTK2_RC_FILES="$HOME/.gtkrc-2.0"
+xcompmgr &
 tint2 &
-~/xmod.sh &
-walls -t=1m nature &
-sleep 3 && xset b off &
+#hsetroot -fill ~/resources/wallhaven/wallhaven-48985.jpg &
 openbox
