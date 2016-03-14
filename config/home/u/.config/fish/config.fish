@@ -28,6 +28,9 @@ alias .... 'cd ../../..'
 alias ..... 'cd ../../../..'
 alias ...... 'cd ../../../../..'
 
+# ref: http://www.projectatomic.io/blog/2015/08/why-we-dont-let-non-root-users-run-docker-in-centos-fedora-or-rhel/
+alias docker="sudo /usr/bin/docker"
+
 # Calendar start on monday.
 alias cal="cal -m"
 
@@ -53,3 +56,6 @@ alias xout='xclip -out'
 
 # Cleaner output
 alias time='time -p'
+
+# Muscle memory is difficult to forget
+alias ack='sift'
