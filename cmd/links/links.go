@@ -67,6 +67,7 @@ func parseFile(filePath string) (err error) {
 	}
 	defer fr.Close()
 
+	log.Println("checking:", filePath)
 	doc, err := html.Parse(fr)
 	if err != nil {
 		return err
@@ -156,6 +157,7 @@ func parseDir(dir string) (err error) {
 // whitelist contains a list of all extensions believed to be HTML files.
 var whitelist = map[string]bool{
 	".html": true,
+	".md":   true,
 }
 
 func walk(path string, info os.FileInfo, err error) error {
