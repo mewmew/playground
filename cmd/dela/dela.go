@@ -1,11 +1,12 @@
 package main
 
 import (
+	"flag"
 	"log"
 	"net/http"
 )
 
-func Log(handler http.Handler) http.Handler {
+func logger(handler http.Handler) http.Handler {
 	logger := func(w http.ResponseWriter, r *http.Request) {
 		log.Printf("%s %s %s", r.RemoteAddr, r.Method, r.URL)
 		handler.ServeHTTP(w, r)
@@ -14,7 +15,11 @@ func Log(handler http.Handler) http.Handler {
 }
 
 func main() {
-	if err := http.ListenAndServe(":8080", Log(http.FileServer(http.Dir(".")))); err != nil {
+	var addr string
+	flag.StringVar(&addr, "http", ":8080", "HTTP service address (e.g., ':6060')")
+	flag.Parse()
+	handler := logger(http.FileServer(http.Dir(".")))
+	if err := http.ListenAndServe(addr, handler); err != nil {
 		log.Fatal(err)
 	}
 }
