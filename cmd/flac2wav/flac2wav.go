@@ -7,9 +7,8 @@ import (
 	"log"
 	"os"
 
-	"azul3d.org/audio.v1"
 	_ "azul3d.org/audio/flac.dev"
-	"azul3d.org/audio/wav.v1"
+	"azul3d.org/engine/audio/wav"
 	"github.com/davecheney/profile"
 	"github.com/mewkiz/pkg/osutil"
 	"github.com/mewkiz/pkg/pathutil"
@@ -56,11 +55,7 @@ func flac2wav(path string) error {
 	// Create WAV file.
 	wavPath := pathutil.TrimExt(path) + ".wav"
 	if !flagForce {
-		exists, err := osutil.Exists(wavPath)
-		if err != nil {
-			return err
-		}
-		if exists {
+		if osutil.Exists(wavPath) {
 			return fmt.Errorf("the file %q exists already", wavPath)
 		}
 	}
