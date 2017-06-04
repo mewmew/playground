@@ -73,13 +73,8 @@ func reverse(w io.Writer, path string) error {
 			star = true
 			continue
 		}
-		pos := strings.IndexByte(line, '|')
-		if pos == -1 {
-			break
-		}
-		line = line[:pos]
 		if len(line) < len("00000000") {
-			break
+			return errors.Errorf("invalid line %q, missing address prefix", line)
 		}
 		part := line[:len("00000000")]
 		line = line[len("00000000"):]
@@ -94,6 +89,10 @@ func reverse(w io.Writer, path string) error {
 			star = false
 		}
 		prev = addr
+		pos := strings.IndexByte(line, '|')
+		if pos != -1 {
+			line = line[:pos]
+		}
 		for len(line) > 0 {
 			line = strings.TrimSpace(line)
 			pos := strings.IndexByte(line, ' ')
