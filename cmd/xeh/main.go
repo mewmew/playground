@@ -1,28 +1,62 @@
+// The xeh tool reverses the output of hexdump -C (*.txt > *.bin).
 package main
 
 import (
 	"bufio"
-	"encoding/hex"
 	"flag"
 	"fmt"
+	"io"
 	"log"
 	"os"
+	"strconv"
 	"strings"
 
 	"github.com/pkg/errors"
 )
 
+func usage() {
+	const use = `
+Reverse the output of hexdump -C.
+
+Usage:
+
+	xeh [OPTION]... FILE
+
+Flags:
+`
+	fmt.Fprintln(os.Stderr, use[1:])
+	flag.PrintDefaults()
+}
+
 func main() {
+	// Parse command line flags.
+	var (
+		// output specifies the output path.
+		output string
+	)
+	flag.StringVar(&output, "o", "", "output path")
+	flag.Usage = usage
 	flag.Parse()
+
+	// Reverse the output of hexdump -C.
+	w := os.Stdout
+	if len(output) > 0 {
+		f, err := os.Create(output)
+		if err != nil {
+			log.Fatal(err)
+		}
+		defer f.Close()
+		w = f
+	}
 	for _, path := range flag.Args() {
-		if err := reverse(path); err != nil {
+		if err := reverse(w, path); err != nil {
 			log.Fatalf("%+v", err)
 		}
 	}
 }
 
-// reverse prints to stdout the reverse output of hexdump -C.
-func reverse(path string) error {
+// reverse reverses the output of hexdump -C, writing to w.
+func reverse(w io.Writer, path string) error {
 	f, err := os.Open(path)
 	if err != nil {
 		return errors.WithStack(err)
@@ -30,43 +64,55 @@ func reverse(path string) error {
 	defer f.Close()
 	s := bufio.NewScanner(f)
 	star := false
-	var prev uint32
+	var prev uint64
 	var data []byte
 	var zero [16]byte
 	for s.Scan() {
 		line := s.Text()
-		var addr uint32
-		var buf [16]byte
 		if line == "*" {
 			star = true
 			continue
 		}
-		if _, err := fmt.Sscanf(line, "%08x", &addr); err != nil {
+		pos := strings.IndexByte(line, '|')
+		if pos == -1 {
+			break
+		}
+		line = line[:pos]
+		if len(line) < len("00000000") {
+			break
+		}
+		part := line[:len("00000000")]
+		line = line[len("00000000"):]
+		addr, err := strconv.ParseUint(part, 16, 32)
+		if err != nil {
 			return errors.WithStack(err)
 		}
-		line = line[len("00000000"):]
-		n := 0
-		for ; n < 16; n++ {
-			line = strings.TrimSpace(line)
-			if _, err := fmt.Sscanf(line, "%02x", &buf[n]); err != nil {
-				break
-			}
-			if len(line) < len("00") {
-				break
-			}
-			line = line[len("00"):]
-		}
 		if star {
-			for i := prev; i < addr-16; i += 16 {
+			for i := prev + 16; i < addr; i += 16 {
 				data = append(data, zero[:]...)
 			}
 			star = false
 		}
 		prev = addr
-		data = append(data, buf[:n]...)
+		for len(line) > 0 {
+			line = strings.TrimSpace(line)
+			pos := strings.IndexByte(line, ' ')
+			if pos == -1 {
+				pos = len(line)
+			}
+			part := line[:pos]
+			line = line[pos:]
+			b, err := strconv.ParseUint(part, 16, 8)
+			if err != nil {
+				return errors.WithStack(err)
+			}
+			data = append(data, byte(b))
+		}
 	}
-	fmt.Println(hex.Dump(data))
 	if err := s.Err(); err != nil {
+		return errors.WithStack(err)
+	}
+	if _, err := w.Write(data); err != nil {
 		return errors.WithStack(err)
 	}
 	return nil
