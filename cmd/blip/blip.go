@@ -8,8 +8,8 @@ import (
 	"time"
 
 	"github.com/faiface/beep"
-	"github.com/faiface/beep/flac"
 	"github.com/faiface/beep/speaker"
+	"github.com/mewpull/beep/flac"
 )
 
 func main() {
