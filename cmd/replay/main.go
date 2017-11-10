@@ -167,9 +167,9 @@ func downloadSegments(playlist, output string) error {
 	}
 
 	var segNames []string
-	for _, url := range urls {
+	for i, url := range urls {
 		segName := segmentName(url)
-		log.Println("downloading:", segName)
+		log.Printf("downloading segment %d of %d\n", i, len(urls))
 		if err := downloadSegment(url, segName); err != nil {
 			return errors.WithStack(err)
 		}
@@ -225,6 +225,14 @@ func merge(segNames []string, output string) error {
 	cmd.Stderr = os.Stderr
 	if err := cmd.Run(); err != nil {
 		return errors.WithStack(err)
+	}
+	if err := os.Remove(listfile); err != nil {
+		return errors.WithStack(err)
+	}
+	for _, segName := range segNames {
+		if err := os.Remove(segName); err != nil {
+			return errors.WithStack(err)
+		}
 	}
 	return nil
 }
