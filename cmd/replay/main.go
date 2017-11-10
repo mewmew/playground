@@ -169,7 +169,7 @@ func downloadSegments(playlist, output string) error {
 	var segNames []string
 	for i, url := range urls {
 		segName := segmentName(url)
-		log.Printf("downloading segment %d of %d\n", i, len(urls))
+		log.Printf("downloading segment %d of %d\n", i+1, len(urls))
 		if err := downloadSegment(url, segName); err != nil {
 			return errors.WithStack(err)
 		}
