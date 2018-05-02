@@ -6,7 +6,6 @@ import (
 	"flag"
 	"fmt"
 	"log"
-	"os"
 	"strings"
 	"time"
 
@@ -14,20 +13,18 @@ import (
 	"github.com/mewmew/playground/archive/ted"
 )
 
-// flagAll specifies if all TED talk pages should be crawled (default: only
-// crawl first page).
-var flagAll bool
-
 func main() {
-	flag.BoolVar(&flagAll, "all", false, "List all TED talks (default: only show first page).")
+	// all specifies if all TED talk pages should be crawled (default: only crawl
+	// first page).
+	var all bool
+	flag.BoolVar(&all, "all", false, "list all TED talks (default: show only first page)")
 	flag.Parse()
-	err := stash("http://www.ted.com/talks/quick-list")
-	if err != nil {
-		log.Fatalln(err)
+	if err := stash("http://www.ted.com/talks/quick-list", all); err != nil {
+		log.Fatalf("%+v", err)
 	}
 	buf, err := json.MarshalIndent(talks, "", "\t")
 	if err != nil {
-		log.Fatalln(err)
+		log.Fatalf("%+v", err)
 	}
 	fmt.Println(string(buf))
 }
@@ -36,10 +33,10 @@ func main() {
 var talks []ted.Talk
 
 // stash downloads a list of all TED talks.
-func stash(url string) error {
+func stash(url string, all bool) error {
 	// Crawl page.
-	if flagAll {
-		fmt.Fprintln(os.Stderr, "crawling:", url)
+	if all {
+		log.Println("crawling:", url)
 	}
 	doc, err := goquery.NewDocument(url)
 	if err != nil {
@@ -51,20 +48,29 @@ func stash(url string) error {
 	dump := func(i int, s *goquery.Selection) {
 		switch i % 5 {
 		case 0: // Date
-			date, err := time.Parse("Jan 2006", s.Text())
+			date, err := time.Parse("Jan 2006", strings.TrimSpace(s.Text()))
 			if err != nil {
 				log.Println(err)
 			}
 			talk = ted.Talk{Date: date}
-		case 1: // Event
-			talk.Event = s.Text()
-		case 2: // Title
+		case 1: // Title
 			talk.Title = s.Find("a").Text()
+		case 2: // Event
+			talk.Event = strings.TrimSpace(s.Text())
 		case 3: // Duration
-			parts := strings.Split(s.Text(), ":")
-			duration, err := time.ParseDuration(fmt.Sprintf("%sm%ss", parts[0], parts[1]))
+			raw := strings.TrimSpace(s.Text())
+			if strings.Contains(raw, ":") {
+				parts := strings.Split(raw, ":")
+				if len(parts) != 2 {
+					log.Printf("invalid duration format `%v` for %q on page %v", raw, talk.Title, url)
+				}
+				raw = fmt.Sprintf("%sm%ss", parts[0], parts[1])
+			} else if strings.Contains(raw, "h ") {
+				raw = strings.Replace(raw, " ", "", -1)
+			}
+			duration, err := time.ParseDuration(raw)
 			if err != nil {
-				log.Println(err)
+				log.Printf("unable to parse duration %v; %v", raw, err)
 			}
 			talk.Duration = duration
 		case 4: // Download
@@ -73,17 +79,17 @@ func stash(url string) error {
 				talk.Download = high
 				talks = append(talks, talk)
 			} else {
-				log.Printf("unable to locate high-definition download link for %q on page %v\n", talk.Title, url)
+				log.Printf("unable to locate high-definition download link for %q on page %v", talk.Title, url)
 			}
 		}
 	}
-	doc.Find("td").Each(dump)
+	doc.Find(".row .quick-list__row > div").Each(dump)
 
 	// Crawl next page recursively.
-	if flagAll {
-		next, ok := doc.Find(".next>a").First().Attr("href")
+	if all {
+		next, ok := doc.Find("a.pagination__next").First().Attr("href")
 		if ok {
-			return stash("http://www.ted.com" + next)
+			return stash("http://www.ted.com"+next, all)
 		}
 	}
 	return nil
