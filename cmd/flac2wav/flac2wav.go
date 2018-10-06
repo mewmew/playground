@@ -7,11 +7,12 @@ import (
 	"log"
 	"os"
 
-	_ "azul3d.org/audio/flac.dev"
+	"azul3d.org/engine/audio"
+	_ "azul3d.org/engine/audio/flac"
 	"azul3d.org/engine/audio/wav"
-	"github.com/davecheney/profile"
 	"github.com/mewkiz/pkg/osutil"
 	"github.com/mewkiz/pkg/pathutil"
+	"github.com/pkg/profile"
 )
 
 // flagForce specifies if file overwriting should be forced, when a WAV file of
@@ -75,7 +76,7 @@ func flac2wav(path string) error {
 	// Encode WAV audio samples copied from the FLAC decoder.
 	// TODO(u): Replace with audio.Copy as soon as that doesn't cause audio
 	// sample conversions.
-	buf := make(audio.PCM16Samples, (32*1024)/8)
+	buf := make(audio.Int16, (32*1024)/8)
 	for {
 		nr, er := dec.Read(buf)
 		if nr > 0 {

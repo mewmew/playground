@@ -1,8 +1,8 @@
 package main
 
 import (
-	"fmt"
 	"flag"
+	"fmt"
 	"log"
 	"strings"
 
@@ -19,7 +19,7 @@ func main() {
 	)
 	const (
 		defaultArtist = "Johnossi"
-		defaultSong = "What's the point"
+		defaultSong   = "What's the point"
 	)
 	flag.StringVar(&artist, "artist", defaultArtist, "artist name")
 	flag.StringVar(&song, "song", defaultSong, "song name")

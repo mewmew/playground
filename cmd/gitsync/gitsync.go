@@ -14,7 +14,8 @@ import (
 	"os"
 	"strings"
 
-	"github.com/mewfork/go-github/github"
+	"github.com/google/go-github/github"
+	"golang.org/x/net/context"
 )
 
 func init() {
@@ -41,7 +42,7 @@ func main() {
 func gitsync(username string) (err error) {
 	c := github.NewClient(nil)
 
-	repos, _, err := c.Repositories.List(username, nil)
+	repos, _, err := c.Repositories.List(context.TODO(), username, nil)
 	if err != nil {
 		return err
 	}
@@ -50,7 +51,7 @@ func gitsync(username string) (err error) {
 	fmt.Println("ssh-add ~/.ssh/id_rsa_mewmew")
 
 	for _, r := range repos {
-		repo, _, err := c.Repositories.Get(username, *r.Name)
+		repo, _, err := c.Repositories.Get(context.TODO(), username, *r.Name)
 		if err != nil {
 			return err
 		}
