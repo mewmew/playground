@@ -4,7 +4,7 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/mewkiz/pkg/errutil"
+	"github.com/pkg/errors"
 )
 
 // An Option represents a search option.
@@ -59,7 +59,7 @@ func (v *Categories) Set(s string) error {
 	for _, name := range names {
 		mask, ok := cats[name]
 		if !ok {
-			return errutil.Newf("invalid wallpaper category %q", name)
+			return errors.Errorf("invalid wallpaper category %q", name)
 		}
 		*v |= mask
 	}
@@ -132,7 +132,7 @@ func (v *Purity) Set(s string) error {
 	for _, name := range names {
 		mask, ok := purity[name]
 		if !ok {
-			return errutil.Newf("invalid purity mode %q", name)
+			return errors.Errorf("invalid purity mode %q", name)
 		}
 		*v |= mask
 	}
@@ -257,7 +257,7 @@ func (v *Resolutions) Set(s string) error {
 	for _, name := range names {
 		mask, ok := res[name]
 		if !ok {
-			return errutil.Newf("invalid screen resolution %q", name)
+			return errors.Errorf("invalid screen resolution %q", name)
 		}
 		*v |= mask
 	}
@@ -334,7 +334,7 @@ func (v *Ratios) Set(s string) error {
 	for _, name := range names {
 		mask, ok := ratios[name]
 		if !ok {
-			return errutil.Newf("invalid aspect ratio %q", name)
+			return errors.Errorf("invalid aspect ratio %q", name)
 		}
 		*v |= mask
 	}
@@ -394,7 +394,7 @@ func (v *Sorting) Set(s string) error {
 	}
 	sorting, ok := sortings[s]
 	if !ok {
-		return errutil.Newf("invalid sorting method %q", s)
+		return errors.Errorf("invalid sorting method %q", s)
 	}
 	*v = sorting
 	return nil
@@ -441,7 +441,7 @@ func (v *Order) Set(s string) error {
 	}
 	order, ok := orders[s]
 	if !ok {
-		return errutil.Newf("invalid sorting order %q", s)
+		return errors.Errorf("invalid sorting order %q", s)
 	}
 	*v = order
 	return nil
@@ -471,7 +471,7 @@ func (v Page) String() string {
 func (v *Page) Set(s string) error {
 	x, err := strconv.Atoi(s)
 	if err != nil {
-		return errutil.Err(err)
+		return errors.WithStack(err)
 	}
 	*v = Page(x)
 	return nil

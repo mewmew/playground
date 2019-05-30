@@ -9,10 +9,10 @@ import (
 	"net/http"
 	"net/url"
 	"path/filepath"
-	"strconv"
+	"strings"
 
 	"github.com/PuerkitoBio/goquery"
-	"github.com/mewkiz/pkg/errutil"
+	"github.com/pkg/errors"
 )
 
 // Search searches for wallpapers based on the given query and search options.
@@ -30,57 +30,57 @@ func Search(query string, options ...Option) (ids []ID, err error) {
 
 	// Send search request.
 	rawquery := values.Encode()
-	rawurl := "http://alpha.wallhaven.cc/search?" + rawquery
+	rawurl := "http://wallhaven.cc/search?" + rawquery
 	doc, err := goquery.NewDocument(rawurl)
 	if err != nil {
-		return nil, errutil.Err(err)
+		return nil, errors.WithStack(err)
 	}
 
 	// Locate wallpaper IDs in response.
 	//
 	// Example response:
-	//    <figure id="thumb-109603" class="thumb thumb-sfw thumb-general" data-wallpaper-id="109603" style="width:300px;height:200px" >
+	//    <a class="preview" href="http://wallhaven.cc/w/oxl3xl">
 	f := func(i int, s *goquery.Selection) {
-		rawid, ok := s.Attr("data-wallpaper-id")
+		rawurl, ok := s.Attr("href")
 		if !ok {
 			return
 		}
-		id, err := strconv.Atoi(rawid)
-		if err != nil {
-			log.Print(errutil.Err(err))
+		pos := strings.Index(rawurl, "/w/")
+		if pos == -1 {
+			log.Printf("unable to locate wallpaper ID in %q", rawurl)
 			return
 		}
+		id := rawurl[pos+len("/w/"):]
 		ids = append(ids, ID(id))
 	}
-	doc.Find("figure.thumb").Each(f)
-
+	doc.Find("a.preview").Each(f)
 	return ids, nil
 }
 
 // ID represents the wallpaper ID of a specific wallpaper on wallhaven.cc.
-type ID int
+type ID string
 
 // Download downloads the wallpaper to the given directory, and returns the path
 // to the downloaded file.
 func (id ID) Download(dir string) (path string, err error) {
 	download := func(ext string) (path string, err error) {
-		filename := fmt.Sprintf("wallhaven-%d.%s", id, ext)
+		filename := fmt.Sprintf("wallhaven-%s.%s", id, ext)
 		path = filepath.Join(dir, filename)
-		rawurl := "http://wallpapers.wallhaven.cc/wallpapers/full/" + filename
+		rawurl := fmt.Sprintf("https://w.wallhaven.cc/full/%s/%s", id[:2], filename)
 		resp, err := http.Get(rawurl)
 		if err != nil {
-			return "", errutil.Err(err)
+			return "", errors.WithStack(err)
 		}
 		defer resp.Body.Close()
 		if resp.StatusCode != http.StatusOK {
-			return "", errutil.Newf("invalid status code; expected %d, got %d", http.StatusOK, resp.StatusCode)
+			return "", errors.Errorf("invalid status code for %q; expected %d, got %d", rawurl, http.StatusOK, resp.StatusCode)
 		}
 		buf, err := ioutil.ReadAll(resp.Body)
 		if err != nil {
-			return "", errutil.Err(err)
+			return "", errors.WithStack(err)
 		}
 		if err := ioutil.WriteFile(path, buf, 0644); err != nil {
-			return "", errutil.Err(err)
+			return "", errors.WithStack(err)
 		}
 		return path, nil
 	}
@@ -94,7 +94,7 @@ func (id ID) Download(dir string) (path string, err error) {
 	// Fallback to download with png extension.
 	path, err = download("png")
 	if err != nil {
-		return "", errutil.Err(err)
+		return "", errors.WithStack(err)
 	}
 	return path, nil
 }

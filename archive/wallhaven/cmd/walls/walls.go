@@ -8,8 +8,8 @@ import (
 	"os"
 	"strings"
 
-	"github.com/mewkiz/pkg/errutil"
 	"github.com/mewmew/playground/archive/wallhaven"
+	"github.com/pkg/errors"
 )
 
 func main() {
@@ -73,7 +73,7 @@ func main() {
 	// Download wallpapers.
 	query := strings.Join(flag.Args(), " ")
 	if err := walls(query, dir, n, options); err != nil {
-		log.Fatal(err)
+		log.Fatalf("%+v", err)
 	}
 }
 
@@ -82,7 +82,7 @@ func main() {
 func walls(query string, dir string, n int, options []wallhaven.Option) error {
 	// Create output directory.
 	if err := os.MkdirAll(dir, 0755); err != nil {
-		return errutil.Err(err)
+		return errors.WithStack(err)
 	}
 
 	// Download at most n wallpapers (0 = infinite).
@@ -90,7 +90,7 @@ func walls(query string, dir string, n int, options []wallhaven.Option) error {
 	for {
 		ids, err := wallhaven.Search(query, options...)
 		if err != nil {
-			return errutil.Err(err)
+			return errors.WithStack(err)
 		}
 		if len(ids) == 0 {
 			return nil
@@ -98,7 +98,7 @@ func walls(query string, dir string, n int, options []wallhaven.Option) error {
 		for _, id := range ids {
 			path, err := id.Download(dir)
 			if err != nil {
-				return errutil.Err(err)
+				return errors.WithStack(err)
 			}
 			fmt.Println(path)
 
