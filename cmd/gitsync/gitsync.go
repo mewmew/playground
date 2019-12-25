@@ -90,7 +90,7 @@ func gitsync(username, accessToken string) error {
 	// Print sync script.
 	fmt.Println("export BASE_DIR=$PWD")
 	fmt.Println("eval `ssh-agent`")
-	fmt.Println("ssh-add ~/.ssh/id_rsa_mewmew")
+	fmt.Println("ssh-add ~/.ssh/id_rsa")
 	for _, repo := range allRepos {
 		if *repo.Fork {
 			gitCloneURL := getGitCloneURL(*repo.CloneURL)
