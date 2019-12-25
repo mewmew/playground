@@ -16,6 +16,7 @@ import (
 
 	"github.com/google/go-github/github"
 	"golang.org/x/net/context"
+	"golang.org/x/oauth2"
 )
 
 func init() {
@@ -27,9 +28,14 @@ func usage() {
 }
 
 func main() {
+	var (
+		// GitHub access token.
+		accessToken string
+	)
+	flag.StringVar(&accessToken, "token", "", "GitHub access token")
 	flag.Parse()
 	for _, username := range flag.Args() {
-		err := gitsync(username)
+		err := gitsync(username, accessToken)
 		if err != nil {
 			log.Fatalln(err)
 		}
@@ -39,8 +45,17 @@ func main() {
 // gitsync locates the repositories of the provided username or organization. It
 // creates a shell script which will clone all repository forks, pull changes
 // from their parens and push those changes to the forked repository.
-func gitsync(username string) (err error) {
+func gitsync(username, accessToken string) (err error) {
 	c := github.NewClient(nil)
+	// Use GitHub access token.
+	if len(accessToken) > 0 {
+		ctx := context.Background()
+		ts := oauth2.StaticTokenSource(
+			&oauth2.Token{AccessToken: accessToken},
+		)
+		tc := oauth2.NewClient(ctx, ts)
+		c = github.NewClient(tc)
+	}
 
 	repos, _, err := c.Repositories.List(context.TODO(), username, nil)
 	if err != nil {
@@ -49,8 +64,8 @@ func gitsync(username string) (err error) {
 	fmt.Println("export BASE_DIR=$PWD")
 	fmt.Println("eval `ssh-agent`")
 	fmt.Println("ssh-add ~/.ssh/id_rsa_mewmew")
-
-	for _, r := range repos {
+	for i, r := range repos {
+		log.Printf("   %d/%d", i+1, len(repos))
 		repo, _, err := c.Repositories.Get(context.TODO(), username, *r.Name)
 		if err != nil {
 			return err
