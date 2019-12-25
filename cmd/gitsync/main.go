@@ -100,10 +100,11 @@ func gitsync(username, accessToken string) error {
 			gitCloneURL := getGitCloneURL(*repo.CloneURL)
 			fmt.Printf("# %s\n", *repo.Name)
 			fmt.Println("cd $BASE_DIR")
-			fmt.Println("git clone", gitCloneURL)
+			fmt.Printf("git clone %s\n", gitCloneURL)
 			fmt.Printf("cd $BASE_DIR/%s\n", *repo.Name)
 			if repo.Parent != nil {
-				fmt.Println("git pull", *repo.Parent.CloneURL)
+				fmt.Printf("git remote add upstream %s\n", *repo.Parent.CloneURL)
+				fmt.Println("git pull upstream master")
 				fmt.Println("git push -u origin master")
 			} else {
 				fmt.Println("# unknown parent repo (GitHub rate limit hit)")
