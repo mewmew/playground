@@ -12,7 +12,7 @@ require (
 	github.com/PuerkitoBio/goquery v1.5.0
 	github.com/faiface/beep v1.0.2
 	github.com/google/go-github v17.0.0+incompatible
-	github.com/google/go-querystring v1.0.0 // indirect
+	github.com/google/go-github/v28 v28.1.1
 	github.com/kr/pretty v0.1.0
 	github.com/kurtcoke/goexifgps v0.0.0-20151224165304-544edf4f4231
 	github.com/mewkiz/pkg v0.0.0-20190919212034-518ade7978e2
