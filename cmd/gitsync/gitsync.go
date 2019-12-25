@@ -64,7 +64,8 @@ func gitsync(username, accessToken string) error {
 		},
 	}
 	var allRepos []*github.Repository
-	for {
+	for i := 0; ; i++ {
+		log.Printf("getting repository list (page %d)", i+1)
 		repos, resp, err := c.Repositories.List(context.TODO(), username, opt)
 		if err != nil {
 			return errors.WithStack(err)
@@ -77,7 +78,7 @@ func gitsync(username, accessToken string) error {
 	}
 	// Get parent repo of all repos.
 	for i, r := range allRepos {
-		log.Printf("   %d/%d", i+1, len(allRepos))
+		log.Printf("getting additional repository information (repo %d/%d)", i+1, len(allRepos))
 		// Get repo.Parent.
 		repo, _, err := c.Repositories.Get(context.TODO(), username, *r.Name)
 		if err != nil {
