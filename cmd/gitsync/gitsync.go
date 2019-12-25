@@ -89,6 +89,8 @@ func gitsync(username, accessToken string) error {
 		allRepos[i] = repo
 	}
 	// Print sync script.
+	fmt.Println("#!/bin/bash")
+	fmt.Println()
 	fmt.Println("export BASE_DIR=$PWD")
 	fmt.Println("eval `ssh-agent`")
 	fmt.Println("ssh-add ~/.ssh/id_rsa")
