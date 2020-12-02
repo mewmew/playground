@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<style>
+			@import 'https://fonts.googleapis.com/css?family=Lato';
+			body {
+				font-family: Lato;
+				font-size: 15px;
+			}
+			#chartdiv {
+				width: 100%;
+				height: 800px;
+			}
+		</style>
+		<script src='https://www.amcharts.com/lib/3/ammap.js'></script>
+		<script src='https://www.amcharts.com/lib/3/maps/js/worldHigh.js'></script>
+		<script src='https://www.amcharts.com/lib/3/themes/light.js'></script>
+
+<script>
+/**
+ * Create the map
+ */
+var map = AmCharts.makeChart("chartdiv", {
+  "type": "map",
+  "theme": "light",
+  "projection": "eckert3",
+  "dataProvider": {
+    "map": "worldHigh",
+    "getAreasFromMap": true
+  },
+  "areasSettings": {
+    "selectedColor": "#CC0000",
+    "selectable": true
+  },
+  /**
+   * Add click event to track country selection/unselection
+   */
+  "listeners": [{
+    "event": "clickMapObject",
+    "method": function(e) {
+
+      // Ignore any click not on area
+      if (e.mapObject.objectType !== "MapArea")
+        return;
+
+      var area = e.mapObject;
+
+      // Toggle showAsSelected
+      area.showAsSelected = !area.showAsSelected;
+      e.chart.returnInitialColor(area);
+
+      // Update the list
+      document.getElementById("selected").innerHTML = JSON.stringify(getSelectedCountries());
+    }
+  }]
+});
+
+/**
+ * Function which extracts currently selected country list.
+ * Returns array consisting of country ISO2 codes
+ */
+function getSelectedCountries() {
+  var selected = [];
+  for(var i = 0; i < map.dataProvider.areas.length; i++) {
+    if(map.dataProvider.areas[i].showAsSelected)
+      selected.push(map.dataProvider.areas[i].id);
+  }
+  return selected;
+}
+</script>
+
+	</head>
+	<body>
+		<h1>Team Explorers</h1>
+		<p>Hej everyone!! I feel very happy to have met each one of you, and gotten a chance to share adventures and celebrations together, exploring islands, ancient forests, fossil beaches, national parks.</p>
+
+		<p>Some happy memories!</p>
+		<a href="img/2014-09-02 - 0014, Gunwharf Quays.jpg"><img width='300px' src="img/thumbs/2014-09-02 - 0014, Gunwharf Quays.jpg"></a>
+		<a href="img/2014-09-09 - 0001, Portsmouth [Antonia] [Cinja] [Mareike] [Michelle].jpg"><img width='300px' src="img/thumbs/2014-09-09 - 0001, Portsmouth [Antonia] [Cinja] [Mareike] [Michelle].jpg"></a>
+		<a href="img/2014-09-12 - 0007, Flag creation [Harriet].jpg"><img width='300px' src="img/thumbs/2014-09-12 - 0007, Flag creation [Harriet].jpg"></a>
+		<a href="img/2014-09-12 - 0009, Flag creation.jpg"><img width='300px' src="img/thumbs/2014-09-12 - 0009, Flag creation.jpg"></a>
+		<a href="img/2014-09-13 - 0002, Isle of Wight [Amina] [Antonia] [Cinja] [Jorunn] [Linn] [Marius] [Massi] [Michelle].jpg"><img width='300px' src="img/thumbs/2014-09-13 - 0002, Isle of Wight [Amina] [Antonia] [Cinja] [Jorunn] [Linn] [Marius] [Massi] [Michelle].jpg"></a>
+		<a href="img/2014-09-13 - 0005, Isle of Wight [Amina] [Antonia] [Cinja] [Jorunn] [Linn] [Mareike] [Marius] [Massi] [Michelle] [Robin].jpg"><img width='300px' src="img/thumbs/2014-09-13 - 0005, Isle of Wight [Amina] [Antonia] [Cinja] [Jorunn] [Linn] [Mareike] [Marius] [Massi] [Michelle] [Robin].jpg"></a>
+		<a href="img/2014-09-13 - 0008, Isle of Wight [Amina] [Mareike] [Michelle].jpg"><img width='300px' src="img/thumbs/2014-09-13 - 0008, Isle of Wight [Amina] [Mareike] [Michelle].jpg"></a>
+		<a href="img/2014-09-13 - 0011, Isle of Wight [Amina] [Antonia] [Cinja] [Jorunn] [Linn] [Mareike] [Marius] [Massi] [Michelle] [Robin].jpg"><img width='300px' src="img/thumbs/2014-09-13 - 0011, Isle of Wight [Amina] [Antonia] [Cinja] [Jorunn] [Linn] [Mareike] [Marius] [Massi] [Michelle] [Robin].jpg"></a>
+		<a href="img/2014-09-13 - 0012, Isle of Wight [Cinja] [Linn] [Marius].jpg"><img width='300px' src="img/thumbs/2014-09-13 - 0012, Isle of Wight [Cinja] [Linn] [Marius].jpg"></a>
+		<a href="img/2014-09-13 - 0014, Isle of Wight [Cinja] [Mareike].jpg"><img width='300px' src="img/thumbs/2014-09-13 - 0014, Isle of Wight [Cinja] [Mareike].jpg"></a>
+		<a href="img/2014-09-13 - 0015, Isle of Wight [Antonia] [Cinja] [Linn] [Mareike].jpg"><img width='300px' src="img/thumbs/2014-09-13 - 0015, Isle of Wight [Antonia] [Cinja] [Linn] [Mareike].jpg"></a>
+		<a href="img/2014-09-13 - 0018, Isle of Wight [Massi].jpg"><img width='300px' src="img/thumbs/2014-09-13 - 0018, Isle of Wight [Massi].jpg"></a>
+		<a href="img/2014-09-13 - 0020, Isle of Wight [Amina] [Antonia] [Cinja] [Jorunn] [Linn] [Mareike] [Marius] [Massi] [Michelle] [Robin].jpg"><img width='300px' src="img/thumbs/2014-09-13 - 0020, Isle of Wight [Amina] [Antonia] [Cinja] [Jorunn] [Linn] [Mareike] [Marius] [Massi] [Michelle] [Robin].jpg"></a>
+		<a href="img/2014-09-13 - 20.07.10.jpg"><img width='300px' src="img/thumbs/2014-09-13 - 20.07.10.jpg"></a>
+		<a href="img/2014-09-14 - British Garden Party.jpg"><img width='300px' src="img/thumbs/2014-09-14 - British Garden Party.jpg"></a>
+		<a href="img/2014-09-20 - 0001, British Garden Party - Mix n' Match.jpg"><img width='300px' src="img/thumbs/2014-09-20 - 0001, British Garden Party - Mix n' Match.jpg"></a>
+		<a href="img/2014-09-20 - 0002, British Garden Party.jpg"><img width='300px' src="img/thumbs/2014-09-20 - 0002, British Garden Party.jpg"></a>
+		<a href="img/2014-09-21 - 23.18.20, Freshers rave [Harriet] [Linn] [Mareika] [Marius] [Robin].jpg"><img width='300px' src="img/thumbs/2014-09-21 - 23.18.20, Freshers rave [Harriet] [Linn] [Mareika] [Marius] [Robin].jpg"></a>
+		<a href="img/2014-10-03 - 0006, Spinnaker.jpg"><img width='300px' src="img/thumbs/2014-10-03 - 0006, Spinnaker.jpg"></a>
+		<a href="img/2014-10-12 - 21.04.44, house party.jpg"><img width='300px' src="img/thumbs/2014-10-12 - 21.04.44, house party.jpg"></a>
+		<a href="img/2014-10-18 - 0012, Oxford [Amanda] [Marius] [Robin].jpg"><img width='300px' src="img/thumbs/2014-10-18 - 0012, Oxford [Amanda] [Marius] [Robin].jpg"></a>
+		<a href="img/2014-10-30 - 0004, Halloween [Cinja] [Robin].jpg"><img width='300px' src="img/thumbs/2014-10-30 - 0004, Halloween [Cinja] [Robin].jpg"></a>
+		<a href="img/2014-10-30 - 0011, Halloween [Amanda] [Cinja] [Harriet] [Holly] [Robin].jpg"><img width='300px' src="img/thumbs/2014-10-30 - 0011, Halloween [Amanda] [Cinja] [Harriet] [Holly] [Robin].jpg"></a>
+		<a href="img/2014-10-30 - 0015, Halloween [Amanda] [Cinja] [Harriet] [Holly] [Robin].jpg"><img width='300px' src="img/thumbs/2014-10-30 - 0015, Halloween [Amanda] [Cinja] [Harriet] [Holly] [Robin].jpg"></a>
+		<a href="img/2014-10-31 - 22.32.12, Halloween [Amanda] [Harriet] [Holly] [Mareika] [Robin].jpg"><img width='300px' src="img/thumbs/2014-10-31 - 22.32.12, Halloween [Amanda] [Harriet] [Holly] [Mareika] [Robin].jpg"></a>
+		<a href="img/2014-10-31 - 23.45.11, Halloween [Mareika] [Robin].jpg"><img width='300px' src="img/thumbs/2014-10-31 - 23.45.11, Halloween [Mareika] [Robin].jpg"></a>
+		<a href="img/2014-11-10 - 0001, New Forest [Cinja] [Linn] [Mareika] [Marius] [Robin].jpg"><img width='300px' src="img/thumbs/2014-11-10 - 0001, New Forest [Cinja] [Linn] [Mareika] [Marius] [Robin].jpg"></a>
+		<a href="img/2014-11-29 - 11.32.51, Winchester [Cinja] [Niklas] [Robin].jpg"><img width='300px' src="img/thumbs/2014-11-29 - 11.32.51, Winchester [Cinja] [Niklas] [Robin].jpg"></a>
+		<a href="img/2014-11-29 - 14.40.02, Winchester [Linn] [Mareika] [Niklas] [Robin].jpg"><img width='300px' src="img/thumbs/2014-11-29 - 14.40.02, Winchester [Linn] [Mareika] [Niklas] [Robin].jpg"></a>
+		<a href="img/2014-12-22 - 09.09.19, Stonehenge [Maisie] [Robin].jpg"><img width='300px' src="img/thumbs/2014-12-22 - 09.09.19, Stonehenge [Maisie] [Robin].jpg"></a>
+		<a href="img/2014-12-24 - 0001, Sidmouth.jpg"><img width='300px' src="img/thumbs/2014-12-24 - 0001, Sidmouth.jpg"></a>
+		<a href="img/2014-12-25 - 0001, Okehampton [Robin].jpg"><img width='300px' src="img/thumbs/2014-12-25 - 0001, Okehampton [Robin].jpg"></a>
+		<a href="img/2014-12-25 - 0011, Dartmoor [Harriet].jpg"><img width='300px' src="img/thumbs/2014-12-25 - 0011, Dartmoor [Harriet].jpg"></a>
+		<a href="img/2014-12-25 - 0013, Dartmoor [Harriet].jpg"><img width='300px' src="img/thumbs/2014-12-25 - 0013, Dartmoor [Harriet].jpg"></a>
+		<a href="img/2015-01-24 - 11.07.16, Brussels [Robin].jpg"><img width='300px' src="img/thumbs/2015-01-24 - 11.07.16, Brussels [Robin].jpg"></a>
+		<a href="img/2015-02-06 - 13.40.03, Brussles.jpg"><img width='300px' src="img/thumbs/2015-02-06 - 13.40.03, Brussles.jpg"></a>
+		<a href="img/2015-02-14 - 13.20.18, Cambridge.jpg"><img width='300px' src="img/thumbs/2015-02-14 - 13.20.18, Cambridge.jpg"></a>
+		<a href="img/2015-02-14 - 19.06.17, Cambridge light festival.jpg"><img width='300px' src="img/thumbs/2015-02-14 - 19.06.17, Cambridge light festival.jpg"></a>
+		<a href="img/2015-05-16 - 16.31.41, Hack Pompey.jpg"><img width='300px' src="img/thumbs/2015-05-16 - 16.31.41, Hack Pompey.jpg"></a>
+		<a href="img/2015-05-20 - 13.28.35, Dublin.jpg"><img width='300px' src="img/thumbs/2015-05-20 - 13.28.35, Dublin.jpg"></a>
+		<a href="img/2015-05-24 - 13.22.39, Ireland, Cliff of Moher.jpg"><img width='300px' src="img/thumbs/2015-05-24 - 13.22.39, Ireland, Cliff of Moher.jpg"></a>
+		<a href="img/2015-08-12 18:47:33, Durdle door.jpg"><img width='300px' src="img/thumbs/2015-08-12 18:47:33, Durdle door.jpg"></a>
+
+		<div id="chartdiv"></div>
+		<div id="info">Selected countries: <span id="selected">-</span></div>
+	</body>
+</html>
