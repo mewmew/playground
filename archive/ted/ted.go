@@ -10,4 +10,5 @@ type Talk struct {
 	Event    string        // TEDGlobal 2009
 	Duration time.Duration // 17:42
 	Download string        // http://download.ted.com/talks/JanineBenyus_2009G-480p.mp4?apikey=TEDDOWNLOAD
+	Link     string        // https://www.ted.com/talks/janine_benyus_biomimicry_in_action
 }

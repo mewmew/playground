@@ -53,8 +53,15 @@ func stash(url string, all bool) error {
 				log.Println(err)
 			}
 			talk = ted.Talk{Date: date}
-		case 1: // Title
-			talk.Title = s.Find("a").Text()
+		case 1: // Title and Link
+			anchor := s.Find("a")
+			talk.Title = anchor.Text()
+			if link, ok := anchor.Attr("href"); ok {
+				if strings.HasPrefix(link, "/") {
+					link = "https://www.ted.com" + link
+				}
+				talk.Link = link
+			}
 		case 2: // Event
 			talk.Event = strings.TrimSpace(s.Text())
 		case 3: // Duration
@@ -77,10 +84,10 @@ func stash(url string, all bool) error {
 			high, ok := s.Find("a").Last().Attr("href")
 			if ok {
 				talk.Download = high
-				talks = append(talks, talk)
 			} else {
 				log.Printf("unable to locate high-definition download link for %q on page %v", talk.Title, url)
 			}
+			talks = append(talks, talk)
 		}
 	}
 	doc.Find(".row .quick-list__row > div").Each(dump)
