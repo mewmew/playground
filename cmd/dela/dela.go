@@ -8,13 +8,12 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/kr/pretty"
 	"github.com/pkg/errors"
 )
 
 func logger(handler http.Handler) http.Handler {
 	logger := func(w http.ResponseWriter, r *http.Request) {
-		log.Printf("%s %s %s", r.RemoteAddr, r.Method, r.URL)
+		fmt.Printf("%s %s %s\n", r.RemoteAddr, r.Method, r.URL)
 		handler.ServeHTTP(w, r)
 	}
 	return http.HandlerFunc(logger)
@@ -35,6 +34,7 @@ func main() {
 	} else {
 		handler = logger(http.FileServer(http.Dir(".")))
 	}
+	fmt.Printf("listening on %q\n", addr)
 	if err := http.ListenAndServe(addr, handler); err != nil {
 		log.Fatal(err)
 	}
@@ -51,20 +51,26 @@ func upload(w http.ResponseWriter, r *http.Request) {
 	if err := r.ParseMultipartForm(1024 * 1024 * 1024); err != nil {
 		log.Fatalf("%+v", errors.WithStack(err))
 	}
-	file, hdr, err := r.FormFile("file")
-	if err != nil {
-		fmt.Println(err)
-		return
-	}
-	defer file.Close()
-	pretty.Println("hdr:", hdr.Header)
-	f, err := ioutil.TempFile("/tmp", "upload_")
-	if err != nil {
-		log.Fatalf("%+v", errors.WithStack(err))
-	}
-	defer f.Close()
-	if _, err := io.Copy(f, file); err != nil {
-		log.Fatalf("%+v", errors.WithStack(err))
+	files := r.MultipartForm.File["files"]
+	for i := range files {
+		file, err := files[i].Open()
+		if err != nil {
+			log.Fatalf("%+v", errors.WithStack(err))
+		}
+		f, err := ioutil.TempFile("/tmp", "upload_")
+		if err != nil {
+			log.Fatalf("%+v", errors.WithStack(err))
+		}
+		if _, err := io.Copy(f, file); err != nil {
+			log.Fatalf("%+v", errors.WithStack(err))
+		}
+		if err := f.Close(); err != nil {
+			log.Fatalf("%+v", err)
+		}
+		if err := file.Close(); err != nil {
+			log.Fatalf("%+v", err)
+		}
+		fmt.Printf("stored %q as %q\n", files[i].Filename, f.Name())
 	}
 }
 
@@ -76,7 +82,7 @@ const uploadPage = `
 	</head>
 	<body>
 		<form enctype="multipart/form-data" action="/" method="POST">
-			<input type="file" name="file">
+			<input type="file" name="files" multiple="multiple">
 			<input type="submit" value="upload">
 		</form>
 	</body>
