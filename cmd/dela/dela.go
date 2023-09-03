@@ -4,9 +4,9 @@ import (
 	"flag"
 	"fmt"
 	"io"
-	"io/ioutil"
 	"log"
 	"net/http"
+	"os"
 
 	"github.com/pkg/errors"
 )
@@ -26,7 +26,6 @@ func main() {
 	)
 	flag.StringVar(&addr, "http", ":8080", "HTTP service address")
 	flag.BoolVar(&recv, "recv", false, "enable upload handler")
-	flag.BoolVar(&recv, "max", false, "enable upload handler")
 	flag.Parse()
 	var handler http.Handler
 	if recv {
@@ -57,7 +56,7 @@ func upload(w http.ResponseWriter, r *http.Request) {
 		if err != nil {
 			log.Fatalf("%+v", errors.WithStack(err))
 		}
-		f, err := ioutil.TempFile("/tmp", "upload_")
+		f, err := os.CreateTemp("/tmp", "upload_")
 		if err != nil {
 			log.Fatalf("%+v", errors.WithStack(err))
 		}
