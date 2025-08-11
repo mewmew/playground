@@ -12,10 +12,14 @@ import (
 	"unicode"
 )
 
-var flagVerbose bool
+var (
+	flagOnlyPlaintext bool
+	flagQuiet         bool
+)
 
 func init() {
-	flag.BoolVar(&flagVerbose, "v", false, "Verbose.")
+	flag.BoolVar(&flagOnlyPlaintext, "only-plaintext", false, "Only check file extensions with known plaintext.")
+	flag.BoolVar(&flagQuiet, "q", false, "Suppress non-error log messages.")
 	flag.Usage = usage
 }
 
@@ -57,16 +61,19 @@ var whitelist = map[string]bool{
 	".md":   true,
 	".sml":  true,
 	".txt":  true,
+	".typ":  true,
 }
 
 func checkFile(filePath string) (err error) {
 	ext := path.Ext(filePath)
-	_, ok := whitelist[ext]
-	if !ok {
-		if flagVerbose {
-			log.Printf("ignoring file %q with extension %q.\n", filePath, ext)
+	if flagOnlyPlaintext {
+		_, ok := whitelist[ext]
+		if !ok {
+			if !flagQuiet {
+				log.Printf("ignoring file %q with extension %q.\n", filePath, ext)
+			}
+			return nil
 		}
-		return nil
 	}
 	f, err := os.Open(filePath)
 	if err != nil {

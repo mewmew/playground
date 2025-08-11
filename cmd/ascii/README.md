@@ -4,7 +4,7 @@ This tool examines files and reports non-ascii characters.
 
 ## Installation
 
-	go get github.com/mewmew/playground/cmd/ascii
+	go install github.com/mewmew/playground/cmd/ascii@latest
 
 ## Usage
 
@@ -12,8 +12,9 @@ This tool examines files and reports non-ascii characters.
 
 Flags:
 
-	-v (default=false)
-		Verbose.
+	-only-plaintext
+	  	Only check file extensions with known plaintext.
+	-q	Suppress non-error log messages.
 
 ## Examples
 
